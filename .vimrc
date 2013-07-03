@@ -108,7 +108,6 @@ set expandtab                   " Tabs are spaces, not tabs
 set tabstop=2                   " An indentation every four columns
 set softtabstop=2               " Let backspace delete indent
 "set matchpairs+=<:>             " Match, to be used with %
-set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
 
 autocmd FileType ruby,c,cpp,java,go,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> call StripTrailingWhitespace()
@@ -117,7 +116,13 @@ autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 
 " Key binding
 let mapleader = ','
+" no highlight after press enter
 nnoremap <CR> :nohlsearch<cr>
+" switch between last buffer
+nnoremap <leader><leader> <c-^>
+" Preserve indentation while pasting text from the OS X clipboard
+noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+
 map <C-J> <C-W>j<C-W>_
 map <C-K> <C-W>k<C-W>_
 map <C-L> <C-W>l<C-W>_
@@ -141,8 +146,27 @@ endif
 
 cmap Tabe tabe
 
+" navigating through tab
 map <S-H> gT
 map <S-L> gt
+
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove"
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+
+" running rspec
+nnoremap <leader>rs :!clear;rspec --color spec<cr>
 
 " For when you forget to sudo.. Really Write the file.
 cmap w!! w !sudo tee % >/dev/null
@@ -186,20 +210,19 @@ set completeopt=menu,preview,longest
 
 " Ctags
 set tags=./tags;/,~/.vimtags
+nmap <F5> :TagbarToggle<CR>
 
 " AutoCloseTag
 au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
 nmap <Leader>ac <Plug>ToggleAutoCloseMappings
 
 " NerdTree
-map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
-map <leader>e :NERDTreeFind<CR>
+nmap <F4> :NERDTreeToggle<cr>:NERDTreeMirror<CR>
 nmap <leader>nt :NERDTreeFind<CR>
 
 let NERDTreeShowBookmarks=1
-let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
-let NERDTreeChDirMode=0
-let NERDTreeQuitOnOpen=1
+let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc']
+let NERDTreeQuitOnOpen=0
 let NERDTreeMouseMode=2
 let NERDTreeShowHidden=1
 let NERDTreeKeepTreeInNewTab=1
@@ -224,7 +247,11 @@ set sessionoptions=blank,buffers,curdir,folds,tabpages,winsize
 nmap <leader>sl :SessionList<CR>
 nmap <leader>ss :SessionSave<CR>
 
-" ctrlP "
+" ctrlP 
+let g:ctrlp_map=''
+nnoremap <silent> <C-o> :CtrlP<CR>
+nnoremap <silent> <C-t> :CtrlPTag<CR>
+
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\.git$\|\.hg$\|\.svn$',
@@ -259,6 +286,14 @@ nnoremap <silent> <leader>gp :Git push<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>:GitGutter<CR>
 nnoremap <silent> <leader>gg :GitGutterToggle<CR>
 
+" CamelCaseMotion
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+sunmap w
+sunmap b
+sunmap e
+
 " neocomplcache
 let g:acp_enableAtStartup = 0
 let g:neocomplcache_enable_at_startup = 1
@@ -283,15 +318,8 @@ let g:neocomplcache_keyword_patterns._ = '\h\w*'
 
 " Plugin key-mappings.
 
-" These two lines conflict with the default digraph mapping of <C-K>
-" If you prefer that functionality, add
-" let g:spf13_no_neosnippet_expand = 1
-" in your .vimrc.bundles.local file
-
-if !exists('g:spf13_no_neosnippet_expand')
-  imap <C-k> <Plug>(neosnippet_expand_or_jump)
-  smap <C-k> <Plug>(neosnippet_expand_or_jump)
-endif
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
 
 inoremap <expr><C-g> neocomplcache#undo_completion()
 inoremap <expr><C-l> neocomplcache#complete_common_string()
@@ -299,7 +327,7 @@ inoremap <expr><CR> neocomplcache#complete_common_string()
 
 " <TAB>: completion.
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+noremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 
 " <CR>: close popup
 " <s-CR>: close popup and save indent.
@@ -350,6 +378,10 @@ set completeopt-=preview
 " ----------------------------------------
 let g:gundo_right = 1
 let g:gundo_preview_bottom = 1
+nnoremap <F6> :GundoToggle<CR>
+
+" Numbers
+nnoremap <F3> :NumbersToggle<CR>
 
 " Snipmate
 let g:snips_author = 'Orgil <orgil.u@gmail.com>'
@@ -378,10 +410,6 @@ endif
 
 " Functions
 function! StripTrailingWhitespace()
-  " To disable the stripping of whitespace, add the following to your
-  " .vimrc.local file:
-  "   let g:spf13_keep_trailing_whitespace = 1
-  if !exists('g:spf13_keep_trailing_whitespace')
     " Preparation: save last search, and cursor position.
     let _s=@/
     let l = line(".")
@@ -391,5 +419,4 @@ function! StripTrailingWhitespace()
     " clean up: restore previous search history, and cursor position
     let @/=_s
     call cursor(l, c)
-  endif
 endfunction
