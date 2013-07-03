@@ -366,7 +366,7 @@ if has('gui_running')
     set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
   endif
   if has('gui_macvim')
-    set guifont=Inconsolata\ for\ Powerline:h16 " setting font and size
+    set guifont=Inconsolata-dz\ for\ Powerline:h14 " setting font and size
     set transparency=2      " Make the window slightly transparent
   endif
 else

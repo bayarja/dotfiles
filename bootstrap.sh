@@ -14,7 +14,7 @@ if [ ! -e $endpath/.git ]; then
     echo "cloning vim config"
     git clone --recursive -b master https://github.com/Orgil/dotfiles.git $endpath
 else
-    echo "updating spf13-vim"
+    echo "updating vim config"
     cd $endpath && git pull origin $branch
 fi
 
