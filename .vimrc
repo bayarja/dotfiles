@@ -198,7 +198,7 @@ if has("autocmd") && exists("+omnifunc")
 endif
 
 hi Pmenu  guifg=#FFFFFF guibg=#555555 ctermfg=Lightgray ctermbg=black
-hi PmenuSel  guifg=#90bedb guibg=#6d6466 ctermfg=Lightgray ctermbg=black
+hi PmenuSel  guifg=#b5e3ff guibg=#424242 ctermfg=Lightgray ctermbg=black
 hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=Lightgray cterm=NONE
 hi PmenuThumb  guifg=#FFFFFF guibg=#555555 gui=NONE ctermfg=darkcyan ctermbg=Lightgray cterm=NONE
 
