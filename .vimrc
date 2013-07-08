@@ -180,6 +180,10 @@ cmap w!! w !sudo tee % >/dev/null
 map zl zL
 map zh zH
 
+" Folding keymap
+nnoremap <space> za
+vnoremap <space> zf
+
 " Plugins
 " PIV
 let g:DisableAutoPHPFolding = 0
