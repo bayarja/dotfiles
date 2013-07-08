@@ -200,9 +200,10 @@ if has("autocmd") && exists("+omnifunc")
         \setlocal omnifunc=syntaxcomplete#Complete |
         \endif
 endif
+help
 
-hi Pmenu  guifg=#FFFFFF guibg=#555555 ctermfg=Lightgray ctermbg=black
-hi PmenuSel  guifg=#b5e3ff guibg=#424242 ctermfg=Lightgray ctermbg=black
+hi Pmenu  guifg=#FFFFFF guibg=#555555 ctermfg=Lightgray ctermbg=240
+hi PmenuSel  guifg=#b5e3ff guibg=#424242 ctermfg=Blue ctermbg=238
 hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=Lightgray cterm=NONE
 hi PmenuThumb  guifg=#FFFFFF guibg=#555555 gui=NONE ctermfg=darkcyan ctermbg=Lightgray cterm=NONE
 
