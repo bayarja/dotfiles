@@ -183,6 +183,7 @@ map zh zH
 " Folding keymap
 nnoremap <space> za
 vnoremap <space> zf
+nnoremap K i<CR><Esc>
 
 " Plugins
 " PIV
