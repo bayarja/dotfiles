@@ -2,14 +2,7 @@
 
 " Basic
 set nocompatible        " Must be first line
-if !(has('win16') || has('win32') || has('win64'))
-  set shell=/bin/sh
-endif
-
-" Windows Compatible
-if has('win32') || has('win64')
-  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-endif
+set shell=/bin/sh
 
 " Setup Bundle Support
 filetype on
@@ -28,14 +21,12 @@ endif
 
 " General setting
 set background=dark         " Assume a dark background
-if !has('gui')
-  "set term=$TERM          " Make arrow and other keys work
-endif
 filetype plugin indent on   " Automatically detect file types.
 syntax on                   " Syntax highlighting
 set mouse=a                 " Automatically enable mouse usage
 set mousehide               " Hide the mouse cursor while typing
 set encoding=utf-8
+setglobal fileencoding=utf-8
 set nobackup                                 " Disabling backup since files are in git
 set noswapfile                               " Disabling swapfile
 set nowb
@@ -102,6 +93,7 @@ set listchars=tab:›\ ,trail:.,extends:>,nbsp:.,precedes:< " Highlight problema
 set lazyredraw
 
 set nowrap                      " No Wrap long lines
+set synmaxcol=512
 set autoindent                  " Indent at the same level of the previous line
 set shiftwidth=2                " Use indents of 2 spaces
 set expandtab                   " Tabs are spaces, not tabs
@@ -136,20 +128,6 @@ nnoremap <c-l> <c-w>l
 " Wrapped lines goes down/up to next row, rather than next line in file.
 nnoremap j gj
 nnoremap k gk
-
-if has("user_commands")
-  command! -bang -nargs=* -complete=file E e<bang> <args>
-  command! -bang -nargs=* -complete=file W w<bang> <args>
-  command! -bang -nargs=* -complete=file Wq wq<bang> <args>
-  command! -bang -nargs=* -complete=file WQ wq<bang> <args>
-  command! -bang Wa wa<bang>
-  command! -bang WA wa<bang>
-  command! -bang Q q<bang>
-  command! -bang QA qa<bang>
-  command! -bang Qa qa<bang>
-endif
-
-cmap Tabe tabe
 
 " navigating through tab
 map <S-H> gT
@@ -191,7 +169,6 @@ let g:DisableAutoPHPFolding = 0
 let g:PIVAutoClose = 0
 
 " Misc
-let g:NERDShutUp=1
 let b:match_ignorecase = 1
 
 " OmniComplete
@@ -221,16 +198,12 @@ au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
 nmap <Leader>ac <Plug>ToggleAutoCloseMappings
 
 " NerdTree
-nmap <F4> :NERDTreeToggle<cr>:NERDTreeMirror<CR>
+nmap <F4> :NERDTreeToggle<cr>
 nmap <leader>nt :NERDTreeFind<CR>
 
 let NERDTreeShowBookmarks=1
 let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc']
-let NERDTreeQuitOnOpen=0
 let NERDTreeMouseMode=2
-let NERDTreeShowHidden=1
-let NERDTreeKeepTreeInNewTab=1
-let g:nerdtree_tabs_open_on_gui_startup=0
 
 " Tabularize
 nmap <Leader>a& :Tabularize /&<CR>
