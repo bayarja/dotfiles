@@ -38,7 +38,6 @@ endif
 
 Bundle 'bkad/CamelCaseMotion'
 Bundle 'godlygeek/csapprox'
-Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'vim-scripts/restore_view.vim'
 Bundle 'airblade/vim-gitgutter'
