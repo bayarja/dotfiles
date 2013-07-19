@@ -62,8 +62,7 @@ Bundle 'briancollins/vim-jst'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'nono/vim-handlebars'
-Bundle 'amirh/HTML-AutoCloseTag'
-
+Bundle 'mattn/zencoding-vim'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'tpope/vim-haml'
 
