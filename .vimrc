@@ -66,7 +66,6 @@ endif
 
 if has('statusline')
   set laststatus=2
-
   " Broken down into easily includeable segments
   set statusline=%<%f\                     " Filename
   set statusline+=%w%h%m%r                 " Options
@@ -97,6 +96,7 @@ set synmaxcol=512
 set autoindent                  " Indent at the same level of the previous line
 set shiftwidth=2                " Use indents of 2 spaces
 set expandtab                   " Tabs are spaces, not tabs
+
 set tabstop=2                   " An indentation every four columns
 set softtabstop=2               " Let backspace delete indent
 "set matchpairs+=<:>             " Match, to be used with %
@@ -105,7 +105,6 @@ set softtabstop=2               " Let backspace delete indent
 set novisualbell                             " Disabling bell sound
 set noerrorbells                             " Disabling bell sound
 set autoread
-let g:Powerline_symbols = 'fancy'
 autocmd FileType ruby,c,cpp,java,go,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
 autocmd BufNewFile,BufRead *.coffee set filetype=coffee
@@ -116,6 +115,9 @@ let mapleader = ','
 nnoremap <CR> :nohlsearch<cr>
 " switch between last buffer
 nnoremap <leader><leader> <c-^>
+
+noremap <leader>y "*y
+noremap <leader>yy "*Y
 " Preserve indentation while pasting text from the OS X clipboard
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 
@@ -204,6 +206,7 @@ nmap <leader>nt :NERDTreeFind<CR>
 let NERDTreeShowBookmarks=1
 let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc']
 let NERDTreeMouseMode=2
+let NERDTreeShowHidden=1
 
 " Tabularize
 nmap <Leader>a& :Tabularize /&<CR>
@@ -233,25 +236,6 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\.git$\|\.hg$\|\.svn$',
       \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
-
-" On Windows use "dir" as fallback command.
-if has('win32') || has('win64')
-  let g:ctrlp_user_command = {
-        \ 'types': {
-        \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
-        \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-        \ },
-        \ 'fallback': 'dir %s /-n /b /s /a-d'
-        \ }
-else
-  let g:ctrlp_user_command = {
-        \ 'types': {
-        \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
-        \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-        \ },
-        \ 'fallback': 'find %s -type f'
-        \ }
-endif
 
 " Figutive
 nnoremap <silent> <leader>gs :Gstatus<CR>
