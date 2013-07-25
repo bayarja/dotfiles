@@ -1,9 +1,3 @@
-" Environment
-
-" Basic
-set nocompatible        " Must be first line
-set shell=/bin/sh
-
 " Setup Bundle Support
 filetype on
 set rtp+=~/.vim/bundle/vundle
@@ -20,9 +14,9 @@ if filereadable(expand("~/.vimrc.bundles"))
 endif
 
 " General setting
-set background=dark         " Assume a dark background
 filetype plugin indent on   " Automatically detect file types.
-syntax on                   " Syntax highlighting
+
+set nocompatible
 set mouse=a                 " Automatically enable mouse usage
 set mousehide               " Hide the mouse cursor while typing
 set encoding=utf-8
@@ -30,13 +24,9 @@ setglobal fileencoding=utf-8
 set nobackup                                 " Disabling backup since files are in git
 set noswapfile                               " Disabling swapfile
 set nowb
+set clipboard=unnamedplus
 
-
-if has ('x') && has ('gui') " On Linux use + register for copy-paste
-  set clipboard=unnamedplus
-else          " On mac and Windows, use * register for copy-paste
-  set clipboard=unnamed
-endif
+syntax on                   " Syntax highlighting
 
 set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
 set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
