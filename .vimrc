@@ -24,7 +24,7 @@ setglobal fileencoding=utf-8
 set nobackup                                 " Disabling backup since files are in git
 set noswapfile                               " Disabling swapfile
 set nowb
-set clipboard=unnamedplus
+set clipboard+=unnamed
 
 syntax on                   " Syntax highlighting
 
@@ -106,10 +106,20 @@ nnoremap <CR> :nohlsearch<cr>
 " switch between last buffer
 nnoremap <leader><leader> <c-^>
 
-noremap <leader>y "*y
-noremap <leader>yy "*Y
-" Preserve indentation while pasting text from the OS X clipboard
-noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+if has('gui_macvim')
+  noremap <leader>y "*y
+  noremap <leader>yy "*Y
+  " Preserve indentation while pasting text from the clipboard
+  noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+else
+  noremap <leader>y "+y
+  noremap <leader>yy "+Y
+  " Preserve indentation while pasting text from the clipboard
+  noremap <leader>p :set paste<CR>:put  +<CR>:set nopaste<CR>
+endif
+
+" Preserve indentation while pasting text from the clipboard
+noremap p :set paste<CR>:put  0<CR>:set nopaste<CR>
 
 " easier navigation between split windows
 nnoremap <c-j> <c-w>j
