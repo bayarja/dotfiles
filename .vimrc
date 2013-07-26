@@ -118,9 +118,6 @@ else
   noremap <leader>p :set paste<CR>:put  +<CR>:set nopaste<CR>
 endif
 
-" Preserve indentation while pasting text from the clipboard
-noremap p :set paste<CR>:put  0<CR>:set nopaste<CR>
-
 " easier navigation between split windows
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
