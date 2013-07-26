@@ -66,6 +66,7 @@ Bundle 'nono/vim-handlebars'
 Bundle 'mattn/zencoding-vim'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'tpope/vim-haml'
+Bundle 'othree/html5'
 
 Bundle 'tpope/vim-rails'
 let g:rubycomplete_buffer_loading = 1
