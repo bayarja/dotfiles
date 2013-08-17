@@ -56,7 +56,10 @@ Bundle 'honza/vim-snippets'
 
 Bundle 'spf13/PIV'
 Bundle 'arnaud-lb/vim-php-namespace'
+Bundle 'vim-scripts/phtml.vim'
 
+Bundle 'jesseschalken/list-text-object'
+Bundle 'thinca/vim-visualstar'
 Bundle 'elzr/vim-json'
 Bundle 'pangloss/vim-javascript'
 Bundle 'briancollins/vim-jst'
