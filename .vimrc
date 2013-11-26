@@ -16,6 +16,7 @@ endif
 " General setting
 filetype plugin indent on   " Automatically detect file types.
 
+set t_Co=256
 set nocompatible
 set mouse=a                 " Automatically enable mouse usage
 set mousehide               " Hide the mouse cursor while typing

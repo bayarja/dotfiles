@@ -20,7 +20,7 @@ fi
 
 echo "setting up symlinks"
 lnif $endpath/.vimrc $HOME/.vimrc
-lnif $endpath/.tmux.config $HOME/.tmux.config
+lnif $endpath/.tmux.conf $HOME/.tmux.conf
 lnif $endpath/.vimrc.bundles $HOME/.vimrc.bundles
 if [ ! -d $endpath/.vim/bundle ]; then
   mkdir -p $endpath/.vim/bundle
