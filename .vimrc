@@ -40,7 +40,7 @@ set hidden                          " Allow buffer switching without saving
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
 " Vim UI
-colorscheme jellybeans
+colorscheme tomorrow-night
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
 set cursorline                  " Highlight current line
@@ -68,7 +68,7 @@ endif
 
 set backspace=indent,eol,start  " Backspace for dummies
 set linespace=0                 " No extra spaces between rows
-set number                          " Line numbers on
+set number                      " Showing line numbers
 set showmatch                   " Show matching brackets/parenthesis
 set incsearch                   " Find as you type search
 set hlsearch                    " Highlight search terms
@@ -315,6 +315,7 @@ nnoremap <F6> :GundoToggle<CR>
 
 " Numbers
 nnoremap <F3> :NumbersToggle<CR>
+let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
 
 " Snipmate
 let g:snips_author = 'Orgil <orgil.u@gmail.com>'

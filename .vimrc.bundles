@@ -22,7 +22,8 @@ if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
 endif
 
-Bundle 'nanotech/jellybeans.vim'
+Bundle 'w0ng/vim-hybrid'
+Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-surround'
@@ -37,7 +38,6 @@ else
 endif
 
 Bundle 'bkad/CamelCaseMotion'
-Bundle 'godlygeek/csapprox'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'vim-scripts/restore_view.vim'
 Bundle 'airblade/vim-gitgutter'
@@ -61,7 +61,8 @@ Bundle 'vim-scripts/phtml.vim'
 Bundle 'jesseschalken/list-text-object'
 Bundle 'thinca/vim-visualstar'
 Bundle 'elzr/vim-json'
-Bundle 'pangloss/vim-javascript'
+
+Bundle 'jelera/vim-javascript-syntax'
 Bundle 'briancollins/vim-jst'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'digitaltoad/vim-jade'
