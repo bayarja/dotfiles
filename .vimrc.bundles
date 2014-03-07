@@ -25,8 +25,10 @@ endif
 Bundle 'w0ng/vim-hybrid'
 Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
+Bundle 'vim-scripts/tComment'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-repeat'
 Bundle 'kien/ctrlp.vim'
 Bundle 'vim-scripts/sessionman.vim'
