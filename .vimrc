@@ -40,7 +40,7 @@ set hidden                          " Allow buffer switching without saving
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
 " Vim UI
-colorscheme tomorrow-night
+colorscheme Tomorrow-Night
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
 set cursorline                  " Highlight current line

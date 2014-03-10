@@ -27,7 +27,6 @@ Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Bundle 'scrooloose/nerdtree'
 Bundle 'vim-scripts/tComment'
 Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-repeat'
 Bundle 'kien/ctrlp.vim'
