@@ -23,7 +23,7 @@ if filereadable(expand("~/.vimrc.bundles.local"))
 endif
 
 Bundle 'w0ng/vim-hybrid'
-Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+Bundle 'd11wtq/tomorrow-theme-vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'vim-scripts/tComment'
 Bundle 'tpope/vim-surround'
