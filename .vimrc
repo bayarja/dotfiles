@@ -320,6 +320,9 @@ let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
 " Snipmate
 let g:snips_author = 'Orgil <orgil.u@gmail.com>'
 
+" Syntastic
+let g:syntastic_filetype_map = { 'html.twig': 'twiglint' }
+
 " GUI Setting
 if has('gui_running')
   set guioptions-=T           " Remove the toolbar
