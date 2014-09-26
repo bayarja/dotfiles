@@ -23,7 +23,9 @@ if filereadable(expand("~/.vimrc.bundles.local"))
 endif
 
 Bundle 'w0ng/vim-hybrid'
-Bundle 'd11wtq/tomorrow-theme-vim'
+"Bundle 'd11wtq/tomorrow-theme-vim'
+Bundle 'Lokaltog/vim-distinguished'
+Bundle 'junegunn/seoul256.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'vim-scripts/tComment'
 Bundle 'tpope/vim-surround'
@@ -64,6 +66,9 @@ Bundle 'thinca/vim-visualstar'
 Bundle 'elzr/vim-json'
 
 Bundle 'jelera/vim-javascript-syntax'
+Bundle 'marijnh/tern_for_vim'
+Bundle 'vim-scripts/JavaScript-Indent'
+Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'briancollins/vim-jst'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'digitaltoad/vim-jade'

@@ -14,7 +14,8 @@ if filereadable(expand("~/.vimrc.bundles"))
 endif
 
 " General setting
-filetype plugin indent on   " Automatically detect file types.
+filetype plugin on
+filetype indent on   " Automatically detect file types.
 
 set t_Co=256
 set nocompatible
@@ -40,7 +41,8 @@ set hidden                          " Allow buffer switching without saving
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
 " Vim UI
-colorscheme Tomorrow-Night
+let g:seoul256_background = 235
+colorscheme seoul256
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
 set cursorline                  " Highlight current line
@@ -252,6 +254,11 @@ map <silent> e <Plug>CamelCaseMotion_e
 sunmap w
 sunmap b
 sunmap e
+
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
 
 " neocomplcache
 let g:acp_enableAtStartup = 0
