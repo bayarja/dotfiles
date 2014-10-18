@@ -36,3 +36,4 @@ system_shell=$SHELL
 export SHELL="/bin/sh"
 vim -u $endpath/.vimrc.bundles +BundleInstall! +BundleClean +qall
 export SHELL=$system_shell
+echo "Welcome to vim power. Happy coding!!!"
