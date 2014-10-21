@@ -32,21 +32,25 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-repeat'
 Bundle 'kien/ctrlp.vim'
-Bundle 'vim-scripts/sessionman.vim'
+Bundle 'xolox/vim-misc'
+Bundle 'xolox/vim-session'
 Bundle 'matchit.zip'
-if (has("python") || has("python3"))
-  Bundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
-else
-  Bundle 'Lokaltog/vim-powerline'
-endif
+" replacement for powerline
+Bundle 'bling/vim-airline'
 
 Bundle 'bkad/CamelCaseMotion'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'vim-scripts/restore_view.vim'
-Bundle 'airblade/vim-gitgutter'
+
+Bundle 'bling/vim-bufferline'
+" replacement for vim-gutter
+Bundle 'mhinz/vim-signify'
+" history tree
 Bundle 'sjl/gundo.vim'
+" syntax checker
 Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-fugitive'
+" git integration
+Bundle 'motemen/git-vim'
 Bundle 'godlygeek/tabular'
 if executable('ctags')
   Bundle 'majutsushi/tagbar'
@@ -57,6 +61,11 @@ Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/neosnippet'
 Bundle 'honza/vim-snippets'
 
+" generate task list from TODO, FIXME tags
+Bundle 'fisadev/FixedTaskList.vim'
+" Window chooser
+" Bundle 't9md/vim-choosewin'
+"
 Bundle 'spf13/PIV'
 Bundle 'arnaud-lb/vim-php-namespace'
 Bundle 'vim-scripts/phtml.vim'
@@ -66,7 +75,9 @@ Bundle 'thinca/vim-visualstar'
 Bundle 'elzr/vim-json'
 
 Bundle 'jelera/vim-javascript-syntax'
-Bundle 'marijnh/tern_for_vim'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'pangloss/vim-javascript'
+" Bundle 'marijnh/tern_for_vim'
 Bundle 'vim-scripts/JavaScript-Indent'
 Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'briancollins/vim-jst'
@@ -81,11 +92,8 @@ Bundle 'tpope/vim-haml'
 Bundle 'othree/html5.vim'
 Bundle 'wavded/vim-stylus'
 
+Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-rails'
-let g:rubycomplete_buffer_loading = 1
-"let g:rubycomplete_classes_in_global = 1
-"let g:rubycomplete_rails = 1
-
 Bundle 'tpope/vim-markdown'
 Bundle 'spf13/vim-preview'
 

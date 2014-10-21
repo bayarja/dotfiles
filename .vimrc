@@ -50,23 +50,27 @@ set splitright                  " Split panel right of current one
 highlight clear SignColumn      " SignColumn should match background for
                                 " things like vim-gitgutter
 
-if has('cmdline_info')
-  set ruler                   " Show the ruler
-  set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
-  set showcmd                 " Show partial commands in status line and
-  " Selected characters/lines in visual mode
-endif
+"Airline
+let g:airline_powerline_fonts = 1
 
-if has('statusline')
-  set laststatus=2
-  " Broken down into easily includeable segments
-  set statusline=%<%f\                     " Filename
-  set statusline+=%w%h%m%r                 " Options
-  set statusline+=%{fugitive#statusline()} " Git Hotness
-  set statusline+=\ [%{&ff}/%Y]            " Filetype
-  set statusline+=\ [%{getcwd()}]          " Current dir
-  set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-endif
+" disabling this section cause we have powerline
+" if has('cmdline_info')
+"   set ruler                   " Show the ruler
+"   set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
+"   set showcmd                 " Show partial commands in status line and
+"   " Selected characters/lines in visual mode
+" endif
+
+" if has('statusline')
+"   set laststatus=2
+"   " Broken down into easily includeable segments
+"   set statusline=%<%f\                     " Filename
+"   set statusline+=%w%h%m%r                 " Options
+"   set statusline+=%{fugitive#statusline()} " Git Hotness
+"   set statusline+=\ [%{&ff}/%Y]            " Filetype
+"   set statusline+=\ [%{getcwd()}]          " Current dir
+"   set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+" endif
 
 set backspace=indent,eol,start  " Backspace for dummies
 set linespace=0                 " No extra spaces between rows
@@ -194,6 +198,10 @@ set completeopt=menu,preview,longest
 " Ctags
 set tags=./tags;/,~/.vimtags
 nmap <F5> :TagbarToggle<CR>
+let g:tagbar_autofocus = 1
+
+" show pending tasks list
+map <F2> :TaskList<CR>
 
 " AutoCloseTag
 au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
@@ -247,6 +255,8 @@ nnoremap <silent> <leader>gp :Git push<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>:GitGutter<CR>
 nnoremap <silent> <leader>gg :GitGutterToggle<CR>
 
+nnoremap <silent> <leader>ss :SaveSession<CR>
+
 " CamelCaseMotion
 map <silent> w <Plug>CamelCaseMotion_w
 map <silent> b <Plug>CamelCaseMotion_b
@@ -274,31 +284,39 @@ let g:neocomplcache_force_overwrite_completefunc = 1
 if !exists('g:neocomplcache_keyword_patterns')
   let g:neocomplcache_keyword_patterns = {}
 endif
-let g:neocomplcache_keyword_patterns._ = '\h\w*'
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+let g:session_autosave = 'no'
+let g:session_autoload = 'yes'
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType cpp setlocal omnifunc=cppcomplete#Complete
+autocmd FileType php setlocal omnifunc=cppcomplete#CompletePHP
 autocmd FileType phtml,html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+autocmd FileType ruby setlocal omnifunc=rubycomplete#CompleteRuby
 
 " Enable heavy omni completion.
 if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
 endif
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.coffee = '\S*\|\S*::\S*?'
+let g:neocomplcache_omni_patterns.javascript = '[^. *\t]\w*\|[^. *\t]\.\%(\h\w*\)\?'
 
 " Use honza's snippets.
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
 " Enable neosnippet snipmate compatibility mode
 let g:neosnippet#enable_snipmate_compatibility = 1
+
+" Indent guides
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
 
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -329,6 +347,25 @@ let g:snips_author = 'Orgil <orgil.u@gmail.com>'
 
 " Syntastic
 let g:syntastic_filetype_map = { 'html.twig': 'twiglint' }
+" show list of errors and warnings on the current file
+nmap <leader>e :Errors<CR>
+" check also when just opened the file
+let g:syntastic_check_on_open = 1
+" don't put icons on the sign column (it hides the vcs status icons of signify)
+let g:syntastic_enable_signs = 1
+" custom icons (enable them if you use a patched font, and enable the previous 
+" setting)
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_style_error_symbol = '✗'
+let g:syntastic_style_warning_symbol = '⚠'
+
+highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
+highlight DiffDelete        cterm=bold ctermbg=none ctermfg=167
+highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
+highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
+highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
+highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
 " GUI Setting
 if has('gui_running')
@@ -344,10 +381,6 @@ if has('gui_running')
   if has('gui_macvim')
     set guifont=Inconsolata-dz\ for\ Powerline:h14 " setting font and size
     set transparency=2      " Make the window slightly transparent
-  endif
-else
-  if &term == 'xterm' || &term == 'screen'
-    set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
   endif
   "set term=builtin_ansi       " Make arrow and other keys work
 endif
