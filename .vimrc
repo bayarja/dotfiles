@@ -52,6 +52,7 @@ highlight clear SignColumn      " SignColumn should match background for
 
 "Airline
 let g:airline_powerline_fonts = 1
+let g:airline_theme='powerlineish'
 
 " disabling this section cause we have powerline
 " if has('cmdline_info')
@@ -239,6 +240,7 @@ nmap <leader>ss :SessionSave<CR>
 let g:ctrlp_map=''
 nnoremap <silent> <C-o> :CtrlP<CR>
 nnoremap <silent> <C-t> :CtrlPTag<CR>
+nnoremap <silent> <C-b> :CtrlPBuffer<CR>
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
@@ -256,6 +258,7 @@ nnoremap <silent> <leader>gw :Gwrite<CR>:GitGutter<CR>
 nnoremap <silent> <leader>gg :GitGutterToggle<CR>
 
 nnoremap <silent> <leader>ss :SaveSession<CR>
+nnoremap <silent> <leader>sd :DeleteSession<CR>
 
 " CamelCaseMotion
 map <silent> w <Plug>CamelCaseMotion_w
