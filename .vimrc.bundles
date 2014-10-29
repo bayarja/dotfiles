@@ -25,13 +25,13 @@ endif
 Bundle 'w0ng/vim-hybrid'
 "Bundle 'd11wtq/tomorrow-theme-vim'
 Bundle 'Lokaltog/vim-distinguished'
-Bundle 'junegunn/seoul256.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'vim-scripts/tComment'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-repeat'
 Bundle 'kien/ctrlp.vim'
+Bundle 'tacahiroy/ctrlp-funky'
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-session'
 Bundle 'matchit.zip'
@@ -50,7 +50,7 @@ Bundle 'sjl/gundo.vim'
 " syntax checker
 Bundle 'scrooloose/syntastic'
 " git integration
-Bundle 'motemen/git-vim'
+Bundle 'tpope/vim-fugitive'
 Bundle 'godlygeek/tabular'
 if executable('ctags')
   Bundle 'majutsushi/tagbar'
@@ -59,6 +59,7 @@ endif
 
 Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/neosnippet'
+Bundle 'Shougo/neosnippet-snippets'
 Bundle 'honza/vim-snippets'
 
 " generate task list from TODO, FIXME tags
