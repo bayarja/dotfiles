@@ -356,9 +356,9 @@ let g:syntastic_enable_signs = 1
 " custom icons (enable them if you use a patched font, and enable the previous setting)
 
 let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '!'
+let g:syntastic_warning_symbol = '^'
 let g:syntastic_style_error_symbol = '✗'
-let g:syntastic_style_warning_symbol = '!'
+let g:syntastic_style_warning_symbol = '^'
 
 highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
 highlight DiffDelete        cterm=bold ctermbg=none ctermfg=167
