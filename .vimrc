@@ -231,7 +231,7 @@ map <F2> :TaskList<CR>
 
 " NerdTree
 " nmap <F4> :NERDTreeToggle<cr>
-nmap <F4> :NERDTreeToggle()<CR>
+nmap <F4> :NERDTreeToggle<CR>
 nmap <leader>nt :NERDTreeFind<CR>
 
 let NERDTreeIgnore=['\.sass-cache$[[dir]]','\.pyc', '\~$', '\.swo$', '\.swp$', '\.git[[dir]]', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc']
