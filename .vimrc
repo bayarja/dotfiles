@@ -46,9 +46,13 @@ highlight clear SignColumn      " SignColumn should match background for
 let g:airline_powerline_fonts  = 1
 let g:airline_theme            = 'powerlineish'
 let g:airline#extensions#hunks#enabled = 0
+" show buffer as a tab
+let g:airline#extensions#tabline#enabled = 1
+" only showing filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = '|'
 
-"vim bufferline
-let g:bufferline_echo = 0
 
 set backspace=indent,eol,start  " Backspace for dummies
 set linespace=0                 " No extra spaces between rows
@@ -64,6 +68,7 @@ set scrolljump=3                " Lines to scroll when cursor leaves screen
 set scrolloff=5                 " Minimum lines to keep above and below cursor
 set foldenable                  " Auto fold code set list
 set listchars=tab:›\ ,trail:.,extends:>,nbsp:.,precedes:< " Highlight problematic whitespace
+set splitright
 
 set nowrap                      " No Wrap long lines
 set synmaxcol=512
@@ -123,6 +128,7 @@ noremap <leader>p :set paste<CR>:put  +<CR>:set nopaste<CR>
 
 " Key binding
 let mapleader = ','
+
 " no highlight after press enter
 nnoremap <CR> :nohlsearch<cr>
 " switch between last buffer
@@ -138,8 +144,16 @@ nnoremap j gj
 nnoremap k gk
 
 " navigating through tab
-map <S-H> gT
-map <S-L> gt
+map <S-H> :bprevious<CR> gT
+map <S-L> :bnext<CR> gt
+
+" Move to the next tab
+nmap gl gT
+" Move to the previous tab
+nmap gh gt
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <leader>q :bp <BAR> bd #<CR>
 
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
@@ -216,7 +230,8 @@ let g:tagbar_autofocus = 1
 map <F2> :TaskList<CR>
 
 " NerdTree
-nmap <F4> :NERDTreeToggle<cr>
+" nmap <F4> :NERDTreeToggle<cr>
+nmap <F4> :NERDTreeToggle()<CR>
 nmap <leader>nt :NERDTreeFind<CR>
 
 let NERDTreeIgnore=['\.sass-cache$[[dir]]','\.pyc', '\~$', '\.swo$', '\.swp$', '\.git[[dir]]', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc']
@@ -246,8 +261,9 @@ nnoremap <silent> <C-b> :CtrlPBuffer<CR>
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\.git$\|\.hg$\|\.svn$|\.sassc$\',
-      \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+      \ 'dir':  '\v[\/]\.(git|hg|svn|sassc)$',
+      \ 'file': '\v\.(exe|so|dll|png|jpg|gif|jpeg|swf|pdf|mp3)$'
+      \}
 let g:ctrlp_extensions = ['funky']
 
 " Figutive
