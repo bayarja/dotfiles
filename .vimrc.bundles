@@ -33,6 +33,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'tacahiroy/ctrlp-funky'
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-session'
+Bundle 'xolox/vim-easytags'
 Bundle 'matchit.zip'
 " replacement for powerline
 Bundle 'bling/vim-airline'
@@ -41,7 +42,6 @@ Bundle 'bkad/CamelCaseMotion'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'vim-scripts/restore_view.vim'
 
-Bundle 'bling/vim-bufferline'
 " replacement for vim-gutter
 Bundle 'mhinz/vim-signify'
 " history tree
@@ -67,6 +67,7 @@ Bundle 'fisadev/FixedTaskList.vim'
 " Bundle 't9md/vim-choosewin'
 "
 Bundle 'spf13/PIV'
+Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'arnaud-lb/vim-php-namespace'
 Bundle 'vim-scripts/phtml.vim'
 
