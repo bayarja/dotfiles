@@ -94,6 +94,7 @@ au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 " setting auto commands
 autocmd FileType ruby,c,cpp,java,go,php,javascript,python,twig,xml,yml,stylus,sass autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 
+autocmd BufNewFile,BufRead *.c set filetype=c
 autocmd BufNewFile,BufRead *.php set filetype=php
 autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
 autocmd BufNewFile,BufRead *.coffee set filetype=coffee
@@ -188,7 +189,7 @@ nnoremap K i<CR><Esc>
 
 " Plugins
 " PIV
-let g:DisableAutoPHPFolding = 0
+let g:DisableAutoPHPFolding = 1
 let g:PIVAutoClose = 0
 
 " Misc
@@ -220,7 +221,7 @@ set tags=./tags;,tags
 let g:easytags_dynamic_files = 1
 let g:easytags_async = 1
 let g:easytags_by_filetype = expand("$HOME/.vim")."/ctags"
-" let g:easytags_auto_highlight = 0
+let g:easytags_auto_highlight = 0
 let g:easytags_events = ['BufWritePost']
 
 nmap <F5> :TagbarToggle<CR>
@@ -293,21 +294,19 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
-" neocomplcache
+" neocomplete
 let g:acp_enableAtStartup = 0
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_enable_auto_delimiter = 1
-let g:neocomplcache_max_list = 15
-let g:neocomplcache_force_overwrite_completefunc = 1
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_auto_delimiter = 1
+let g:neocomplete#max_list = 15
+let g:neocomplete#force_overwrite_completefunc = 1
 
 " Define keyword.
-if !exists('g:neocomplcache_keyword_patterns')
-  let g:neocomplcache_keyword_patterns = {}
+if !exists('g:neocomplete#keyword_patterns')
+  let g:neocomplete#keyword_patterns = {}
 endif
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 let g:session_autosave = 'no'
 let g:session_autoload = 'yes'
@@ -321,13 +320,13 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby setlocal omnifunc=rubycomplete#CompleteRuby
 
 " Enable heavy omni completion.
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
 endif
-let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.coffee = '\S*\|\S*::\S*?'
-let g:neocomplcache_omni_patterns.javascript = '[^. *\t]\w*\|[^. *\t]\.\%(\h\w*\)\?'
+let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.coffee = '\S*\|\S*::\S*?'
+let g:neocomplete#sources#omni#input_patterns.javascript = '[^. *\t]\w*\|[^. *\t]\.\%(\h\w*\)\?'
 
 " Use honza's snippets.
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'

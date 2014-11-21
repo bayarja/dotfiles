@@ -56,7 +56,7 @@ if executable('ctags')
   Bundle 'skroll/vim-taghighlight'
 endif
 
-Bundle 'Shougo/neocomplcache'
+Bundle 'Shougo/neocomplete'
 Bundle 'Shougo/neosnippet'
 Bundle 'Shougo/neosnippet-snippets'
 Bundle 'honza/vim-snippets'
