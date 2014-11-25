@@ -33,7 +33,6 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'tacahiroy/ctrlp-funky'
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-session'
-Bundle 'xolox/vim-easytags'
 Bundle 'matchit.zip'
 " replacement for powerline
 Bundle 'bling/vim-airline'
@@ -51,10 +50,6 @@ Bundle 'scrooloose/syntastic'
 " git integration
 Bundle 'tpope/vim-fugitive'
 Bundle 'godlygeek/tabular'
-if executable('ctags')
-  Bundle 'majutsushi/tagbar'
-  Bundle 'skroll/vim-taghighlight'
-endif
 
 Bundle 'Shougo/neocomplete'
 Bundle 'Shougo/neosnippet'
@@ -85,8 +80,10 @@ Bundle 'briancollins/vim-jst'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'mustache/vim-mustache-handlebars'
+
 Bundle 'dsawardekar/portkey'
 Bundle 'dsawardekar/ember.vim'
+
 Bundle 'mattn/emmet-vim'
 Bundle 'ap/vim-css-color'
 Bundle 'hail2u/vim-css3-syntax'
