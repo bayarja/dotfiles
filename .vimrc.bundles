@@ -5,97 +5,92 @@ filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-if executable('ack-grep')
-  let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-  Bundle 'mileszs/ack.vim'
-elseif executable('ack')
-  Bundle 'mileszs/ack.vim'
-elseif executable('ag')
-  Bundle 'mileszs/ack.vim'
-  let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+if executable('ag')
+  Plugin 'rking/ag.vim'
 endif
 
-if filereadable(expand("~/.vimrc.bundles.local"))
-  source ~/.vimrc.bundles.local
-endif
-
-Bundle 'Orgil/vim-hybrid'
-Bundle 'Lokaltog/vim-distinguished'
-Bundle 'scrooloose/nerdtree'
-Bundle 'vim-scripts/tComment'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-repeat'
-Bundle 'kien/ctrlp.vim'
-Bundle 'tacahiroy/ctrlp-funky'
-Bundle 'xolox/vim-misc'
-Bundle 'xolox/vim-session'
-Bundle 'matchit.zip'
+Plugin 'w0ng/vim-hybrid'
+Plugin 'Lokaltog/vim-distinguished'
+Plugin 'scrooloose/nerdtree'
+Plugin 'vim-scripts/tComment'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-repeat'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-session'
+Plugin 'matchit.zip'
 " replacement for powerline
-Bundle 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 
-Bundle 'bkad/CamelCaseMotion'
-Bundle 'myusuf3/numbers.vim'
-Bundle 'vim-scripts/restore_view.vim'
+Plugin 'bkad/CamelCaseMotion'
+Plugin 'myusuf3/numbers.vim'
+Plugin 'vim-scripts/restore_view.vim'
 
 " replacement for vim-gutter
-Bundle 'mhinz/vim-signify'
+Plugin 'mhinz/vim-signify'
 " history tree
-Bundle 'sjl/gundo.vim'
+Plugin 'sjl/gundo.vim'
 " syntax checker
-Bundle 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 " git integration
-Bundle 'tpope/vim-fugitive'
-Bundle 'godlygeek/tabular'
+Plugin 'tpope/vim-fugitive'
+Plugin 'godlygeek/tabular'
 
-Bundle 'Shougo/neocomplete'
-Bundle 'Shougo/neosnippet'
-Bundle 'Shougo/neosnippet-snippets'
-Bundle 'honza/vim-snippets'
+Plugin 'Shougo/neocomplete'
+Plugin 'Shougo/neosnippet'
+Plugin 'Shougo/neosnippet-snippets'
+" Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 " generate task list from TODO, FIXME tags
-Bundle 'fisadev/FixedTaskList.vim'
-" Window chooser
-" Bundle 't9md/vim-choosewin'
+Plugin 'fisadev/FixedTaskList.vim'
 "
-Bundle 'spf13/PIV'
-Bundle 'shawncplus/phpcomplete.vim'
-Bundle 'arnaud-lb/vim-php-namespace'
-Bundle 'vim-scripts/phtml.vim'
+Plugin 'spf13/PIV'
+Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'arnaud-lb/vim-php-namespace'
+Plugin 'vim-scripts/phtml.vim'
 
-Bundle 'jesseschalken/list-text-object'
-Bundle 'thinca/vim-visualstar'
-Bundle 'elzr/vim-json'
+Plugin 'jesseschalken/list-text-object'
+Plugin 'thinca/vim-visualstar'
+Plugin 'elzr/vim-json'
 
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'pangloss/vim-javascript'
-" Bundle 'marijnh/tern_for_vim'
-Bundle 'vim-scripts/JavaScript-Indent'
-Bundle 'othree/javascript-libraries-syntax.vim'
-Bundle 'briancollins/vim-jst'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'digitaltoad/vim-jade'
-Bundle 'mustache/vim-mustache-handlebars'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'pangloss/vim-javascript'
+" Plugin 'marijnh/tern_for_vim'
+Plugin 'vim-scripts/JavaScript-Indent'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'briancollins/vim-jst'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'mustache/vim-mustache-handlebars'
 
-Bundle 'dsawardekar/portkey'
-Bundle 'dsawardekar/ember.vim'
+Plugin 'dsawardekar/portkey'
+Plugin 'dsawardekar/ember.vim'
 
-Bundle 'mattn/emmet-vim'
-Bundle 'ap/vim-css-color'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'tpope/vim-haml'
-Bundle 'othree/html5.vim'
-Bundle 'wavded/vim-stylus'
+" Plugin 'mattn/emmet-vim'
+if has('win32') || has('win64')
+  Plugin 'rstacruz/sparkup', {'rtp': 'vim'}
+else
+  Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+endif
 
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-markdown'
-Bundle 'spf13/vim-preview'
+Plugin 'ap/vim-css-color'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'tpope/vim-haml'
+Plugin 'othree/html5.vim'
+Plugin 'wavded/vim-stylus'
 
-Bundle 'beyondwords/vim-twig'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-rails'
+Plugin 'jtratner/vim-flavored-markdown'
+Plugin 'spf13/vim-preview'
+
+Plugin 'beyondwords/vim-twig'
 
 set shortmess+=filmnrxoOtT      " abbrev. of messages (avoids 'hit enter')
