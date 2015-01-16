@@ -37,8 +37,12 @@ Plugin 'godlygeek/tabular'
 Plugin 'Shougo/neocomplete'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
+Plugin 'tpope/vim-dispatch'
 " Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+
+" for c#
+Plugin 'OmniSharp/omnisharp-vim'
 
 " generate task list from TODO, FIXME tags
 Plugin 'fisadev/FixedTaskList.vim'
@@ -85,5 +89,7 @@ Plugin 'jtratner/vim-flavored-markdown'
 Plugin 'spf13/vim-preview'
 
 Plugin 'beyondwords/vim-twig'
+
+" Plugin 'chimeric/dokuvimki'
 
 set shortmess+=filmnrxoOtT      " abbrev. of messages (avoids 'hit enter')

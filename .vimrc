@@ -121,7 +121,7 @@ if has('win32') || has('win64')
 endif
 
 " setting auto commands
-autocmd FileType ruby,c,cpp,java,go,php,javascript,python,twig,xml,yml,stylus,sass autocmd BufWritePre <buffer> call StripTrailingWhitespace()
+autocmd FileType cs,ruby,c,cpp,java,go,php,javascript,python,twig,xml,yml,stylus,sass autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 
 autocmd BufNewFile,BufRead *.c,*.h set filetype=c
 autocmd BufNewFile,BufRead *.cpp set filetype=cpp
@@ -152,6 +152,7 @@ autocmd FileType phtml,html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby setlocal omnifunc=rubycomplete#CompleteRuby
+autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 
 " =========================== Custom Global Keybindings ===============================
 let mapleader = ','
@@ -324,6 +325,11 @@ let g:ctrlp_custom_ignore = {
       \}
 let g:ctrlp_extensions = ['funky']
 
+" Omnisharp
+let g:OmniSharp_host = "http://localhost:2000"
+let g:Omnisharp_stop_server = 0
+set noshowmatch
+
 " Figutive
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
@@ -365,6 +371,10 @@ let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
 let g:neocomplete#sources#omni#input_patterns.coffee = '\S*\|\S*::\S*?'
 let g:neocomplete#sources#omni#input_patterns.javascript = '[^. *\t]\w*\|[^. *\t]\.\%(\h\w*\)\?'
+let g:neocomplete#sources#omni#input_patterns.cs = '.*[^=\);]'
+" let g:neocomplete#sources.cs = ['omni']
+" let g:neocomplete#enable_refresh_always = 0
+" let g:neocomplete#enable_insert_char_pre = 0
 
 " Use honza's snippets.
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
@@ -400,6 +410,7 @@ let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
 
 " Syntastic
 let g:syntastic_filetype_map = { 'html.twig': 'twiglint' }
+let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
 " show list of errors and warnings on the current file
 nmap <leader>e :Errors<CR>
 let g:syntastic_ignore_files = ['\.cpp$', '\.c&']
