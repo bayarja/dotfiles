@@ -108,7 +108,7 @@ if has('gui_running')
   endif
   "set term=builtin_ansi       " Make arrow and other keys work
 endif
-                                
+
 " ======================== Filetype & Autocmd ==============================
 
 " Instead of reverting the cursor to the last position in the buffer, we
@@ -117,7 +117,7 @@ au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
 " on windows, set cl compiler
 if has('win32') || has('win64')
-  au BufEnter *.c,*.cpp compiler cl 
+  au BufEnter *.c,*.cpp compiler cl
 endif
 
 " setting auto commands
@@ -193,10 +193,6 @@ nnoremap k gk
 " navigating through tab
 map <S-H> gT
 map <S-L> gt
-
-" Visual shifting (does not exit Visual mode)
-vnoremap < <gv
-vnoremap > >gv
 
 " Move to the next tab
 nmap gl gT
