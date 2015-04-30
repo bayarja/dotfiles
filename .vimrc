@@ -405,12 +405,15 @@ nnoremap <F3> :NumbersToggle<CR>
 let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
 
 " Syntastic
+" check also when just opened the file
+let g:syntastic_check_on_open = 1
 let g:syntastic_filetype_map = { 'html.twig': 'twiglint' }
 let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_loc_list_height = 5
+let g:syntastic_auto_loc_list = 1
 " show list of errors and warnings on the current file
 nmap <leader>e :Errors<CR>
-let g:syntastic_ignore_files = ['\.cpp$', '\.c&']
-" check also when just opened the file
 " don't put icons on the sign column (it hides the vcs status icons of signify)
 let g:syntastic_enable_signs = 0
 " custom icons (enable them if you use a patched font, and enable the previous setting)

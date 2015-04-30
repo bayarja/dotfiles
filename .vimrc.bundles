@@ -43,9 +43,8 @@ Plugin 'honza/vim-snippets'
 
 " for c#
 Plugin 'OmniSharp/omnisharp-vim'
+Plugin 'yuratomo/dotnet-complete'
 
-" generate task list from TODO, FIXME tags
-Plugin 'fisadev/FixedTaskList.vim'
 "
 Plugin 'spf13/PIV'
 Plugin 'shawncplus/phpcomplete.vim'
