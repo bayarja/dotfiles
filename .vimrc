@@ -89,7 +89,7 @@ highlight clear SignColumn      " SignColumn should match background for
                                 " things like vim-gitgutter
 
 set background=dark
-colorscheme hybrid
+colorscheme Tomorrow-Night
 " ======================== GUI configs ==============================
 
 " Setting font for GUI otherwise it sets terminal font
@@ -105,6 +105,7 @@ if has('gui_running')
   elseif has('gui_macvim')
     set guifont=Inconsolata-dz\ for\ Powerline:h12 " setting font and size
     set transparency=2      " Make the window slightly transparent
+    set guioptions-=L
   endif
   "set term=builtin_ansi       " Make arrow and other keys work
 endif
@@ -149,7 +150,7 @@ endif
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 autocmd FileType phtml,html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType javascript setlocal omnifunc=tern#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby setlocal omnifunc=rubycomplete#CompleteRuby
 autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
@@ -409,9 +410,9 @@ let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
 let g:syntastic_check_on_open = 1
 let g:syntastic_filetype_map = { 'html.twig': 'twiglint' }
 let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
-let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 " show list of errors and warnings on the current file
 nmap <leader>e :Errors<CR>
 " don't put icons on the sign column (it hides the vcs status icons of signify)
@@ -421,6 +422,9 @@ let g:syntastic_error_symbol = '>>'
 let g:syntastic_warning_symbol = '^^'
 let g:syntastic_style_error_symbol = '>'
 let g:syntastic_style_warning_symbol = '^'
+
+" Handlebars
+let g:mustache_abbreviations = 1
 
 " Signify
 highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
