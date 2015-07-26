@@ -85,8 +85,6 @@ set autoread
 set tabpagemax=15               " Only show 15 tabs
 set noshowmode                  " Hiding current mode under statusline
 set cursorline                  " Highlight current line
-highlight clear SignColumn      " SignColumn should match background for
-                                " things like vim-gitgutter
 
 set background=dark
 colorscheme Tomorrow-Night
@@ -140,13 +138,6 @@ au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menu,preview,longest
 
 " OmniComplete
-if has("autocmd") && exists("+omnifunc")
-  autocmd Filetype *
-        \if &omnifunc == "" |
-        \setlocal omnifunc=syntaxcomplete#Complete |
-        \endif
-endif
-
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 autocmd FileType phtml,html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -154,6 +145,13 @@ autocmd FileType javascript setlocal omnifunc=tern#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby setlocal omnifunc=rubycomplete#CompleteRuby
 autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+
+if has("autocmd") && exists("+omnifunc")
+  autocmd Filetype *
+        \if &omnifunc == "" |
+        \setlocal omnifunc=syntaxcomplete#Complete |
+        \endif
+endif
 
 " =========================== Custom Global Keybindings ===============================
 let mapleader = ','
@@ -251,6 +249,9 @@ noremap <Right> <NOP>
 " =========================== Plugin configs & Keybindings ===============================
 
 " YouCompleteMe
+let g:ycm_key_detailed_diagnostics = ''
+let g:ycm_filepath_completion_use_working_dir = 1
+let g:ycm_add_preview_to_completeopt = 0
 
 "Airline
 let g:airline_powerline_fonts  = 1
@@ -312,7 +313,6 @@ vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 let g:ctrlp_map=''
 nnoremap <silent> <C-p> :CtrlP<CR>
 nnoremap <silent> <C-t> :CtrlPTag<CR>
-nnoremap <silent> <C-f> :CtrlPFunky<CR>
 nnoremap <silent> <C-b> :CtrlPBuffer<CR>
 
 let g:ctrlp_working_path_mode = 'ra'
@@ -341,50 +341,20 @@ nnoremap <silent> <leader>ss :SaveSession<CR>
 nnoremap <silent> <leader>sd :DeleteSession<CR>
 
 " UltiSnip
+let g:UltiSnipsExpandTrigger="<c-k>"
 let g:UltiSnipsUsePythonVersion = 2
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetsDir="~/.vim/snippets"
 
-" neocomplete
-let g:acp_enableAtStartup = 0
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#enable_auto_delimiter = 1
-let g:neocomplete#max_list = 15
-let g:neocomplete#force_overwrite_completefunc = 1
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
+" auto session save
 let g:session_autosave = 'no'
 let g:session_autoload = 'yes'
 
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
-let g:neocomplete#sources#omni#input_patterns.coffee = '\S*\|\S*::\S*?'
-let g:neocomplete#sources#omni#input_patterns.javascript = '[^. *\t]\w*\|[^. *\t]\.\%(\h\w*\)\?'
-let g:neocomplete#sources#omni#input_patterns.cs = '.*[^=\);]'
-" let g:neocomplete#sources.cs = ['omni']
-" let g:neocomplete#enable_refresh_always = 0
-" let g:neocomplete#enable_insert_char_pre = 0
-
 " Use honza's snippets.
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
-
-" Enable neosnippet snipmate compatibility mode
-let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Indent guides
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
-
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
 
 " For snippet_complete marker.
 if has('conceal')
@@ -394,7 +364,7 @@ endif
 " Disable the neosnippet preview candidate window
 " When enabled, there can be too much visual noise
 " especially when splits are used.
-" set completeopt-=preview
+set completeopt-=preview
 
 " Gundo history tree
 let g:gundo_right = 1
@@ -413,8 +383,7 @@ let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_loc_list_height = 5
 let g:syntastic_auto_loc_list = 0
-" show list of errors and warnings on the current file
-nmap <leader>e :Errors<CR>
+
 " don't put icons on the sign column (it hides the vcs status icons of signify)
 let g:syntastic_enable_signs = 0
 " custom icons (enable them if you use a patched font, and enable the previous setting)
@@ -426,25 +395,65 @@ let g:syntastic_style_warning_symbol = '^'
 " Handlebars
 let g:mustache_abbreviations = 1
 
+" Git Gutter
+let g:gitgutter_override_sign_column_highlight = 0
+nmap <Leader>hv <Plug>GitGutterPreviewHunk
+
 " Signify
-highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
-highlight DiffDelete        cterm=bold ctermbg=none ctermfg=167
-highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
-highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
-highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
-highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
+" highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
+" highlight DiffDelete        cterm=bold ctermbg=none ctermfg=167
+" highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
+" highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
+" highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
+" highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
+" Easy Motion
 
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" Bi-directional find motion
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+nmap s <Plug>(easymotion-s)
+" or `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-s2)
+
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
+" Esformatter
+nnoremap <silent> <leader>es :Esformatter<CR>
+vnoremap <silent> <leader>es :EsformatterVisual<CR>
+
+" JS-Beautify
+map <c-f> :call JsBeautify()<cr>
+autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+" in case of selection
+autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
+autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
+autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
+
+let g:config_Beautifier = {}
+let g:config_Beautifier['js'] = {}
+let g:config_Beautifier['js'].indent_size = '2'
 
 " =========================== Custom functions ===============================
 function! StripTrailingWhitespace()
-    " Preparation: save last search, and cursor position.
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " do the business:
-    %s/\s\+$//e
-    " clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " do the business:
+  %s/\s\+$//e
+  " clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
 endfunction
+" Show highlight group current location
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>

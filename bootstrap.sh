@@ -15,7 +15,7 @@ if [ ! -e $endpath/.git ]; then
     git clone --recursive -b master https://github.com/Orgil/dotfiles.git $endpath
 else
     echo "updating vim config"
-    cd $endpath && git pull origin $branch
+    cd $endpath && git pull origin master
 fi
 
 echo "setting up symlinks"

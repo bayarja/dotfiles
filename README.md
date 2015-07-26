@@ -1,4 +1,7 @@
 Installation
 ------------
+Дараах мөрийг терминал дээрээ ажиллуулаад л гүйцээ!
 
-curl https://raw.github.com/Orgil/dotfiles/master/bootstrap.sh | sh
+Run this on your terminal and happy coding!
+
+curl https://raw.githubusercontent.com/Orgil/dotfiles/master/bootstrap.sh | sh

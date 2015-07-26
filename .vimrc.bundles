@@ -6,27 +6,28 @@ if executable('ag')
 endif
 
 Plugin 'w0ng/vim-hybrid'
-Plugin 'chriskempson/vim-tomorrow-theme'
-Plugin 'Lokaltog/vim-distinguished'
+Plugin 'Orgil/vim-tomorrow-theme'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/tComment'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-repeat'
 Plugin 'kien/ctrlp.vim'
-Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
 Plugin 'matchit.zip'
 " replacement for powerline
 Plugin 'bling/vim-airline'
 
+Plugin 'easymotion/vim-easymotion'
 Plugin 'faceleg/CamelCaseMotion'
 Plugin 'myusuf3/numbers.vim'
 Plugin 'vim-scripts/restore_view.vim'
 
-" replacement for vim-gutter
-Plugin 'mhinz/vim-signify'
+" because gitgutter is more git oriented, i added back
+Plugin 'airblade/vim-gitgutter'
+" Plugin 'mhinz/vim-signify'
+
 " history tree
 Plugin 'sjl/gundo.vim'
 " syntax checker
@@ -35,12 +36,10 @@ Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-fugitive'
 Plugin 'godlygeek/tabular'
 
-Plugin 'Valloric/YouCompleteMe'
-" Plugin 'Shougo/neocomplete'
-" Plugin 'Shougo/neosnippet'
-" Plugin 'Shougo/neosnippet-snippets'
 Plugin 'tpope/vim-dispatch'
-" Plugin 'SirVer/ultisnips'
+
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
 " for c#
@@ -53,21 +52,24 @@ Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'vim-scripts/phtml.vim'
 
-Plugin 'jesseschalken/list-text-object'
 Plugin 'thinca/vim-visualstar'
-Plugin 'elzr/vim-json'
 
-Plugin 'othree/yajs.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'pangloss/vim-javascript'
 Plugin 'Raimondi/delimitMate'
-Plugin 'jelera/vim-javascript-syntax'
+
+" for javascript
 Plugin 'marijnh/tern_for_vim'
-Plugin 'lukeyeager/JavaScript-Indent'
+Plugin 'othree/yajs.vim'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'pangloss/vim-javascript'
 Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'briancollins/vim-jst'
+Plugin 'ahayman/vim-nodejs-complete'
+Plugin 'maksimr/vim-jsbeautify'
+Plugin 'einars/js-beautify'
+Plugin 'millermedeiros/vim-esformatter'
+
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'digitaltoad/vim-jade'
+" for htmlbars
 Plugin 'mustache/vim-mustache-handlebars'
 
 Plugin 'dsawardekar/portkey'
@@ -80,19 +82,20 @@ else
   Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 endif
 
+Plugin 'elzr/vim-json'
+Plugin 'jtratner/vim-flavored-markdown'
+
 Plugin 'ap/vim-css-color'
 Plugin 'hail2u/vim-css3-syntax'
-Plugin 'tpope/vim-haml'
+
 Plugin 'othree/html5.vim'
 Plugin 'wavded/vim-stylus'
+Plugin 'cakebaker/scss-syntax.vim'
 
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
-Plugin 'jtratner/vim-flavored-markdown'
 Plugin 'spf13/vim-preview'
 
 Plugin 'beyondwords/vim-twig'
-
-" Plugin 'chimeric/dokuvimki'
 
 set shortmess+=filmnrxoOtT      " abbrev. of messages (avoids 'hit enter')
