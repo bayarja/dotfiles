@@ -127,6 +127,7 @@ autocmd BufNewFile,BufRead *.cpp set filetype=cpp
 autocmd BufNewFile,BufRead *.php set filetype=php
 autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
 autocmd BufNewFile,BufRead *.coffee set filetype=coffee
+autocmd BufNewFile,BufRead *.hbs set filetype=handlebars.html syntax=mustache
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
@@ -380,9 +381,12 @@ let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
 let g:syntastic_check_on_open = 1
 let g:syntastic_filetype_map = { 'html.twig': 'twiglint' }
 let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+let g:syntastic_javascript_checkers = ['jshint', 'jscs']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_loc_list_height = 5
 let g:syntastic_auto_loc_list = 0
+let g:syntastic_filetype_map = { 'handlebars.html': 'handlebars' }
+
 
 " don't put icons on the sign column (it hides the vcs status icons of signify)
 let g:syntastic_enable_signs = 0
