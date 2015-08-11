@@ -107,7 +107,6 @@ if has('gui_running')
   endif
   "set term=builtin_ansi       " Make arrow and other keys work
 endif
-
 " ======================== Filetype & Autocmd ==============================
 
 " Instead of reverting the cursor to the last position in the buffer, we
@@ -246,6 +245,9 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+" Disable F1 annoyance
+map <F1> <Esc>
+imap <F1> <Esc>
 
 " =========================== Plugin configs & Keybindings ===============================
 
