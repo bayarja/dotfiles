@@ -93,6 +93,7 @@ colorscheme Tomorrow-Night
 " Setting font for GUI otherwise it sets terminal font
 if has('gui_running')
   set guioptions-=T           " Remove the toolbar
+  set guioptions-=r           " Remove scrollbars
   set lines=80
   if has("gui_gtk2")
     set guifont=Ubuntu\ Mono:h16,Menlo\ Regular:h15,Consolas\ Regular:h16,Courier\ New\ Regular:h18
@@ -324,6 +325,8 @@ let g:ctrlp_custom_ignore = {
       \ 'file': '\v\.(exe|so|dll|png|jpg|gif|jpeg|swf|pdf|mp3)$'
       \}
 let g:ctrlp_extensions = ['funky']
+" Silver search
+let g:ag_working_path_mode="r"
 
 " Omnisharp
 let g:OmniSharp_host = "http://localhost:2000"

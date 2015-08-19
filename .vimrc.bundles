@@ -5,7 +5,7 @@ if executable('ag')
   Plugin 'rking/ag.vim'
 endif
 
-Plugin 'w0ng/vim-hybrid'
+Plugin 'Orgil/vim-hybrid'
 Plugin 'Orgil/vim-tomorrow-theme'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/tComment'
@@ -47,6 +47,7 @@ Plugin 'OmniSharp/omnisharp-vim'
 Plugin 'yuratomo/dotnet-complete'
 
 "
+Plugin 'luochen1990/rainbow'
 Plugin 'spf13/PIV'
 Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'arnaud-lb/vim-php-namespace'
