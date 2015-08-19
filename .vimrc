@@ -226,8 +226,14 @@ map zh zH
 nnoremap <space> za
 vnoremap <space> zf
 
+" joining lines
+nnoremap Y J
+
+" Need to remap ✠ char to Shift+Enter in iterm2
 " Splitting lines
-nnoremap K i<CR><Esc>
+nnoremap ✠ i<CR><Esc>
+" DelimitMate
+inoremap ✠ <CR><Esc>O
 
 " show pending tasks list
 map <F2> :TaskList<CR>
@@ -422,10 +428,10 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 " Bi-directional find motion
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `s{char}{label}`
-" nmap <Leader>s <Plug>(easymotion-s)
+nmap <Leader>s <Plug>(easymotion-s)
 " or `s{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
-nmap <Leader>s <Plug>(easymotion-s2)
+" nmap <Leader>s <Plug>(easymotion-s2)
 
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
@@ -468,3 +474,34 @@ function! StripTrailingWhitespace()
 endfunction
 " Show highlight group current location
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
+
+" swap lines
+function! s:swap_lines(n1, n2)
+    let line1 = getline(a:n1)
+    let line2 = getline(a:n2)
+    call setline(a:n1, line2)
+    call setline(a:n2, line1)
+endfunction
+
+function! s:swap_up()
+    let n = line('.')
+    if n == 1
+        return
+    endif
+
+    call s:swap_lines(n, n - 1)
+    exec n - 1
+endfunction
+
+function! s:swap_down()
+    let n = line('.')
+    if n == line('$')
+        return
+    endif
+
+    call s:swap_lines(n, n + 1)
+    exec n + 1
+endfunction
+
+noremap <silent> <s-k> :call <SID>swap_up()<CR>
+noremap <silent> <s-j> :call <SID>swap_down()<CR>
