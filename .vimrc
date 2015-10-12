@@ -294,6 +294,8 @@ if has('win32') || has('win64')
   let g:NERDTreeCopyCmd= 'cp -r'
 endif
 let g:NERDTreeDirArrows = 1
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 let NERDTreeIgnore=['\.sass-cache$[[dir]]','\.pyc', '\~$', '\.swo$', '\.swp$', '\.git[[dir]]', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc', '^\.$', '^\.\.$', '^Thumbs\.db$']
 let NERDTreeMouseMode=0
 let NERDTreeShowHidden=1
