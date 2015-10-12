@@ -329,7 +329,7 @@ nnoremap <silent> <C-b> :CtrlPBuffer<CR>
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/]\.(git|hg|svn|sassc)$',
+      \ 'dir':  '\v[\/](node_modules|bower_components|dist)|(\.(git|hg|svn|sassc))$',
       \ 'file': '\v\.(exe|so|dll|png|jpg|gif|jpeg|swf|pdf|mp3)$'
       \}
 let g:ctrlp_extensions = ['funky']
