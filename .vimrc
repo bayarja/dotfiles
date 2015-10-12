@@ -299,7 +299,7 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 let NERDTreeIgnore=['\.sass-cache$[[dir]]','\.pyc', '\~$', '\.swo$', '\.swp$', '\.git[[dir]]', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc', '^\.$', '^\.\.$', '^Thumbs\.db$']
 let NERDTreeMouseMode=0
 let NERDTreeShowHidden=1
-let NERDTreeChDirMode=1
+let NERDTreeChDirMode=2
 
 " Increase tree width slightly
 let NERDTreeWinSize = 38
