@@ -305,6 +305,7 @@ let NERDTreeChDirMode=2
 let NERDTreeWinSize = 38
 " Change working directory to the root automatically
 
+noremap <F3> :Autoformat<CR>
 nmap <F4> :NERDTreeToggle<CR>
 nmap <leader>nt :NERDTreeFind<CR>
 

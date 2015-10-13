@@ -18,6 +18,7 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'kien/ctrlp.vim'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
+Plugin 'Chiel92/vim-autoformat'
 Plugin 'tmhedberg/matchit'
 " replacement for powerline
 Plugin 'bling/vim-airline'
