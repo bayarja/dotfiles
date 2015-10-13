@@ -69,9 +69,6 @@ Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'ahayman/vim-nodejs-complete'
-Plugin 'maksimr/vim-jsbeautify'
-Plugin 'einars/js-beautify'
-Plugin 'millermedeiros/vim-esformatter'
 
 Plugin 'kchmck/vim-coffee-script'
 " for htmlbars
