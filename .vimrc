@@ -108,6 +108,14 @@ if has('gui_running')
   endif
   "set term=builtin_ansi       " Make arrow and other keys work
 endif
+if has('nvim')
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  " Hack to get C-h working in neovim
+  "   nmap <BS> <C-W>h
+  "     tnoremap <Esc> <C-\><C-n>
+  "     endif
+endif
 " ======================== Filetype & Autocmd ==============================
 
 " Instead of reverting the cursor to the last position in the buffer, we
@@ -131,9 +139,9 @@ autocmd BufNewFile,BufRead *.hbs set filetype=handlebars.html syntax=mustache
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal! g`\"" |
+      \ endif
 " Automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menu,preview,longest
@@ -194,10 +202,6 @@ nnoremap k gk
 map <S-H> gT
 map <S-L> gt
 
-" Move to the next tab
-nmap gl gT
-" Move to the previous tab
-nmap gh gt
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab
 nmap <leader>q :bp <BAR> bd #<CR>
@@ -234,10 +238,6 @@ nnoremap Y J
 nnoremap ✠ i<CR><Esc>
 " DelimitMate
 inoremap ✠ <CR><Esc>O
-
-" show pending tasks list
-map <F2> :TaskList<CR>
-
 
 " CamelCaseMotion
 map <silent> w <Plug>CamelCaseMotion_w
@@ -282,8 +282,8 @@ let b:match_ignorecase = 1
 
 
 " Indent guide color
-hi IndentGuidesOdd  ctermbg=black
-hi IndentGuidesEven ctermbg=darkgrey
+" hi IndentGuidesOdd  ctermbg=black
+" hi IndentGuidesEven ctermbg=darkgrey
 
 " hi PmenuSel  guifg=#b5e3ff guibg=#424242 ctermfg=Blue ctermbg=238
 " hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=Lightgray cterm=NONE
@@ -305,7 +305,6 @@ let NERDTreeChDirMode=2
 let NERDTreeWinSize = 38
 " Change working directory to the root automatically
 
-noremap <F3> :Autoformat<CR>
 nmap <F4> :NERDTreeToggle<CR>
 nmap <leader>nt :NERDTreeFind<CR>
 
@@ -330,7 +329,7 @@ nnoremap <silent> <C-b> :CtrlPBuffer<CR>
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/](node_modules|bower_components|dist)|(\.(git|hg|svn|sassc))$',
+      \ 'dir':  '\v[\/](node_modules|bower_components|dist|tmp)|(\.(git|hg|svn|sassc))$',
       \ 'file': '\v\.(exe|so|dll|png|jpg|gif|jpeg|swf|pdf|mp3)$'
       \}
 let g:ctrlp_extensions = ['funky']
@@ -364,8 +363,6 @@ let g:UltiSnipsSnippetsDir="~/.vim/snippets"
 " auto session save
 let g:session_autosave = 'no'
 let g:session_autoload = 'yes'
-
-" Use honza's snippets.
 
 " Indent guides
 let g:indent_guides_guide_size = 1
@@ -415,7 +412,7 @@ let g:mustache_abbreviations = 1
 
 " Git Gutter
 let g:gitgutter_override_sign_column_highlight = 0
-nmap <Leader>hv <Plug>GitGutterPreviewHunk
+nmap <Leader>hk <Plug>GitGutterPreviewHunk
 
 " Signify
 " highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
@@ -445,23 +442,8 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>b <Plug>(easymotion-linebackward)
 
-" Esformatter
-nnoremap <silent> <leader>es :Esformatter<CR>
-vnoremap <silent> <leader>es :EsformatterVisual<CR>
-
 " JS-Beautify
-map <c-f> :call JsBeautify()<cr>
-autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-" in case of selection
-autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
-autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
-autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
-
-let g:config_Beautifier = {}
-let g:config_Beautifier['js'] = {}
-let g:config_Beautifier['js'].indent_size = '2'
+noremap <c-f> :Autoformat<CR>
 
 " =========================== Custom functions ===============================
 function! StripTrailingWhitespace()
@@ -480,30 +462,30 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 
 " swap lines
 function! s:swap_lines(n1, n2)
-    let line1 = getline(a:n1)
-    let line2 = getline(a:n2)
-    call setline(a:n1, line2)
-    call setline(a:n2, line1)
+  let line1 = getline(a:n1)
+  let line2 = getline(a:n2)
+  call setline(a:n1, line2)
+  call setline(a:n2, line1)
 endfunction
 
 function! s:swap_up()
-    let n = line('.')
-    if n == 1
-        return
-    endif
+  let n = line('.')
+  if n == 1
+    return
+  endif
 
-    call s:swap_lines(n, n - 1)
-    exec n - 1
+  call s:swap_lines(n, n - 1)
+  exec n - 1
 endfunction
 
 function! s:swap_down()
-    let n = line('.')
-    if n == line('$')
-        return
-    endif
+  let n = line('.')
+  if n == line('$')
+    return
+  endif
 
-    call s:swap_lines(n, n + 1)
-    exec n + 1
+  call s:swap_lines(n, n + 1)
+  exec n + 1
 endfunction
 
 noremap <silent> <s-k> :call <SID>swap_up()<CR>

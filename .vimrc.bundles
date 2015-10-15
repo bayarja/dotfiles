@@ -8,6 +8,7 @@ endif
 Plugin 'Orgil/vim-hybrid'
 Plugin 'Orgil/vim-tomorrow-theme'
 Plugin 'morhetz/gruvbox'
+Plugin 'chriskempson/base16-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 
