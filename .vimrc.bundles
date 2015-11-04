@@ -97,7 +97,7 @@ Plugin 'wavded/vim-stylus'
 Plugin 'cakebaker/scss-syntax.vim'
 
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-rails'
+" Plugin 'tpope/vim-rails'
 Plugin 'spf13/vim-preview'
 
 Plugin 'beyondwords/vim-twig'

@@ -164,6 +164,7 @@ endif
 
 " =========================== Custom Global Keybindings ===============================
 let mapleader = ','
+let g:maplocalleader = ';'
 
 " Setting clipboard copy functionality
 if has('gui_macvim')
