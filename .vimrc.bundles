@@ -46,7 +46,6 @@ Plugin 'tpope/vim-dispatch'
 
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
 
 " for c#
 Plugin 'OmniSharp/omnisharp-vim'

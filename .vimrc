@@ -355,11 +355,15 @@ nnoremap <silent> <leader>gg :GitGutterToggle<CR>
 nnoremap <silent> <leader>ss :SaveSession<CR>
 nnoremap <silent> <leader>sd :DeleteSession<CR>
 
+" YouCompleteMe
+let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+
 " UltiSnip
-let g:UltiSnipsExpandTrigger="<c-k>"
+let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsUsePythonVersion = 2
 let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetsDir="~/.vim/snippets"
+let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 
 " auto session save
 let g:session_autosave = 'no'
