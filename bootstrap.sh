@@ -22,6 +22,8 @@ echo "setting up symlinks"
 lnif $endpath/.vimrc $HOME/.vimrc
 lnif $endpath/.tmux.conf $HOME/.tmux.conf
 lnif $endpath/.vimrc.bundles $HOME/.vimrc.bundles
+lnif $endpath/.ctags $HOME/.ctags
+lnif $endpath/.global_ignore $HOME/.global_ignore
 if [ ! -d $endpath/.vim/bundle ]; then
   mkdir -p $endpath/.vim/bundle
 fi
@@ -36,4 +38,5 @@ system_shell=$SHELL
 export SHELL="/bin/sh"
 vim +PluginInstall! +PluginClean +qall
 export SHELL=$system_shell
+git config --global core.excludesfile $HOME/.global_ignore
 echo "Welcome to vim power. Happy coding!!!"
