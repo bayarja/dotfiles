@@ -85,9 +85,11 @@ set autoread
 set tabpagemax=15               " Only show 15 tabs
 set noshowmode                  " Hiding current mode under statusline
 set cursorline                  " Highlight current line
+set lazyredraw
 
 set background=dark
-colorscheme Tomorrow-Night
+colorscheme gruvbox
+let g:gruvbox_contrast_dark = "medium"
 " ======================== GUI configs ==============================
 
 " Setting font for GUI otherwise it sets terminal font
@@ -152,7 +154,6 @@ autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 autocmd FileType phtml,html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=tern#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType ruby setlocal omnifunc=rubycomplete#CompleteRuby
 autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 
 if has("autocmd") && exists("+omnifunc")
@@ -281,14 +282,10 @@ let g:PIVAutoClose = 0
 " Misc
 let b:match_ignorecase = 1
 
-
-" Indent guide color
-" hi IndentGuidesOdd  ctermbg=black
-" hi IndentGuidesEven ctermbg=darkgrey
-
-" hi PmenuSel  guifg=#b5e3ff guibg=#424242 ctermfg=Blue ctermbg=238
-" hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=Lightgray cterm=NONE
-" hi PmenuThumb  guifg=#FFFFFF guibg=#555555 gui=NONE ctermfg=darkcyan ctermbg=Lightgray cterm=NONE
+" vertical line indentation
+let g:indentLine_color_term = 237
+let g:indentLine_color_gui = '#3a3a3a'
+let g:indentLine_char = '│'
 
 " NerdTree
 if has('win32') || has('win64')
@@ -297,7 +294,7 @@ endif
 let g:NERDTreeDirArrows = 1
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-let NERDTreeIgnore=['\.sass-cache$[[dir]]','\.pyc', '\~$', '\.swo$', '\.swp$', '\.git[[dir]]', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc', '^\.$', '^\.\.$', '^Thumbs\.db$']
+let NERDTreeIgnore=['\.sass-cache$[[dir]]','\.pyc', '\~$', '\.swo$', '\.swp$', '\.git[[dir]]', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc', '^\.$', '^\.\.$', '^Thumbs\.db$', '.DS_Store']
 let NERDTreeMouseMode=0
 let NERDTreeShowHidden=1
 let NERDTreeChDirMode=2
@@ -308,6 +305,16 @@ let NERDTreeWinSize = 38
 
 nmap <F4> :NERDTreeToggle<CR>
 nmap <leader>nt :NERDTreeFind<CR>
+
+"Vim-Go
+let g:go_disable_autoinstall = 0
+"" Highlight
+let g:go_highlight_functions = 1  
+let g:go_highlight_methods = 1  
+let g:go_highlight_structs = 1  
+let g:go_highlight_operators = 1  
+let g:go_highlight_build_constraints = 1  
+
 
 " Tabularize
 nmap <Leader>a& :Tabularize /&<CR>
@@ -369,10 +376,6 @@ let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 let g:session_autosave = 'no'
 let g:session_autoload = 'yes'
 
-" Indent guides
-let g:indent_guides_guide_size = 1
-let g:indent_guides_start_level = 2
-
 " For snippet_complete marker.
 if has('conceal')
   set conceallevel=2 concealcursor=i
@@ -393,16 +396,25 @@ nnoremap <F3> :NumbersToggle<CR>
 let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
 
 " Syntastic
+" jscs returns exit code when no config file is present.
+" Only load it when appropriate.
+function! JavascriptCheckers()
+  if filereadable(getcwd() . '/.jscsrc')
+    return ['jshint', 'jscs']
+  else
+    return ['jshint']
+  endif
+endfunction
+
 " check also when just opened the file
 let g:syntastic_check_on_open = 1
 let g:syntastic_filetype_map = { 'html.twig': 'twiglint' }
 let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
-let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+let g:syntastic_javascript_checkers = JavascriptCheckers()
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_loc_list_height = 5
 let g:syntastic_auto_loc_list = 0
-let g:syntastic_filetype_map = { 'handlebars.html': 'handlebars' }
-
+let g:syntastic_filetype_map = { 'hbs': 'handlebars' }
 
 " don't put icons on the sign column (it hides the vcs status icons of signify)
 let g:syntastic_enable_signs = 0

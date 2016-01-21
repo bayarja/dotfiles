@@ -10,6 +10,10 @@ snippet todo "TODO reminder" b
 //TODO(`whoami`): $1
 endsnippet
 
+snippet note "NOTE reminder" b
+//NOTE(`whoami`): $1
+endsnippet
+
 snippet fix "FIX reminder" b
 //FIX(`whoami`): $1
 endsnippet
@@ -23,5 +27,28 @@ endsnippet
 
 snippet super "Ember call super" b
 this._super.apply(this, arguments);
-$1
+endsnippet
+
+snippet fn "JS function" b
+$1: function() {
+	$2
+}
+endsnippet
+
+snippet fn, "JS middle function" b
+$1: function() {
+	$2
+},
+endsnippet
+
+snippet func "JS ES6 Function" b
+$1() {
+	$2
+}
+endsnippet
+
+snippet func, "JS ES6 Function" b
+$1() {
+	$2
+},
 endsnippet

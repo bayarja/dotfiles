@@ -20,7 +20,9 @@ fi
 
 echo "setting up symlinks"
 lnif $endpath/.vimrc $HOME/.vimrc
+lnif $endpath/.vimrc $HOME/init.vim
 lnif $endpath/.tmux.conf $HOME/.tmux.conf
+lnif $endpath/.tern-config $HOME/.tern-config
 lnif $endpath/.vimrc.bundles $HOME/.vimrc.bundles
 lnif $endpath/.ctags $HOME/.ctags
 lnif $endpath/.global_ignore $HOME/.global_ignore
