@@ -64,6 +64,8 @@ set scrolloff=5                 " Minimum lines to keep above and below cursor
 set foldenable                  " Auto fold code set list
 set listchars=tab:›\ ,trail:.,extends:>,nbsp:.,precedes:< " Highlight problematic whitespace
 set splitright
+set splitbelow
+set magic
 
 set nowrap                      " No Wrap long lines
 set synmaxcol=512
@@ -114,23 +116,14 @@ if has('nvim')
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   " Hack to get C-h working in neovim
-  "   nmap <BS> <C-W>h
-  "     tnoremap <Esc> <C-\><C-n>
-  "     endif
+  nmap <BS> <C-W>h
+  tnoremap <Esc> <C-\><C-n>
 endif
 " ======================== Filetype & Autocmd ==============================
 
 " Instead of reverting the cursor to the last position in the buffer, we
 " set it to the first line when editing a git commit message
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-
-" on windows, set cl compiler
-if has('win32') || has('win64')
-  au BufEnter *.c,*.cpp compiler cl
-endif
-
-" setting auto commands
-autocmd FileType cs,ruby,c,cpp,java,go,php,javascript,python,twig,xml,yml,stylus,sass autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 
 autocmd BufNewFile,BufRead *.c,*.h set filetype=c
 autocmd BufNewFile,BufRead *.cpp set filetype=cpp
@@ -309,12 +302,11 @@ nmap <leader>nt :NERDTreeFind<CR>
 "Vim-Go
 let g:go_disable_autoinstall = 0
 "" Highlight
-let g:go_highlight_functions = 1  
-let g:go_highlight_methods = 1  
-let g:go_highlight_structs = 1  
-let g:go_highlight_operators = 1  
-let g:go_highlight_build_constraints = 1  
-
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 
 " Tabularize
 nmap <Leader>a& :Tabularize /&<CR>
@@ -329,7 +321,15 @@ nmap <Leader>a, :Tabularize /,<CR>
 vmap <Leader>a, :Tabularize /,<CR>
 nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-
+" ctrlP
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
 let g:ctrlp_map=''
 nnoremap <silent> <C-p> :CtrlP<CR>
 nnoremap <silent> <C-t> :CtrlPTag<CR>
@@ -347,7 +347,6 @@ let g:ag_working_path_mode="r"
 " Omnisharp
 let g:OmniSharp_host = "http://localhost:2000"
 let g:Omnisharp_stop_server = 0
-set noshowmatch
 
 " Figutive
 nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -398,31 +397,47 @@ let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
 " Syntastic
 " jscs returns exit code when no config file is present.
 " Only load it when appropriate.
-function! JavascriptCheckers()
-  if filereadable(getcwd() . '/.jscsrc')
-    return ['jshint', 'jscs']
-  else
-    return ['jshint']
-  endif
-endfunction
+if has('nvim')
+  autocmd! BufWritePost,BufEnter * Neomake
+  let g:neomake_list_height=5
+  " let g:neomake_place_signs=0
+  let g:neomake_warning_sign = {
+    \ 'text': '⦿',
+    \ 'texthl': 'WarningMsg',
+    \ }
+  "
+  let g:neomake_error_sign = {
+    \ 'text': '●',
+    \ 'texthl': 'ErrorMsg',
+    \ }
+else
 
-" check also when just opened the file
-let g:syntastic_check_on_open = 1
-let g:syntastic_filetype_map = { 'html.twig': 'twiglint' }
-let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
-let g:syntastic_javascript_checkers = JavascriptCheckers()
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_filetype_map = { 'hbs': 'handlebars' }
+  function! JavascriptCheckers()
+    if filereadable(getcwd() . '/.jscsrc')
+      return ['jshint', 'jscs']
+    else
+      return ['jshint']
+    endif
+  endfunction
 
-" don't put icons on the sign column (it hides the vcs status icons of signify)
-let g:syntastic_enable_signs = 0
-" custom icons (enable them if you use a patched font, and enable the previous setting)
-let g:syntastic_error_symbol = '>>'
-let g:syntastic_warning_symbol = '^^'
-let g:syntastic_style_error_symbol = '>'
-let g:syntastic_style_warning_symbol = '^'
+  " check also when just opened the file
+  let g:syntastic_check_on_open = 1
+  let g:syntastic_filetype_map = { 'html.twig': 'twiglint' }
+  let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+  let g:syntastic_javascript_checkers = JavascriptCheckers()
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_loc_list_height = 5
+  let g:syntastic_auto_loc_list = 0
+  let g:syntastic_filetype_map = { 'hbs': 'handlebars' }
+
+  " don't put icons on the sign column (it hides the vcs status icons of signify)
+  let g:syntastic_enable_signs = 0
+  " custom icons (enable them if you use a patched font, and enable the previous setting)
+  let g:syntastic_error_symbol = '>>'
+  let g:syntastic_warning_symbol = '^^'
+  let g:syntastic_style_error_symbol = '>'
+  let g:syntastic_style_warning_symbol = '^'
+endif
 
 " Handlebars
 let g:mustache_abbreviations = 1
@@ -440,7 +455,6 @@ nmap <Leader>hk <Plug>GitGutterPreviewHunk
 " highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
 " Easy Motion
-
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 " Bi-directional find motion
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
@@ -463,17 +477,6 @@ map <Leader>b <Plug>(easymotion-linebackward)
 noremap <c-f> :Autoformat<CR>
 
 " =========================== Custom functions ===============================
-function! StripTrailingWhitespace()
-  " Preparation: save last search, and cursor position.
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-  " do the business:
-  %s/\s\+$//e
-  " clean up: restore previous search history, and cursor position
-  let @/=_s
-  call cursor(l, c)
-endfunction
 " Show highlight group current location
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 

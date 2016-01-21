@@ -20,12 +20,15 @@ fi
 
 echo "setting up symlinks"
 lnif $endpath/.vimrc $HOME/.vimrc
-lnif $endpath/.vimrc $HOME/init.vim
 lnif $endpath/.tmux.conf $HOME/.tmux.conf
 lnif $endpath/.tern-config $HOME/.tern-config
 lnif $endpath/.vimrc.bundles $HOME/.vimrc.bundles
 lnif $endpath/.ctags $HOME/.ctags
 lnif $endpath/.global_ignore $HOME/.global_ignore
+# nvim link
+lnif $endpath $HOME/.config/nvim
+lnif $endpath/.vimrc $endpath/init.vim
+
 if [ ! -d $endpath/.vim/bundle ]; then
   mkdir -p $endpath/.vim/bundle
 fi

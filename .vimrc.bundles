@@ -34,17 +34,23 @@ Plugin 'vim-scripts/restore_view.vim'
 Plugin 'airblade/vim-gitgutter'
 " Plugin 'mhinz/vim-signify'
 
+" remove whitespace
+Plugin 'thirtythreeforty/lessspace.vim'
 " history tree
 Plugin 'sjl/gundo.vim'
 " syntax checker
-Plugin 'scrooloose/syntastic'
+if has('nvim') 
+  Plugin 'benekastah/neomake'
+else
+  Plugin 'scrooloose/syntastic'
+endif
 " git integration
 Plugin 'tpope/vim-fugitive'
 Plugin 'godlygeek/tabular'
 
 Plugin 'tpope/vim-dispatch'
 
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --omnisharp-completer --tern-completer' }
 Plugin 'SirVer/ultisnips'
 
 " for c#
