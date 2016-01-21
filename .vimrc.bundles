@@ -5,10 +5,7 @@ if executable('ag')
   Plugin 'rking/ag.vim'
 endif
 
-Plugin 'Orgil/vim-hybrid'
-Plugin 'Orgil/vim-tomorrow-theme'
 Plugin 'morhetz/gruvbox'
-Plugin 'chriskempson/base16-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 
@@ -43,12 +40,11 @@ if has('nvim')
   Plugin 'benekastah/neomake'
 else
   Plugin 'scrooloose/syntastic'
+  Plugin 'tpope/vim-dispatch'
 endif
 " git integration
 Plugin 'tpope/vim-fugitive'
 Plugin 'godlygeek/tabular'
-
-Plugin 'tpope/vim-dispatch'
 
 Plugin 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --omnisharp-completer --tern-completer' }
 Plugin 'SirVer/ultisnips'
@@ -56,17 +52,12 @@ Plugin 'SirVer/ultisnips'
 " for c#
 Plugin 'OmniSharp/omnisharp-vim'
 Plugin 'yuratomo/dotnet-complete'
-
-"
 Plugin 'luochen1990/rainbow'
 Plugin 'spf13/PIV'
 Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'vim-scripts/phtml.vim'
-
 Plugin 'thinca/vim-visualstar'
-
-Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'Yggdroot/indentLine'
 Plugin 'Raimondi/delimitMate'
 
