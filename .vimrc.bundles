@@ -20,7 +20,8 @@ Plugin 'xolox/vim-session'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'tmhedberg/matchit'
 " replacement for powerline
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 Plugin 'easymotion/vim-easymotion'
 Plugin 'faceleg/CamelCaseMotion'
