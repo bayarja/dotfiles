@@ -53,23 +53,23 @@ Plug 'SirVer/ultisnips'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'yuratomo/dotnet-complete'
 Plug 'luochen1990/rainbow'
-Plug 'spf13/PIV'
-Plug 'shawncplus/phpcomplete.vim'
-Plug 'arnaud-lb/vim-php-namespace'
-Plug 'vim-scripts/phtml.vim'
+Plug 'spf13/PIV', { 'for': 'php'}
+Plug 'shawncplus/phpcomplete.vim', { 'for': 'php'}
+Plug 'arnaud-lb/vim-php-namespace', { 'for': 'php'}
+Plug 'vim-scripts/phtml.vim', { 'for': 'php'}
 Plug 'thinca/vim-visualstar'
 Plug 'Yggdroot/indentLine'
 Plug 'Raimondi/delimitMate'
 
 " for go development
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'for': 'javascript'}
 
 " for javascript
-Plug 'othree/yajs.vim'
-Plug 'jelera/vim-javascript-syntax'
-Plug 'pangloss/vim-javascript'
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'ahayman/vim-nodejs-complete'
+Plug 'othree/yajs.vim', { 'for': 'javascript'}
+Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript'}
+Plug 'pangloss/vim-javascript', { 'for': 'javascript'}
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript'}
+Plug 'ahayman/vim-nodejs-complete', { 'for': 'javascript'}
 
 Plug 'kchmck/vim-coffee-script'
 " for htmlbars
@@ -96,7 +96,7 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'dsawardekar/portkey'
 Plug 'dsawardekar/ember.vim'
 
-Plug 'vim-ruby/vim-ruby'
+Plug 'vim-ruby/vim-ruby', { 'for': 'ruby'}
 " Plug 'tpope/vim-rails'
 Plug 'spf13/vim-preview'
 
