@@ -4,3 +4,4 @@ tags
 sessions/
 ctags/
 init.vim
+autoload/plug.vim

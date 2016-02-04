@@ -1,20 +1,18 @@
 " ======================== Required configs ==============================
-set nocompatible              " be iMproved, required
 " on windows, setting runtime path to .vim same as *nix system
 if has('win32') || has('win64')
   set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 endif
 
-" Vundle
-filetype off                  " required
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
+if !has('nvim')
+  set nocompatible              " be iMproved, required
 endif
-call vundle#end()            " required
+
+call plug#begin('~/.vim/bundle')
+  if filereadable(expand("~/.vimrc.bundles"))
+    source ~/.vimrc.bundles
+  endif
+call plug#end()
 
 filetype plugin indent on    " required
 
@@ -91,7 +89,7 @@ set lazyredraw
 
 set background=dark
 colorscheme gruvbox
-let g:gruvbox_contrast_dark = "medium"
+let g:gruvbox_contrast_dark = "soft"
 " ======================== GUI configs ==============================
 
 " Setting font for GUI otherwise it sets terminal font

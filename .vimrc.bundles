@@ -1,106 +1,105 @@
-Plugin 'gmarik/Vundle.vim'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
 if executable('ag')
-  Plugin 'rking/ag.vim'
+  Plug 'rking/ag.vim'
 endif
 
-Plugin 'morhetz/gruvbox'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plug 'morhetz/gruvbox'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle'}
 
-Plugin 'vim-scripts/tComment'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'kien/ctrlp.vim'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-session'
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'tmhedberg/matchit'
+Plug 'vim-scripts/tComment'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
+Plug 'kien/ctrlp.vim'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
+Plug 'Chiel92/vim-autoformat'
+Plug 'tmhedberg/matchit'
 " replacement for powerline
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-Plugin 'easymotion/vim-easymotion'
-Plugin 'faceleg/CamelCaseMotion'
-Plugin 'myusuf3/numbers.vim'
-Plugin 'vim-scripts/restore_view.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'faceleg/CamelCaseMotion'
+Plug 'myusuf3/numbers.vim'
+Plug 'vim-scripts/restore_view.vim'
 
 " because gitgutter is more git oriented, i added back
-Plugin 'airblade/vim-gitgutter'
-" Plugin 'mhinz/vim-signify'
+Plug 'airblade/vim-gitgutter'
+" Plug 'mhinz/vim-signify'
 
 " remove whitespace
-Plugin 'thirtythreeforty/lessspace.vim'
+Plug 'thirtythreeforty/lessspace.vim'
 " history tree
-Plugin 'sjl/gundo.vim'
+Plug 'sjl/gundo.vim'
 " syntax checker
 if has('nvim') 
-  Plugin 'benekastah/neomake'
+  Plug 'benekastah/neomake'
 else
-  Plugin 'scrooloose/syntastic'
-  Plugin 'tpope/vim-dispatch'
+  Plug 'scrooloose/syntastic'
+  Plug 'tpope/vim-dispatch'
 endif
 " git integration
-Plugin 'tpope/vim-fugitive'
-Plugin 'godlygeek/tabular'
+Plug 'tpope/vim-fugitive'
+Plug 'godlygeek/tabular'
 
-Plugin 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --omnisharp-completer --tern-completer' }
-Plugin 'SirVer/ultisnips'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --omnisharp-completer --tern-completer' }
+Plug 'SirVer/ultisnips'
 
 " for c#
-Plugin 'OmniSharp/omnisharp-vim'
-Plugin 'yuratomo/dotnet-complete'
-Plugin 'luochen1990/rainbow'
-Plugin 'spf13/PIV'
-Plugin 'shawncplus/phpcomplete.vim'
-Plugin 'arnaud-lb/vim-php-namespace'
-Plugin 'vim-scripts/phtml.vim'
-Plugin 'thinca/vim-visualstar'
-Plugin 'Yggdroot/indentLine'
-Plugin 'Raimondi/delimitMate'
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'yuratomo/dotnet-complete'
+Plug 'luochen1990/rainbow'
+Plug 'spf13/PIV'
+Plug 'shawncplus/phpcomplete.vim'
+Plug 'arnaud-lb/vim-php-namespace'
+Plug 'vim-scripts/phtml.vim'
+Plug 'thinca/vim-visualstar'
+Plug 'Yggdroot/indentLine'
+Plug 'Raimondi/delimitMate'
 
 " for go development
-Plugin 'fatih/vim-go'
+Plug 'fatih/vim-go'
 
 " for javascript
-Plugin 'othree/yajs.vim'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'pangloss/vim-javascript'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'ahayman/vim-nodejs-complete'
+Plug 'othree/yajs.vim'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'ahayman/vim-nodejs-complete'
 
-Plugin 'kchmck/vim-coffee-script'
+Plug 'kchmck/vim-coffee-script'
 " for htmlbars
-Plugin 'mustache/vim-mustache-handlebars'
+Plug 'mustache/vim-mustache-handlebars'
 
-" Plugin 'mattn/emmet-vim'
+" Plug 'mattn/emmet-vim'
 if has('win32') || has('win64')
-  Plugin 'rstacruz/sparkup', {'rtp': 'vim'}
+  Plug 'rstacruz/sparkup', {'rtp': 'vim'}
 else
-  Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+  Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 endif
 
-Plugin 'elzr/vim-json'
-Plugin 'jtratner/vim-flavored-markdown'
+Plug 'elzr/vim-json'
+Plug 'jtratner/vim-flavored-markdown'
 
-Plugin 'ap/vim-css-color'
-Plugin 'hail2u/vim-css3-syntax'
+Plug 'ap/vim-css-color'
+Plug 'hail2u/vim-css3-syntax'
 
-Plugin 'othree/html5.vim'
-Plugin 'othree/html5-syntax.vim'
-Plugin 'wavded/vim-stylus'
-Plugin 'cakebaker/scss-syntax.vim'
+Plug 'othree/html5.vim'
+Plug 'othree/html5-syntax.vim'
+Plug 'wavded/vim-stylus'
+Plug 'cakebaker/scss-syntax.vim'
 
-Plugin 'dsawardekar/portkey'
-Plugin 'dsawardekar/ember.vim'
+Plug 'dsawardekar/portkey'
+Plug 'dsawardekar/ember.vim'
 
-Plugin 'vim-ruby/vim-ruby'
-" Plugin 'tpope/vim-rails'
-Plugin 'spf13/vim-preview'
+Plug 'vim-ruby/vim-ruby'
+" Plug 'tpope/vim-rails'
+Plug 'spf13/vim-preview'
 
-Plugin 'beyondwords/vim-twig'
+Plug 'beyondwords/vim-twig'
 
 set shortmess+=filmnrxoOtT      " abbrev. of messages (avoids 'hit enter')
