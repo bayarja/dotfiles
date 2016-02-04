@@ -33,16 +33,12 @@ if [ ! -d $endpath/.vim/bundle ]; then
   mkdir -p $endpath/.vim/bundle
 fi
 
-if [ ! -e $HOME/.vim/bundle/Vundle.vim ]; then
-  echo "Installing Vundle"
-  git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
-fi
-if [ ! -e $HOME/.vim/bundle/Vundle.vim ]; then
-  echo "Installing Vim-plug"
+if [ ! -e $HOME/.vim/autoload/plug.vim ]; then
+  echo "Installing vim-plug"
   curl -fLo $HOME/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-echo "update/install plugins using Vundle"
+echo "update/install plugins using vim-plug"
 system_shell=$SHELL
 export SHELL="/bin/sh"
 vim +PluginInstall! +PluginClean +qall
