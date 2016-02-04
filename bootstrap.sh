@@ -37,6 +37,10 @@ if [ ! -e $HOME/.vim/bundle/Vundle.vim ]; then
   echo "Installing Vundle"
   git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 fi
+if [ ! -e $HOME/.vim/bundle/Vundle.vim ]; then
+  echo "Installing Vim-plug"
+  curl -fLo $HOME/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
 
 echo "update/install plugins using Vundle"
 system_shell=$SHELL
