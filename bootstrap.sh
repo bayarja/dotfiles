@@ -38,10 +38,10 @@ if [ ! -e $HOME/.vim/autoload/plug.vim ]; then
   curl -fLo $HOME/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-echo "update/install plugins using vim-plug"
-system_shell=$SHELL
-export SHELL="/bin/sh"
-vim +PluginInstall! +PluginClean +qall
-export SHELL=$system_shell
+# echo "update/install plugins using vim-plug"
+# system_shell=$SHELL
+# export SHELL="/bin/sh"
+# nvim +PluginInstall! +PluginClean +qall
+# export SHELL=$system_shell
 git config --global core.excludesfile $HOME/.global_ignore
 echo "Welcome to vim power. Happy coding!!!"

@@ -88,8 +88,9 @@ set cursorline                  " Highlight current line
 set lazyredraw
 
 set background=dark
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark = "hard"
 colorscheme gruvbox
-let g:gruvbox_contrast_dark = "soft"
 " ======================== GUI configs ==============================
 
 " Setting font for GUI otherwise it sets terminal font
