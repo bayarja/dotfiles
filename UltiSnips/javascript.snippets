@@ -20,13 +20,13 @@ endsnippet
 
 snippet init "Ember init function" b
 init() {
-	this._super.apply(this, arguments);
+	this._super(...arguments);
 	$1
 }
 endsnippet
 
 snippet super "Ember call super" b
-this._super.apply(this, arguments);
+this._super(...arguments);
 endsnippet
 
 snippet fn "JS function" b

@@ -98,7 +98,8 @@ Plug 'dsawardekar/portkey'
 Plug 'dsawardekar/ember.vim'
 
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby'}
-" Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-bundler'
 Plug 'spf13/vim-preview'
 
 Plug 'beyondwords/vim-twig'
