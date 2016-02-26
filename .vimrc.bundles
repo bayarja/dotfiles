@@ -26,6 +26,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'faceleg/CamelCaseMotion'
 Plug 'myusuf3/numbers.vim'
 Plug 'vim-scripts/restore_view.vim'
+"Jira plugin
+Plug 'mnpk/vim-jira-complete'
 
 " because gitgutter is more git oriented, i added back
 Plug 'airblade/vim-gitgutter'
