@@ -5,3 +5,4 @@ sessions/
 ctags/
 init.vim
 autoload/plug.vim
+.netrwhist
