@@ -48,7 +48,7 @@ endif
 Plug 'tpope/vim-fugitive'
 Plug 'godlygeek/tabular'
 
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --omnisharp-completer --tern-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --tern-completer' }
 Plug 'SirVer/ultisnips'
 
 " for c#
