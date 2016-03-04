@@ -103,6 +103,7 @@ Plug 'vim-ruby/vim-ruby', { 'for': 'ruby'}
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
 Plug 'spf13/vim-preview'
+Plug 'mxw/vim-jsx'
 
 Plug 'beyondwords/vim-twig'
 
