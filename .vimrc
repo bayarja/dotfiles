@@ -396,6 +396,7 @@ let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
 " jscs returns exit code when no config file is present.
 " Only load it when appropriate.
 if has('nvim')
+  let g:neomake_javascript_enabled_makers = ['eslint']
   autocmd! BufWritePost,BufEnter * Neomake
   let g:neomake_list_height=5
   " let g:neomake_place_signs=0
