@@ -72,7 +72,6 @@ Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript'}
 Plug 'pangloss/vim-javascript', { 'for': 'javascript'}
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript'}
 Plug 'moll/vim-node', { 'for': 'javascript' }
-Plug 'ahayman/vim-nodejs-complete', { 'for': 'javascript'}
 
 Plug 'kchmck/vim-coffee-script'
 " for htmlbars
