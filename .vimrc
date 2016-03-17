@@ -285,9 +285,10 @@ endif
 let g:NERDTreeDirArrows = 1
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
+let NERDTreeMinimalUI=1
+let NERDTreeAutoDeleteBuffer=1
 let NERDTreeIgnore=['\.sass-cache$[[dir]]','\.pyc', '\~$', '\.swo$', '\.swp$', '\.git[[dir]]', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc', '^\.$', '^\.\.$', '^Thumbs\.db$', '.DS_Store']
 let NERDTreeMouseMode=0
-let NERDTreeShowHidden=1
 let NERDTreeChDirMode=2
 
 " Increase tree width slightly
@@ -395,8 +396,15 @@ let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
 " Syntastic
 " jscs returns exit code when no config file is present.
 " Only load it when appropriate.
+let g:jsx_ext_required = 0
 if has('nvim')
-  let g:neomake_javascript_enabled_makers = ['eslint']
+  let g:neomake_javascript_enabled_makers= ['eslint']
+
+  " load local eslint in the project root
+  " modified from https://github.com/mtscout6/syntastic-local-eslint.vim
+  let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
+  let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+
   autocmd! BufWritePost,BufEnter * Neomake
   let g:neomake_list_height=5
   " let g:neomake_place_signs=0

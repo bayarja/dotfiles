@@ -27,7 +27,7 @@ Plug 'faceleg/CamelCaseMotion'
 Plug 'myusuf3/numbers.vim'
 Plug 'vim-scripts/restore_view.vim'
 "Jira plugin
-Plug 'mnpk/vim-jira-complete'
+" Plug 'mnpk/vim-jira-complete'
 
 " because gitgutter is more git oriented, i added back
 Plug 'airblade/vim-gitgutter'
@@ -55,23 +55,23 @@ Plug 'SirVer/ultisnips'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'yuratomo/dotnet-complete'
 Plug 'luochen1990/rainbow'
-Plug 'spf13/PIV', { 'for': 'php'}
-Plug 'shawncplus/phpcomplete.vim', { 'for': 'php'}
-Plug 'arnaud-lb/vim-php-namespace', { 'for': 'php'}
-Plug 'vim-scripts/phtml.vim', { 'for': 'php'}
+Plug 'spf13/PIV'
+Plug 'shawncplus/phpcomplete.vim'
+Plug 'arnaud-lb/vim-php-namespace'
+Plug 'vim-scripts/phtml.vim'
 Plug 'thinca/vim-visualstar'
 Plug 'Yggdroot/indentLine'
 Plug 'Raimondi/delimitMate'
 
 " for go development
-Plug 'fatih/vim-go', { 'for': 'javascript'}
+Plug 'fatih/vim-go'
 
 " for javascript
-Plug 'othree/yajs.vim', { 'for': 'javascript'}
-Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript'}
-Plug 'pangloss/vim-javascript', { 'for': 'javascript'}
-Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript'}
-Plug 'moll/vim-node', { 'for': 'javascript' }
+Plug 'othree/yajs.vim'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'moll/vim-node'
 
 Plug 'kchmck/vim-coffee-script'
 " for htmlbars
@@ -98,7 +98,7 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'dsawardekar/portkey'
 Plug 'dsawardekar/ember.vim'
 
-Plug 'vim-ruby/vim-ruby', { 'for': 'ruby'}
+Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
 Plug 'thoughtbot/vim-rspec'
