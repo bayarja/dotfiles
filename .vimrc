@@ -397,6 +397,25 @@ let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
 " jscs returns exit code when no config file is present.
 " Only load it when appropriate.
 let g:jsx_ext_required = 0
+
+function! NeomakeESlintChecker()
+  let l:npm_bin = ''
+  let l:eslint = 'eslint'
+
+  if executable('npm')
+    let l:npm_bin = split(system('npm bin'), '\n')[0]
+  endif
+
+  if strlen(l:npm_bin) && executable(l:npm_bin . '/eslint')
+    let l:eslint = l:npm_bin . '/eslint'
+  endif
+
+  let b:neomake_javascript_eslint_exe = l:eslint
+endfunction
+
+autocmd FileType javascript :call NeomakeESlintChecker()
+
+
 if has('nvim')
   let g:neomake_javascript_enabled_makers= ['eslint']
 
@@ -405,7 +424,7 @@ if has('nvim')
   let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
   let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 
-  autocmd! BufWritePost,BufEnter * Neomake
+  autocmd! BufWritePost,BufReadPost * Neomake
   let g:neomake_list_height=5
   " let g:neomake_place_signs=0
   let g:neomake_warning_sign = {
