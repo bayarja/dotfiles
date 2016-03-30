@@ -413,16 +413,17 @@ function! NeomakeESlintChecker()
   let b:neomake_javascript_eslint_exe = l:eslint
 endfunction
 
-autocmd FileType javascript :call NeomakeESlintChecker()
 
 
 if has('nvim')
   let g:neomake_javascript_enabled_makers= ['eslint']
+  let g:neomake_jsx_enabled_makers= ['eslint']
+  autocmd FileType javascript :call NeomakeESlintChecker()
 
   " load local eslint in the project root
   " modified from https://github.com/mtscout6/syntastic-local-eslint.vim
-  let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
-  let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+  " let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
+  " let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 
   autocmd! BufWritePost,BufReadPost * Neomake
   let g:neomake_list_height=5
