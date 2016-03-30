@@ -413,7 +413,7 @@ function! NeomakeESlintChecker()
   let b:neomake_javascript_eslint_exe = l:eslint
 endfunction
 
-
+autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
 
 if has('nvim')
   let g:neomake_javascript_enabled_makers= ['eslint']
