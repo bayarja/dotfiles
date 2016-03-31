@@ -389,6 +389,9 @@ let g:gundo_right = 1
 let g:gundo_preview_bottom = 1
 nnoremap <F6> :GundoToggle<CR>
 
+"vim-json
+let g:vim_json_syntax_conceal = 0
+
 " Numbers
 nnoremap <F3> :NumbersToggle<CR>
 let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
