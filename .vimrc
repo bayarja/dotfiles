@@ -210,7 +210,9 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
 
 " running rspec
-nnoremap <leader>rs :!clear;rspec --color spec<cr>
+" nnoremap <leader>rs :!clear;rspec --color spec<cr>
+" vim-spec plugin
+let g:mocha_js_command = "!mocha --recursive --no-colors"
 
 " For when you forget to sudo.. Really Write the file.
 cmap w!! w !sudo tee % >/dev/null
