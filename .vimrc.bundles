@@ -101,7 +101,7 @@ Plug 'dsawardekar/ember.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
-Plug 'geekjuice/vim-spec'
+Plug 'janko-m/vim-test'
 Plug 'spf13/vim-preview'
 Plug 'mxw/vim-jsx'
 

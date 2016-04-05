@@ -208,14 +208,24 @@ map <leader>tm :tabmove"
 " Super useful when editing files in the same directory
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
+<<<<<<< a3433818217f9d2852f6bd6a8e70ae57a3c86a8f
 
 " running rspec
 " nnoremap <leader>rs :!clear;rspec --color spec<cr>
 " vim-spec plugin
 let g:mocha_js_command = "!mocha --recursive --no-colors"
 
+=======
+>>>>>>> adding vim test to run mocha tests
 " For when you forget to sudo.. Really Write the file.
 cmap w!! w !sudo tee % >/dev/null
+
+" vim-test
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
 
 " Easier horizontal scrolling
 map zl zL
@@ -420,7 +430,14 @@ endfunction
 
 autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
 
+
 if has('nvim')
+  let test#strategy = "neovim"
+
+  " this is temporary fix for current project
+  let test#javascript#mocha#executable = 'NODE_PATH=./src ./node_modules/.bin/mocha'
+  let test#javascript#mocha#options = '--compilers jsx:babel-core/register,css:./test/null-compiler.js --require ./test/test_helper.js'
+
   let g:neomake_javascript_enabled_makers= ['eslint']
   let g:neomake_jsx_enabled_makers= ['eslint']
   autocmd FileType javascript :call NeomakeESlintChecker()
@@ -443,7 +460,7 @@ if has('nvim')
     \ 'texthl': 'ErrorMsg',
     \ }
 else
-
+  let test#strategy = "dispatch"
   function! JavascriptCheckers()
     if filereadable(getcwd() . '/.jscsrc')
       return ['jshint', 'jscs']
