@@ -427,7 +427,7 @@ if has('nvim')
 
   " this is temporary fix for current project
   let test#javascript#mocha#executable = 'NODE_PATH=./src ./node_modules/.bin/mocha'
-  let test#javascript#mocha#options = '--compilers jsx:babel-core/register,css:./test/null-compiler.js --require ./test/test_helper.js'
+  let test#javascript#mocha#options = '--compilers jsx:babel-core/register,css:./test/null.compiler.js --require ./test/test.helper.js'
 
   let g:neomake_javascript_enabled_makers= ['eslint']
   let g:neomake_jsx_enabled_makers= ['eslint']
