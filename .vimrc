@@ -425,10 +425,6 @@ autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
 if has('nvim')
   let test#strategy = "neovim"
 
-  " this is temporary fix for current project
-  let test#javascript#mocha#executable = 'NODE_PATH=./src ./node_modules/.bin/mocha'
-  let test#javascript#mocha#options = '--compilers jsx:babel-core/register,css:./test/null.compiler.js --require ./test/test.helper.js'
-
   let g:neomake_javascript_enabled_makers= ['eslint']
   let g:neomake_jsx_enabled_makers= ['eslint']
   autocmd FileType javascript :call NeomakeESlintChecker()
@@ -452,6 +448,7 @@ if has('nvim')
     \ }
 else
   let test#strategy = "dispatch"
+
   function! JavascriptCheckers()
     if filereadable(getcwd() . '/.jscsrc')
       return ['jshint', 'jscs']
