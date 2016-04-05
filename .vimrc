@@ -208,15 +208,6 @@ map <leader>tm :tabmove"
 " Super useful when editing files in the same directory
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
-<<<<<<< a3433818217f9d2852f6bd6a8e70ae57a3c86a8f
-
-" running rspec
-" nnoremap <leader>rs :!clear;rspec --color spec<cr>
-" vim-spec plugin
-let g:mocha_js_command = "!mocha --recursive --no-colors"
-
-=======
->>>>>>> adding vim test to run mocha tests
 " For when you forget to sudo.. Really Write the file.
 cmap w!! w !sudo tee % >/dev/null
 
