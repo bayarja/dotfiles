@@ -98,7 +98,9 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'dsawardekar/portkey'
 Plug 'dsawardekar/ember.vim'
 
-Plug 'kassio/neoterm'
+if has('nvim')
+  Plug 'kassio/neoterm'
+endif
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
