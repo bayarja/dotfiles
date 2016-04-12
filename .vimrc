@@ -417,6 +417,8 @@ function! NeomakeESlintChecker()
   endif
 
   let b:neomake_javascript_eslint_exe = l:eslint
+  let g:neomake_javascript_enabled_makers= ['eslint']
+  let g:neomake_jsx_enabled_makers= ['eslint']
 endfunction
 
 autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
@@ -425,8 +427,6 @@ autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
 if has('nvim')
   let test#strategy = "neovim"
 
-  let g:neomake_javascript_enabled_makers= ['eslint']
-  let g:neomake_jsx_enabled_makers= ['eslint']
   autocmd FileType javascript :call NeomakeESlintChecker()
 
   " load local eslint in the project root
