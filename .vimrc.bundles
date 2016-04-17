@@ -6,7 +6,6 @@ endif
 
 Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle'}
 
 Plug 'vim-scripts/tComment'
 Plug 'tpope/vim-surround'
