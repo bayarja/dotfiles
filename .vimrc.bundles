@@ -51,8 +51,8 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-comp
 Plug 'SirVer/ultisnips'
 
 " for c#
-Plug 'OmniSharp/omnisharp-vim'
-Plug 'yuratomo/dotnet-complete'
+" Plug 'OmniSharp/omnisharp-vim'
+" Plug 'yuratomo/dotnet-complete'
 Plug 'luochen1990/rainbow'
 Plug 'spf13/PIV'
 Plug 'shawncplus/phpcomplete.vim'
@@ -104,7 +104,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
 Plug 'janko-m/vim-test'
-Plug 'spf13/vim-preview'
+" Plug 'spf13/vim-preview'
 Plug 'mxw/vim-jsx'
 
 Plug 'beyondwords/vim-twig'
