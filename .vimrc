@@ -334,6 +334,8 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_map=''
 nnoremap <silent> <C-p> :CtrlP<CR>
 nnoremap <silent> <C-t> :CtrlPTag<CR>
@@ -423,6 +425,7 @@ function! NeomakeESlintChecker()
 
 endfunction
 
+" enable zen coding on jsx
 autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
 
 
@@ -431,23 +434,19 @@ if has('nvim')
 
   autocmd FileType javascript :call NeomakeESlintChecker()
 
-  " load local eslint in the project root
-  " modified from https://github.com/mtscout6/syntastic-local-eslint.vim
-  " let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
-  " let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-
   autocmd! BufWritePost,BufReadPost * Neomake
   let g:neomake_list_height=5
   " let g:neomake_place_signs=0
+
   let g:neomake_warning_sign = {
-    \ 'text': '⦿',
-    \ 'texthl': 'WarningMsg',
-    \ }
+        \ 'text': '●',
+        \ 'texthl': 'NeomakeWarningMsg',
+        \ }
   "
   let g:neomake_error_sign = {
-    \ 'text': '●',
-    \ 'texthl': 'ErrorMsg',
-    \ }
+        \ 'text': '⦿',
+        \ 'texthl': 'ErrorMsg',
+        \ }
 else
   let test#strategy = "dispatch"
 

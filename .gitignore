@@ -6,3 +6,4 @@ ctags/
 init.vim
 autoload/plug.vim
 .netrwhist
+.DS_Store
