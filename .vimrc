@@ -160,6 +160,9 @@ endif
 let mapleader = ','
 let g:maplocalleader = ';'
 
+" r redo
+nmap r <c-r>
+
 " Setting clipboard copy functionality
 if has('gui_macvim')
   noremap <leader>y "*y
@@ -177,6 +180,10 @@ if has('win32') || has('win64')
   nnoremap í :Make<CR>
 endif
 
+" save file
+nnoremap <leader>s :w<cr>
+inoremap <leader>s <C-c>:w<cr>
+
 " no highlight after press enter
 nnoremap <CR> :nohlsearch<cr>
 
@@ -184,22 +191,27 @@ nnoremap <CR> :nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
 
 " easier navigation between split windows
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
+nnoremap <c-j> <c-w>j<c-w>
+nnoremap <c-k> <c-w>k<c-w>
+nnoremap <c-h> <c-w>h<c-w>
+nnoremap <c-l> <c-w>l<c-w>
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 nnoremap j gj
 nnoremap k gk
 
+" Expand selection
+vmap v <Plug>(expand_region_expand)
+vmap f <Plug>(expand_region_shrink)
+
 " navigating through tab
 map <S-H> gT
 map <S-L> gt
 
-" Close the current buffer and move to the previous one
-" This replicates the idea of closing a tab
-nmap <leader>q :bp <BAR> bd #<CR>
+" quit
+noremap <leader>q :q<cr>
+" save and quit
+noremap <leader>wq :wq<cr>
 
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
@@ -219,6 +231,11 @@ nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
+
+" go to end of copy or paste
+vnoremap <silent> y y`]
+vnoremap <silent> p p`]
+nnoremap <silent> p p`]
 
 " Easier horizontal scrolling
 map zl zL
@@ -497,7 +514,7 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 " Bi-directional find motion
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `s{char}{label}`
-nmap <Leader>s <Plug>(easymotion-s)
+nmap ;s <Plug>(easymotion-s)
 " or `s{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
 " nmap <Leader>s <Plug>(easymotion-s2)
@@ -506,10 +523,12 @@ nmap <Leader>s <Plug>(easymotion-s)
 let g:EasyMotion_smartcase = 1
 
 " JK motions: Line motions
-map <Leader>w <Plug>(easymotion-lineforward)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>b <Plug>(easymotion-linebackward)
+map ;w <Plug>(easymotion-lineforward)
+map ;j <Plug>(easymotion-j)
+map ;k <Plug>(easymotion-k)
+map ;b <Plug>(easymotion-linebackward)
+
+nnoremap <Leader>w :w<cr><Space>
 
 " JS-Beautify
 noremap <c-f> :Autoformat<CR>

@@ -14,6 +14,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-sleuth'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'xolox/vim-misc'
@@ -49,6 +50,7 @@ endif
 " git integration
 Plug 'tpope/vim-fugitive'
 Plug 'godlygeek/tabular'
+Plug 'terryma/vim-expand-region'
 
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --tern-completer' }
 Plug 'SirVer/ultisnips'
