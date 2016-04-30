@@ -191,10 +191,10 @@ nnoremap <CR> :nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
 
 " easier navigation between split windows
-nnoremap <c-j> <c-w>j<c-w>
-nnoremap <c-k> <c-w>k<c-w>
-nnoremap <c-h> <c-w>h<c-w>
-nnoremap <c-l> <c-w>l<c-w>
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 nnoremap j gj
@@ -237,13 +237,14 @@ vnoremap <silent> y y`]
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
 
+
 " Easier horizontal scrolling
 map zl zL
 map zh zH
 
 " Folding keymap
-nnoremap <space> za
-vnoremap <space> zf
+nnoremap <space><space> za<esc>
+vnoremap <space><space> zf
 
 " joining lines
 nnoremap Y J
@@ -267,6 +268,7 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
 " Disable F1 annoyance
 map <F1> <Esc>
 imap <F1> <Esc>
@@ -510,23 +512,24 @@ nmap <Leader>hk <Plug>GitGutterPreviewHunk
 " highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
 " Easy Motion
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 " Bi-directional find motion
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `s{char}{label}`
-nmap ;s <Plug>(easymotion-s)
+nmap <space>s <Plug>(easymotion-s)
 " or `s{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
 " nmap <Leader>s <Plug>(easymotion-s2)
 
-" Turn on case insensitive feature
-let g:EasyMotion_smartcase = 1
 
 " JK motions: Line motions
-map ;w <Plug>(easymotion-lineforward)
-map ;j <Plug>(easymotion-j)
-map ;k <Plug>(easymotion-k)
-map ;b <Plug>(easymotion-linebackward)
+nmap <space>w <Plug>(easymotion-lineforward)
+nmap <space>j <Plug>(easymotion-j)
+nmap <space>k <Plug>(easymotion-k)
+nmap <space>b <Plug>(easymotion-linebackward)
 
 nnoremap <Leader>w :w<cr><Space>
 
