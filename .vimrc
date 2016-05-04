@@ -471,9 +471,9 @@ else
 
   function! JavascriptCheckers()
     if filereadable(getcwd() . '/.jscsrc')
-      return ['jshint', 'jscs']
+      return ['eslint', 'jscs']
     else
-      return ['jshint']
+      return ['eslint']
     endif
   endfunction
 

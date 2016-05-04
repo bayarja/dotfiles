@@ -46,6 +46,7 @@ if has('nvim')
 else
   Plug 'scrooloose/syntastic'
   Plug 'tpope/vim-dispatch'
+  Plug 'pmsorhaindo/syntastic-local-eslint.vim'
 endif
 " git integration
 Plug 'tpope/vim-fugitive'
