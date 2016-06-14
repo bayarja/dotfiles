@@ -4,6 +4,8 @@ tags
 sessions/
 ctags/
 init.vim
+.init.vim-rplugin~
 autoload/plug.vim
+autoload/plug.vim.old
 .netrwhist
 .DS_Store

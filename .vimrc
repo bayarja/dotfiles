@@ -91,6 +91,9 @@ set background=dark
 let g:gruvbox_contrast_dark = "hard"
 let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1
+
+" Base16
+let base16colorspace=256
 colorscheme base16-ocean
 " ======================== GUI configs ==============================
 
@@ -141,20 +144,40 @@ autocmd BufReadPost *
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menu,preview,longest
 
-" OmniComplete
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
-autocmd FileType phtml,html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=tern#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-
-if has("autocmd") && exists("+omnifunc")
-  autocmd Filetype *
-        \if &omnifunc == "" |
-        \setlocal omnifunc=syntaxcomplete#Complete |
-        \endif
+" omnifuncs
+augroup omnifuncs
+  autocmd!
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType phtml,html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+  " autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+augroup end
+" tern
+if exists('g:plugs["tern_for_vim"]')
+  let g:tern_show_argument_hints = 'on_hold'
+  let g:tern_show_signature_in_pum = 1
+  autocmd FileType javascript setlocal omnifunc=tern#Complete
 endif
+
+" deoplete tab-complete
+inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
+" tern
+" Use deoplete.
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
+
+autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+
+" " OmniComplete
+" if has("autocmd") && exists("+omnifunc")
+"   autocmd Filetype *
+"         \if &omnifunc == "" |
+"         \setlocal omnifunc=syntaxcomplete#Complete |
+"         \endif
+" endif
 
 " =========================== Custom Global Keybindings ===============================
 let mapleader = ','
@@ -252,7 +275,6 @@ nnoremap Y J
 " Need to remap ✠ char to Shift+Enter in iterm2
 " Splitting lines
 nnoremap ✠ i<CR><Esc>
-" DelimitMate
 inoremap ✠ <CR><Esc>O
 
 " CamelCaseMotion
@@ -274,11 +296,20 @@ map <F1> <Esc>
 imap <F1> <Esc>
 
 " =========================== Plugin configs & Keybindings ===============================
+let g:deoplete#enable_at_startup = 1
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
+" let g:deoplete#disable_auto_complete = 1
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " YouCompleteMe
-let g:ycm_key_detailed_diagnostics = ''
-let g:ycm_filepath_completion_use_working_dir = 1
-let g:ycm_add_preview_to_completeopt = 0
+" let g:ycm_key_detailed_diagnostics = ''
+" let g:ycm_filepath_completion_use_working_dir = 1
+" let g:ycm_add_preview_to_completeopt = 0
+" let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+
 
 "Airline
 let g:airline_powerline_fonts  = 1
@@ -386,13 +417,10 @@ nnoremap <silent> <leader>gg :GitGutterToggle<CR>
 nnoremap <silent> <leader>ss :SaveSession<CR>
 nnoremap <silent> <leader>sd :DeleteSession<CR>
 
-" YouCompleteMe
-let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
-
 " UltiSnip
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsUsePythonVersion = 2
+" let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsListSnippets = '<s-tab>'
+let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 
@@ -496,20 +524,15 @@ else
   let g:syntastic_style_warning_symbol = '^'
 endif
 
+" javascript-libraries-syntax
+let g:used_javascript_libs = 'jquery,chai,handlebars,underscore,react'
+
 " Handlebars
 let g:mustache_abbreviations = 1
 
 " Git Gutter
 let g:gitgutter_override_sign_column_highlight = 0
 nmap <Leader>hk <Plug>GitGutterPreviewHunk
-
-" Signify
-" highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
-" highlight DiffDelete        cterm=bold ctermbg=none ctermfg=167
-" highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
-" highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
-" highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
-" highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
 " Easy Motion
 " Turn on case insensitive feature
