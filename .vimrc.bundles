@@ -40,6 +40,7 @@ Plug 'tmhedberg/matchit'
 " replacement for powerline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'flowtype/vim-flow'
 
 Plug 'easymotion/vim-easymotion'
 Plug 'faceleg/CamelCaseMotion'
