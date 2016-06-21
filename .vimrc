@@ -417,6 +417,9 @@ nnoremap <silent> <leader>gg :GitGutterToggle<CR>
 nnoremap <silent> <leader>ss :SaveSession<CR>
 nnoremap <silent> <leader>sd :DeleteSession<CR>
 
+"vim-flow
+let g:flow#autoclose = 1
+
 " UltiSnip
 " let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsListSnippets = '<s-tab>'

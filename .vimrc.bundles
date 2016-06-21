@@ -98,11 +98,12 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'vimwiki/vimwiki'
 
 " for javascript
-Plug 'othree/yajs.vim'
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'jelera/vim-javascript-syntax'
-Plug 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'moll/vim-node'
+Plug 'gavocanov/vim-js-indent'
 
 Plug 'kchmck/vim-coffee-script'
 " for htmlbars
@@ -137,7 +138,7 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
 Plug 'janko-m/vim-test'
 " Plug 'spf13/vim-preview'
-Plug 'mxw/vim-jsx'
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 
 Plug 'beyondwords/vim-twig'
 
