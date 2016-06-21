@@ -67,6 +67,7 @@ else
   Plug 'pmsorhaindo/syntastic-local-eslint.vim'
 endif
 " git integration
+Plug 'tpope/vim-git'
 Plug 'tpope/vim-fugitive'
 Plug 'terryma/vim-expand-region'
 Plug 'kshenoy/vim-signature'

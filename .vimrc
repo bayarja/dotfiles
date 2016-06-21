@@ -60,6 +60,10 @@ set wildmode=list:longest  " Command <Tab> completion, list matches, then longes
 set scrolljump=3                " Lines to scroll when cursor leaves screen
 set scrolloff=5                 " Minimum lines to keep above and below cursor
 set foldenable                  " Auto fold code set list
+set foldlevel=0
+set foldlevelstart=0
+set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
+
 set listchars=tab:›\ ,trail:.,extends:>,nbsp:.,precedes:< " Highlight problematic whitespace
 set splitright
 set splitbelow
@@ -478,7 +482,19 @@ endfunction
 " enable zen coding on jsx
 autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
 
+let g:neomake_scss_enabled_makers = ['stylelint']
+let g:neomake_scss_stylelint_maker = {
+\ 'exe': split(system('npm bin'), '\n')[0].'/stylelint',
+\ 'args': ['--syntax', 'scss', '--format=compact'],
+\ 'errorformat': '%+P%f,\ %l:%c\ \ \✖%*\s%m, %-Q'
+\ }
 
+let g:neomake_css_enabled_makers = ['stylelint']
+let g:neomake_css_stylelint_maker = {
+\ 'exe': split(system('npm bin'), '\n')[0].'/stylelint',
+\ 'args': ['--format=compact'],
+\ 'errorformat': '%+P%f,\ %l:%c\ \ \✖%*\s%m, %-Q'
+\ }
 if has('nvim')
   let test#strategy = "neovim"
 
