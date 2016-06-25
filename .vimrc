@@ -466,16 +466,22 @@ function! NeomakeESlintChecker()
   let l:npm_bin = ''
   let l:eslint = 'eslint'
 
+  if executable('npm-which')
+    let l:eslint = split(system('npm-which eslint'))[0]
+    return 0
+  endif
+
   if executable('npm')
     let l:npm_bin = split(system('npm bin'), '\n')[0]
   endif
 
   if strlen(l:npm_bin) && executable(l:npm_bin . '/eslint')
     let l:eslint = l:npm_bin . '/eslint'
-    let b:neomake_javascript_eslint_exe = l:eslint
-    let g:neomake_javascript_enabled_makers= ['eslint']
-    let g:neomake_jsx_enabled_makers= ['eslint']
   endif
+
+  let b:neomake_javascript_eslint_exe = l:eslint
+  let g:neomake_javascript_enabled_makers= ['eslint']
+  let g:neomake_jsx_enabled_makers= ['eslint']
 
 endfunction
 
@@ -484,16 +490,21 @@ autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
 
 let g:neomake_scss_enabled_makers = ['stylelint']
 let g:neomake_scss_stylelint_maker = {
-\ 'exe': split(system('npm bin'), '\n')[0].'/stylelint',
-\ 'args': ['--syntax', 'scss', '--format=compact'],
-\ 'errorformat': '%+P%f,\ %l:%c\ \ \✖%*\s%m, %-Q'
+\ 'exe': split(system('npm-which stylelint'))[0],
+\ 'args': ['--syntax', 'scss'],
+\ 'errorformat': 
+  \ '%+P%f,' . 
+    \ '%*\s%l:%c  %t  %m,' .
+  \ '%-Q'
 \ }
 
 let g:neomake_css_enabled_makers = ['stylelint']
 let g:neomake_css_stylelint_maker = {
-\ 'exe': split(system('npm bin'), '\n')[0].'/stylelint',
-\ 'args': ['--format=compact'],
-\ 'errorformat': '%+P%f,\ %l:%c\ \ \✖%*\s%m, %-Q'
+\ 'exe': split(system('npm-which stylelint'))[0],
+\ 'errorformat': 
+  \ '%+P%f,' . 
+    \ '%*\s%l:%c  %t  %m,' .
+  \ '%-Q'
 \ }
 if has('nvim')
   let test#strategy = "neovim"
