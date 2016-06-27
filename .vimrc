@@ -462,54 +462,37 @@ let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
 " Only load it when appropriate.
 let g:jsx_ext_required = 0
 
-function! NeomakeESlintChecker()
-  let l:npm_bin = ''
-  let l:eslint = 'eslint'
-
-  if executable('npm-which')
-    let l:eslint = split(system('npm-which eslint'))[0]
-    return 0
-  endif
-
-  if executable('npm')
-    let l:npm_bin = split(system('npm bin'), '\n')[0]
-  endif
-
-  if strlen(l:npm_bin) && executable(l:npm_bin . '/eslint')
-    let l:eslint = l:npm_bin . '/eslint'
-  endif
-
-  let b:neomake_javascript_eslint_exe = l:eslint
-  let g:neomake_javascript_enabled_makers= ['eslint']
-  let g:neomake_jsx_enabled_makers= ['eslint']
-
-endfunction
-
 " enable zen coding on jsx
 autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
 
-let g:neomake_scss_enabled_makers = ['stylelint']
-let g:neomake_scss_stylelint_maker = {
-\ 'exe': split(system('npm-which stylelint'))[0],
-\ 'args': ['--syntax', 'scss'],
-\ 'errorformat': 
-  \ '%+P%f,' . 
-    \ '%*\s%l:%c  %t  %m,' .
-  \ '%-Q'
-\ }
-
-let g:neomake_css_enabled_makers = ['stylelint']
-let g:neomake_css_stylelint_maker = {
-\ 'exe': split(system('npm-which stylelint'))[0],
-\ 'errorformat': 
-  \ '%+P%f,' . 
-    \ '%*\s%l:%c  %t  %m,' .
-  \ '%-Q'
-\ }
 if has('nvim')
+
+	let g:neomake_scss_enabled_makers = ['stylelint']
+	let g:neomake_scss_stylelint_maker = {
+	\ 'exe': split(system('npm-which stylelint'))[0],
+	\ 'args': ['--syntax', 'scss'],
+	\ 'errorformat': 
+		\ '%+P%f,' . 
+			\ '%*\s%l:%c  %t  %m,' .
+		\ '%-Q'
+	\ }
+
+	let g:neomake_css_enabled_makers = ['stylelint']
+	let g:neomake_css_stylelint_maker = {
+	\ 'exe': split(system('npm-which stylelint'))[0],
+	\ 'errorformat': 
+		\ '%+P%f,' . 
+			\ '%*\s%l:%c  %t  %m,' .
+		\ '%-Q'
+	\ }
+
   let test#strategy = "neovim"
 
-  autocmd FileType javascript :call NeomakeESlintChecker()
+	let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
+	let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+
+  let g:neomake_javascript_enabled_makers= ['eslint']
+  let g:neomake_jsx_enabled_makers= ['eslint']
 
   autocmd! BufWritePost,BufReadPost * Neomake
   let g:neomake_list_height=5
