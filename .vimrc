@@ -489,10 +489,12 @@ if has('nvim')
   let test#strategy = "neovim"
 
 	let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
-	let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+	if executable(s:eslint_path)
+		let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+		let g:neomake_javascript_enabled_makers= ['eslint']
+		let g:neomake_jsx_enabled_makers= ['eslint']
+	endif
 
-  let g:neomake_javascript_enabled_makers= ['eslint']
-  let g:neomake_jsx_enabled_makers= ['eslint']
 
   autocmd! BufWritePost,BufReadPost * Neomake
   let g:neomake_list_height=5
