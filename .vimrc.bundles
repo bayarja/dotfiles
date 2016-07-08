@@ -99,7 +99,7 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'vimwiki/vimwiki'
 
 " for javascript
-Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/javascript-libraries-syntax.vim'

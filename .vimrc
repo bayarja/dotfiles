@@ -465,6 +465,23 @@ let g:jsx_ext_required = 0
 " enable zen coding on jsx
 autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
 
+function! NeomakeESlintChecker()
+  let l:npm_bin = ''
+  let l:eslint = 'eslint'
+
+  if executable('npm')
+    let l:npm_bin = split(system('npm bin'), '\n')[0]
+  endif
+
+  if strlen(l:npm_bin) && executable(l:npm_bin . '/eslint')
+    let l:eslint = l:npm_bin . '/eslint'
+    let b:neomake_javascript_eslint_exe = l:eslint
+    let g:neomake_javascript_enabled_makers= ['eslint']
+    let g:neomake_jsx_enabled_makers= ['eslint']
+  endif
+
+endfunction
+
 if has('nvim')
 
 	let g:neomake_scss_enabled_makers = ['stylelint']
@@ -488,15 +505,11 @@ if has('nvim')
 
   let test#strategy = "neovim"
 
-	let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
-	if executable(s:eslint_path)
-		let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-		let g:neomake_javascript_enabled_makers= ['eslint']
-		let g:neomake_jsx_enabled_makers= ['eslint']
-	endif
+	autocmd FileType javascript :call NeomakeESlintChecker()
+	autocmd FileType javascript.jsx :call NeomakeESlintChecker()
 
+	autocmd! BufWritePost,BufReadPost * Neomake
 
-  autocmd! BufWritePost,BufReadPost * Neomake
   let g:neomake_list_height=5
   " let g:neomake_place_signs=0
 
