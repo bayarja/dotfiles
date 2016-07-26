@@ -159,12 +159,6 @@ augroup omnifuncs
   autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
   " autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 augroup end
-" tern
-if exists('g:plugs["tern_for_vim"]')
-  let g:tern_show_argument_hints = 'on_hold'
-  let g:tern_show_signature_in_pum = 1
-  autocmd FileType javascript setlocal omnifunc=tern#Complete
-endif
 
 " deoplete tab-complete
 inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
@@ -172,8 +166,6 @@ inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual
 " Use deoplete.
 let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
-
-autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 
 " " OmniComplete
 " if has("autocmd") && exists("+omnifunc")
