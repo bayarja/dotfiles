@@ -384,7 +384,7 @@ endif
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_map=''
 nnoremap <silent> <C-p> :CtrlP<CR>
-nnoremap <silent> <C-t> :CtrlPTag<CR>
+nnoremap <silent> <C-t> :CtrlPBufTag<CR>
 nnoremap <silent> <C-b> :CtrlPBuffer<CR>
 
 let g:ctrlp_working_path_mode = 'ra'
@@ -437,6 +437,8 @@ endif
 " especially when splits are used.
 set completeopt-=preview
 
+nmap <F5> :TagbarToggle<CR>
+
 " Gundo history tree
 let g:gundo_right = 1
 let g:gundo_preview_bottom = 1
@@ -444,7 +446,6 @@ nnoremap <F6> :GundoToggle<CR>
 
 "vim-json
 let g:vim_json_syntax_conceal = 0
-
 " Numbers
 nnoremap <F3> :NumbersToggle<CR>
 let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']

@@ -24,6 +24,7 @@ if has('nvim')
 else
   Plug 'Valloric/YouCompleteMe', { 'do': '~/.vim/bundle/YouCompleteMe/install.py --clang-completer --go-completer --tern-completer' }
 end
+Plug 'majutsushi/tagbar'
 
 Plug 'vim-scripts/tComment'
 Plug 'tpope/vim-surround'
