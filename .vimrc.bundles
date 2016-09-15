@@ -19,8 +19,9 @@ function! DoRemote(arg)
 endfunction
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-  " Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+  Plug 'mhartington/deoplete-typescript'
   Plug 'carlitux/deoplete-ternjs'
+  " Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 else
   Plug 'Valloric/YouCompleteMe', { 'do': '~/.vim/bundle/YouCompleteMe/install.py --clang-completer --go-completer --tern-completer' }
 end

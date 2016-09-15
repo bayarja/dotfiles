@@ -476,6 +476,7 @@ function! NeomakeESlintChecker()
 endfunction
 
 if has('nvim')
+  let g:deoplete#enable_at_startup = 1
 
 	let g:neomake_scss_enabled_makers = ['stylelint']
 	let g:neomake_scss_stylelint_maker = {
