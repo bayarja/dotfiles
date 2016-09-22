@@ -11,19 +11,19 @@ Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 
 Plug 'Konfekt/FastFold'
 
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'matze/vim-move'
+
 Plug 'Shougo/context_filetype.vim'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-  Plug 'mhartington/deoplete-typescript'
-  Plug 'carlitux/deoplete-ternjs'
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --tern-completer' }
+  " Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+  " Plug 'mhartington/deoplete-typescript'
+  " Plug 'carlitux/deoplete-ternjs'
   " Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-else
-  Plug 'Valloric/YouCompleteMe', { 'do': '~/.vim/bundle/YouCompleteMe/install.py --clang-completer --go-completer --tern-completer' }
 end
 Plug 'majutsushi/tagbar'
 
@@ -31,7 +31,6 @@ Plug 'vim-scripts/tComment'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-sleuth'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'FelikZ/ctrlp-py-matcher'
@@ -46,7 +45,6 @@ Plug 'flowtype/vim-flow'
 
 Plug 'easymotion/vim-easymotion'
 Plug 'faceleg/CamelCaseMotion'
-Plug 'myusuf3/numbers.vim'
 Plug 'vim-scripts/restore_view.vim'
 "Jira plugin
 " Plug 'mnpk/vim-jira-complete'
@@ -64,6 +62,7 @@ Plug 'sjl/gundo.vim'
 if has('nvim') 
   Plug 'benekastah/neomake'
 else
+  Plug 'Shougo/vimproc.vim', { 'do': 'make' }
   Plug 'scrooloose/syntastic'
   Plug 'tpope/vim-dispatch'
   Plug 'pmsorhaindo/syntastic-local-eslint.vim'
@@ -71,6 +70,7 @@ endif
 " git integration
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
 Plug 'terryma/vim-expand-region'
 Plug 'kshenoy/vim-signature'
 
@@ -84,7 +84,6 @@ Plug 'junegunn/vim-easy-align'
 " Plug 'yuratomo/dotnet-complete'
 Plug 'luochen1990/rainbow'
 Plug 'spf13/PIV'
-Plug 'm2mdas/phpcomplete-extended'
 Plug 'StanAngeloff/php.vim', { 'for': 'php' }
 Plug 'arnaud-lb/vim-php-namespace', { 'for': 'php' }
 Plug 'vim-scripts/phtml.vim'
@@ -95,7 +94,7 @@ Plug 'jiangmiao/auto-pairs'
 " for go development
 Plug 'fatih/vim-go', { 'for' : ['go', 'markdown'] }
 
-" typescript
+" typescript highlight
 Plug 'HerringtonDarkholme/yats.vim'
 
 Plug 'vimwiki/vimwiki'

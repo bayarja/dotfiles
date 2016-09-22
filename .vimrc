@@ -44,12 +44,13 @@ syntax on
 set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
 set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
 set nospell                         " disable spell checking
-set history=1000                    " Store a ton of history (default is 20)
 set hidden                          " Allow buffer switching without saving
+set history=1000                    " Store a ton of history (default is 20)
 
 set backspace=indent,eol,start  " Backspace for dummies
 set linespace=0                 " No extra spaces between rows
-set nu                      " Showing line numbers
+set relativenumber
+set number                      " Showing line numbers
 set showmatch                   " Show matching brackets/parenthesis
 set incsearch                   " Find as you type search
 set hlsearch                    " Highlight search terms
@@ -232,6 +233,9 @@ noremap <leader>q :q<cr>
 " save and quit
 noremap <leader>wq :wq<cr>
 
+" Make the dot command work as expected in visual mode
+vnoremap . :norm.<CR>
+
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
@@ -292,21 +296,23 @@ map <F1> <Esc>
 imap <F1> <Esc>
 
 " =========================== Plugin configs & Keybindings ===============================
-let g:deoplete#enable_at_startup = 1
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
-endif
+" let g:deoplete#enable_at_startup = 1
+" if !exists('g:deoplete#omni#input_patterns')
+"   let g:deoplete#omni#input_patterns = {}
+" endif
 " let g:deoplete#disable_auto_complete = 1
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " YouCompleteMe
-" let g:ycm_key_detailed_diagnostics = ''
-" let g:ycm_filepath_completion_use_working_dir = 1
-" let g:ycm_add_preview_to_completeopt = 0
-" let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-" let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
-
-
+let g:ycm_key_detailed_diagnostics = ''
+let g:ycm_filepath_completion_use_working_dir = 1
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+let g:ycm_always_populate_location_list = 1
+let g:ycm_warning_symbol = '●'
+let g:ycm_error_symbol = '⦿'
+highlight YcmErrorSign ctermbg=237 ctermfg=1
 "Airline
 let g:airline_powerline_fonts  = 1
 let g:airline_theme            = 'powerlineish'
@@ -338,7 +344,7 @@ let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 let NERDTreeMinimalUI=1
 let NERDTreeAutoDeleteBuffer=1
-let NERDTreeIgnore=['\.sass-cache$[[dir]]','\.pyc', '\~$', '\.swo$', '\.swp$', '\.git[[dir]]', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc', '^\.$', '^\.\.$', '^Thumbs\.db$', '.DS_Store']
+let NERDTreeIgnore=['\.sass-cache$[[dir]]','\.pyc', '\~$', '\.swo$', '\.swp$', '\.git[[dir]]', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc', '^\.$', '^\.\.$', '^Thumbs\.db$', '.DS_Store', '\.meta$']
 let NERDTreeMouseMode=0
 let NERDTreeChDirMode=2
 
@@ -397,8 +403,8 @@ let g:ctrlp_extensions = ['funky']
 let g:ag_working_path_mode="r"
 
 " Omnisharp
-let g:OmniSharp_host = "http://localhost:2000"
-let g:Omnisharp_stop_server = 0
+" let g:OmniSharp_host = "http://localhost:2000"
+" let g:Omnisharp_stop_server = 0
 
 " Figutive
 nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -505,7 +511,7 @@ if has('nvim')
 	autocmd! BufWritePost,BufReadPost * Neomake
 
   let g:neomake_list_height=5
-  " let g:neomake_place_signs=0
+  let g:neomake_place_signs=0
 
   let g:neomake_warning_sign = {
         \ 'text': '●',
@@ -577,41 +583,13 @@ nmap <space>k <Plug>(easymotion-k)
 nmap <space>b <Plug>(easymotion-linebackward)
 
 nnoremap <Leader>w :w<cr><Space>
-
 " JS-Beautify
 noremap <c-f> :Autoformat<CR>
+
 
 " =========================== Custom functions ===============================
 " Show highlight group current location
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 
-" swap lines
-function! s:swap_lines(n1, n2)
-  let line1 = getline(a:n1)
-  let line2 = getline(a:n2)
-  call setline(a:n1, line2)
-  call setline(a:n2, line1)
-endfunction
-
-function! s:swap_up()
-  let n = line('.')
-  if n == 1
-    return
-  endif
-
-  call s:swap_lines(n, n - 1)
-  exec n - 1
-endfunction
-
-function! s:swap_down()
-  let n = line('.')
-  if n == line('$')
-    return
-  endif
-
-  call s:swap_lines(n, n + 1)
-  exec n + 1
-endfunction
-
-noremap <silent> <s-k> :call <SID>swap_up()<CR>
-noremap <silent> <s-j> :call <SID>swap_down()<CR>
+" vim-move
+let g:move_key_modifier = 'S'
