@@ -140,6 +140,9 @@ autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
 autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 autocmd BufNewFile,BufRead *.hbs set filetype=handlebars.html syntax=mustache
 
+" autocmd BufEnter * sign define dummy
+" autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -313,6 +316,7 @@ let g:ycm_always_populate_location_list = 1
 let g:ycm_warning_symbol = '●'
 let g:ycm_error_symbol = '⦿'
 highlight YcmErrorSign ctermbg=237 ctermfg=1
+
 "Airline
 let g:airline_powerline_fonts  = 1
 let g:airline_theme            = 'powerlineish'
@@ -339,6 +343,7 @@ let g:indentLine_char = '│'
 if has('win32') || has('win64')
   let g:NERDTreeCopyCmd= 'cp -r'
 endif
+
 let g:NERDTreeDirArrows = 1
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
@@ -399,12 +404,9 @@ let g:ctrlp_custom_ignore = {
       \ 'file': '\v\.(exe|so|dll|png|jpg|gif|jpeg|swf|pdf|mp3)$'
       \}
 let g:ctrlp_extensions = ['funky']
+
 " Silver search
 let g:ag_working_path_mode="r"
-
-" Omnisharp
-" let g:OmniSharp_host = "http://localhost:2000"
-" let g:Omnisharp_stop_server = 0
 
 " Figutive
 nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -452,8 +454,8 @@ nnoremap <F6> :GundoToggle<CR>
 
 "vim-json
 let g:vim_json_syntax_conceal = 0
+
 " Numbers
-nnoremap <F3> :NumbersToggle<CR>
 let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
 
 " Syntastic
@@ -511,7 +513,7 @@ if has('nvim')
 	autocmd! BufWritePost,BufReadPost * Neomake
 
   let g:neomake_list_height=5
-  let g:neomake_place_signs=0
+  let g:neomake_place_signs=1
 
   let g:neomake_warning_sign = {
         \ 'text': '●',
@@ -560,6 +562,7 @@ let g:mustache_abbreviations = 1
 
 " Git Gutter
 let g:gitgutter_override_sign_column_highlight = 0
+let g:gitgutter_sign_column_always = 1
 nmap <Leader>hk <Plug>GitGutterPreviewHunk
 
 " Easy Motion

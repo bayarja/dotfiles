@@ -18,6 +18,7 @@ Plug 'Shougo/context_filetype.vim'
 function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
+
 if has('nvim')
   Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --tern-completer' }
   " Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
@@ -25,6 +26,7 @@ if has('nvim')
   " Plug 'carlitux/deoplete-ternjs'
   " Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 end
+
 Plug 'majutsushi/tagbar'
 
 Plug 'vim-scripts/tComment'
@@ -59,10 +61,10 @@ Plug 'thirtythreeforty/lessspace.vim'
 " history tree
 Plug 'sjl/gundo.vim'
 " syntax checker
-if has('nvim') 
+if has('nvim')
   Plug 'benekastah/neomake'
 else
-  Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+  " Plug 'Shougo/vimproc.vim', { 'do': 'make' }
   Plug 'scrooloose/syntastic'
   Plug 'tpope/vim-dispatch'
   Plug 'pmsorhaindo/syntastic-local-eslint.vim'
