@@ -13,21 +13,13 @@ Plug 'Konfekt/FastFold'
 
 Plug 'matze/vim-move'
 
-Plug 'Shougo/context_filetype.vim'
-
 function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
 
-if has('nvim')
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --tern-completer' }
-  " Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-  " Plug 'mhartington/deoplete-typescript'
-  " Plug 'carlitux/deoplete-ternjs'
-  " Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-end
-
-Plug 'majutsushi/tagbar'
+Plug 'ervandew/supertab'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --tern-completer --omnisharp-completer' }
+Plug 'SirVer/ultisnips'
 
 Plug 'vim-scripts/tComment'
 Plug 'tpope/vim-surround'
@@ -47,13 +39,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'easymotion/vim-easymotion'
 Plug 'faceleg/CamelCaseMotion'
 Plug 'vim-scripts/restore_view.vim'
-"Jira plugin
-" Plug 'mnpk/vim-jira-complete'
-Plug 'Raimondi/delimitMate'
 
-" because gitgutter is more git oriented, i added back
 Plug 'airblade/vim-gitgutter'
-" Plug 'mhinz/vim-signify'
 
 " remove whitespace
 Plug 'thirtythreeforty/lessspace.vim'
@@ -74,8 +61,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'terryma/vim-expand-region'
 Plug 'kshenoy/vim-signature'
-
-Plug 'SirVer/ultisnips'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-easy-align'
@@ -96,8 +81,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'fatih/vim-go', { 'for' : ['go', 'markdown'] }
 
 " typescript highlight
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'Quramy/tsuquyomi'
 Plug 'HerringtonDarkholme/yats.vim'
 
 Plug 'vimwiki/vimwiki'

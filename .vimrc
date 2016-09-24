@@ -139,6 +139,8 @@ autocmd BufNewFile,BufRead *.php set filetype=php
 autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
 autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 autocmd BufNewFile,BufRead *.hbs set filetype=handlebars.html syntax=mustache
+autocmd BufNewFile,BufRead *.ts set filetype=typescript
+autocmd BufNewFile,BufRead *.xml set filetype=xml
 
 " autocmd BufEnter * sign define dummy
 " autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
@@ -163,21 +165,6 @@ augroup omnifuncs
   autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
   " autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 augroup end
-
-" deoplete tab-complete
-inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
-" tern
-" Use deoplete.
-let g:tern_request_timeout = 1
-let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
-
-" " OmniComplete
-" if has("autocmd") && exists("+omnifunc")
-"   autocmd Filetype *
-"         \if &omnifunc == "" |
-"         \setlocal omnifunc=syntaxcomplete#Complete |
-"         \endif
-" endif
 
 " =========================== Custom Global Keybindings ===============================
 let mapleader = ','
@@ -299,13 +286,6 @@ map <F1> <Esc>
 imap <F1> <Esc>
 
 " =========================== Plugin configs & Keybindings ===============================
-" let g:deoplete#enable_at_startup = 1
-" if !exists('g:deoplete#omni#input_patterns')
-"   let g:deoplete#omni#input_patterns = {}
-" endif
-" let g:deoplete#disable_auto_complete = 1
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
 " YouCompleteMe
 let g:ycm_key_detailed_diagnostics = ''
 let g:ycm_filepath_completion_use_working_dir = 1
@@ -316,6 +296,21 @@ let g:ycm_always_populate_location_list = 1
 let g:ycm_warning_symbol = '●'
 let g:ycm_error_symbol = '⦿'
 highlight YcmErrorSign ctermbg=237 ctermfg=1
+
+" UltiSnip
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsListSnippets = '<s-tab>'
+" let g:UltiSnipsUsePythonVersion = 3
+" let g:UltiSnipsEditSplit="vertical"
+" let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 "Airline
 let g:airline_powerline_fonts  = 1
@@ -423,13 +418,6 @@ nnoremap <silent> <leader>sd :DeleteSession<CR>
 
 "vim-flow
 let g:flow#autoclose = 1
-
-" UltiSnip
-" let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsListSnippets = '<s-tab>'
-let g:UltiSnipsUsePythonVersion = 3
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 
 " auto session save
 let g:session_autosave = 'no'
