@@ -20,7 +20,7 @@ endfunction
 Plug 'ervandew/supertab'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --tern-completer --omnisharp-completer' }
 Plug 'SirVer/ultisnips'
-
+Plug 'yssl/QFEnter'
 Plug 'vim-scripts/tComment'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
@@ -66,8 +66,6 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-easy-align'
 
 " for c#
-" Plug 'OmniSharp/omnisharp-vim'
-" Plug 'yuratomo/dotnet-complete'
 Plug 'luochen1990/rainbow'
 Plug 'spf13/PIV'
 Plug 'StanAngeloff/php.vim', { 'for': 'php' }
@@ -81,6 +79,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'fatih/vim-go', { 'for' : ['go', 'markdown'] }
 
 " typescript highlight
+" Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+" Plug 'Quramy/tsuquyomi'
 Plug 'HerringtonDarkholme/yats.vim'
 
 Plug 'vimwiki/vimwiki'

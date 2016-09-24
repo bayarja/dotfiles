@@ -295,6 +295,11 @@ let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 let g:ycm_always_populate_location_list = 1
 let g:ycm_warning_symbol = '●'
 let g:ycm_error_symbol = '⦿'
+
+" find all references
+nnoremap <c-t> :YcmCompleter GoToReferences<cr>
+nnoremap <F5> :YcmCompleter GetDoc<cr>
+
 highlight YcmErrorSign ctermbg=237 ctermfg=1
 
 " UltiSnip
@@ -390,7 +395,6 @@ endif
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_map=''
 nnoremap <silent> <C-p> :CtrlP<CR>
-nnoremap <silent> <C-t> :CtrlPBufTag<CR>
 nnoremap <silent> <C-b> :CtrlPBuffer<CR>
 
 let g:ctrlp_working_path_mode = 'ra'
@@ -416,6 +420,9 @@ nnoremap <silent> <leader>gg :GitGutterToggle<CR>
 nnoremap <silent> <leader>ss :SaveSession<CR>
 nnoremap <silent> <leader>sd :DeleteSession<CR>
 
+" rainbow
+let g:rainbow_active = 1
+
 "vim-flow
 let g:flow#autoclose = 1
 
@@ -433,7 +440,7 @@ endif
 " especially when splits are used.
 set completeopt-=preview
 
-nmap <F5> :TagbarToggle<CR>
+" nmap <F5> :TagbarToggle<CR>
 
 " Gundo history tree
 let g:gundo_right = 1
@@ -446,7 +453,6 @@ let g:vim_json_syntax_conceal = 0
 " Numbers
 let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
 
-" Syntastic
 " jscs returns exit code when no config file is present.
 " Only load it when appropriate.
 let g:jsx_ext_required = 0
@@ -472,8 +478,7 @@ function! NeomakeESlintChecker()
 endfunction
 
 if has('nvim')
-  let g:deoplete#enable_at_startup = 1
-
+	let g:neomake_typescript_enabled_makers = ['tslint']
 	let g:neomake_scss_enabled_makers = ['stylelint']
 	let g:neomake_scss_stylelint_maker = {
 	\ 'exe': split(system('npm-which stylelint'))[0],
@@ -513,6 +518,7 @@ if has('nvim')
         \ 'texthl': 'ErrorMsg',
         \ }
 else
+  " Syntastic
   let test#strategy = "dispatch"
 
   function! JavascriptCheckers()
