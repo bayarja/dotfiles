@@ -43,7 +43,6 @@ Plug 'tmhedberg/matchit'
 " replacement for powerline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'flowtype/vim-flow'
 
 Plug 'easymotion/vim-easymotion'
 Plug 'faceleg/CamelCaseMotion'
@@ -60,11 +59,11 @@ Plug 'airblade/vim-gitgutter'
 Plug 'thirtythreeforty/lessspace.vim'
 " history tree
 Plug 'sjl/gundo.vim'
+
 " syntax checker
 if has('nvim')
   Plug 'benekastah/neomake'
 else
-  " Plug 'Shougo/vimproc.vim', { 'do': 'make' }
   Plug 'scrooloose/syntastic'
   Plug 'tpope/vim-dispatch'
   Plug 'pmsorhaindo/syntastic-local-eslint.vim'
@@ -97,6 +96,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'fatih/vim-go', { 'for' : ['go', 'markdown'] }
 
 " typescript highlight
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'Quramy/tsuquyomi'
 Plug 'HerringtonDarkholme/yats.vim'
 
 Plug 'vimwiki/vimwiki'
