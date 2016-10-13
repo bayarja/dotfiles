@@ -41,6 +41,7 @@ Plug 'faceleg/CamelCaseMotion'
 Plug 'vim-scripts/restore_view.vim'
 
 Plug 'airblade/vim-gitgutter'
+Plug 'OrangeT/vim-csharp', { 'for': 'cs' }
 
 " remove whitespace
 Plug 'thirtythreeforty/lessspace.vim'
