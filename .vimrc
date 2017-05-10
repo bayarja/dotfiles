@@ -60,9 +60,10 @@ set wildmenu                    " Show list instead of just completing
 set wildmode=list:longest  " Command <Tab> completion, list matches, then longest common part, then all.
 set scrolljump=3                " Lines to scroll when cursor leaves screen
 set scrolloff=5                 " Minimum lines to keep above and below cursor
-set foldenable                  " Auto fold code set list
-set foldlevel=0
-set foldlevelstart=0
+set nofoldenable
+set foldmethod=indent
+set foldlevel=99
+set foldlevelstart=99
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 
 set listchars=tab:›\ ,trail:.,extends:>,nbsp:.,precedes:< " Highlight problematic whitespace
@@ -99,7 +100,7 @@ let g:hybrid_reduced_contrast = 1
 
 " Base16
 let base16colorspace=256
-colorscheme base16-ocean
+colorscheme base16-tomorrow-night
 " ======================== GUI configs ==============================
 
 " Setting font for GUI otherwise it sets terminal font
@@ -121,8 +122,10 @@ if has('gui_running')
   "set term=builtin_ansi       " Make arrow and other keys work
 endif
 if has('nvim')
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  set termguicolors
+  set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+  " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+  " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   " Hack to get C-h working in neovim
   nmap <BS> <C-W>h
   tnoremap <Esc> <C-\><C-n>
@@ -167,6 +170,8 @@ augroup omnifuncs
   " autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 augroup end
 
+" disable folding in javascript
+let g:javascript_fold_enabled=1
 " =========================== Custom Global Keybindings ===============================
 let mapleader = ','
 let g:maplocalleader = ';'
@@ -485,8 +490,8 @@ if has('nvim')
 	let g:neomake_scss_stylelint_maker = {
 	\ 'exe': split(system('npm-which stylelint'))[0],
 	\ 'args': ['--syntax', 'scss'],
-	\ 'errorformat': 
-		\ '%+P%f,' . 
+	\ 'errorformat':
+		\ '%+P%f,' .
 			\ '%*\s%l:%c  %t  %m,' .
 		\ '%-Q'
 	\ }
@@ -494,8 +499,8 @@ if has('nvim')
 	let g:neomake_css_enabled_makers = ['stylelint']
 	let g:neomake_css_stylelint_maker = {
 	\ 'exe': split(system('npm-which stylelint'))[0],
-	\ 'errorformat': 
-		\ '%+P%f,' . 
+	\ 'errorformat':
+		\ '%+P%f,' .
 			\ '%*\s%l:%c  %t  %m,' .
 		\ '%-Q'
 	\ }

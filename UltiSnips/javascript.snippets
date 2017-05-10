@@ -18,31 +18,8 @@ snippet fix "FIX reminder" b
 // FIX(`whoami`): $1
 endsnippet
 
-snippet init "Ember init function" b
-init() {
-	this._super(...arguments);
-	$1
-}
-endsnippet
-
-snippet super "Ember call super" b
-this._super(...arguments);
-endsnippet
-
-snippet fn "JS function" b
-$1: function() {
-	$2
-}
-endsnippet
-
-snippet fn, "JS middle function" b
-$1: function() {
-	$2
-},
-endsnippet
-
 snippet func "JS ES6 Function"
-$1() => {
+$1 = () => {
 	$2
 }
 endsnippet
@@ -57,6 +34,26 @@ snippet comp "React component" b
 import React, { PropTypes } from 'react';
 
 class ${1:class} extends React.Component {
+	render() {
+		return (
+			$2
+		);
+	}
+}
+
+$1.propTypes = {
+};
+
+$1.defaultProps = {
+};
+
+export default $1;
+endsnippet
+
+snippet pcomp "React Pure Component" b
+import React, { PureComponent, PropTypes } from 'react';
+
+class ${1:class} extends PureComponent {
 	render() {
 		return (
 			$2
@@ -100,6 +97,18 @@ class ${1:class} extends React.Component {
 }
 
 export default connect()($1);
+endsnippet
+
+snippet act "Redux act action" b
+export const $1 = createAction('$2');
+endsnippet
+
+snippet imp "import module" b
+import $1 from '$2';
+endsnippet
+
+snippet simp "import sub module" b
+import { $1 } from '$2';
 endsnippet
 
 snippet ctime "console.time" b

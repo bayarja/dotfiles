@@ -9,3 +9,4 @@ autoload/plug.vim
 autoload/plug.vim.old
 .netrwhist
 .DS_Store
+.vim
