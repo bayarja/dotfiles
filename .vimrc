@@ -100,7 +100,7 @@ let g:hybrid_reduced_contrast = 1
 
 " Base16
 let base16colorspace=256
-colorscheme base16-tomorrow-night
+colorscheme base16-gruvbox-dark-pale
 " ======================== GUI configs ==============================
 
 " Setting font for GUI otherwise it sets terminal font
