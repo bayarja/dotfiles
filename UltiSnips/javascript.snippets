@@ -18,40 +18,21 @@ snippet fix "FIX reminder" b
 // FIX(`whoami`): $1
 endsnippet
 
-snippet func "JS ES6 Function"
+snippet fn "JS ES6 Function"
 $1 = () => {
 	$2
 }
 endsnippet
 
-snippet func, "JS ES6 Function" b
+snippet fn, "JS ES6 Function" b
 $1 = () => {
 	$2
 },
 endsnippet
 
 snippet comp "React component" b
-import React, { PropTypes } from 'react';
-
-class ${1:class} extends React.Component {
-	render() {
-		return (
-			$2
-		);
-	}
-}
-
-$1.propTypes = {
-};
-
-$1.defaultProps = {
-};
-
-export default $1;
-endsnippet
-
-snippet pcomp "React Pure Component" b
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 class ${1:class} extends PureComponent {
 	render() {
@@ -71,7 +52,8 @@ export default $1;
 endsnippet
 
 snippet scomp "React component" b
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const ${1:class} = (props) => ($2);
 
@@ -84,17 +66,22 @@ $1.defaultProps = {
 export default $1;
 endsnippet
 
-snippet cont "React container" b
-import React, { PropTypes } from 'react';
+snippet ccomp "React container" b
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-class ${1:class} extends React.Component {
+class ${1:class} extends PureComponent {
 	render() {
 		return (
 			$2
 		);
 	}
 }
+
+const mapStateToProps = state => ({
+  $3
+});
 
 export default connect()($1);
 endsnippet

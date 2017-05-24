@@ -35,7 +35,7 @@ scriptencoding utf-8
 set nobackup                                 " Disabling backup since files are in git
 set noswapfile                               " Disabling swapfile
 set nowb
-set clipboard+=unnamed
+set clipboard=unnamed
 set timeoutlen=1000 ttimeoutlen=0
 set laststatus=2
 
@@ -99,8 +99,11 @@ let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1
 
 " Base16
-let base16colorspace=256
-colorscheme base16-gruvbox-dark-pale
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
+
 " ======================== GUI configs ==============================
 
 " Setting font for GUI otherwise it sets terminal font

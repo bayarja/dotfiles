@@ -73,7 +73,7 @@ Plug 'arnaud-lb/vim-php-namespace', { 'for': 'php' }
 Plug 'vim-scripts/phtml.vim'
 Plug 'thinca/vim-visualstar'
 Plug 'jiangmiao/auto-pairs'
-
+Plug 'christoomey/vim-tmux-navigator'
 " for go development
 Plug 'fatih/vim-go', { 'for' : ['go', 'markdown'] }
 
