@@ -105,6 +105,8 @@ if filereadable(expand("~/.vimrc_background"))
 endif
 
 " ======================== GUI configs ==============================
+"
+hi NonText guifg=bg
 
 " Setting font for GUI otherwise it sets terminal font
 if has('gui_running')
@@ -183,7 +185,11 @@ let g:maplocalleader = ';'
 nmap r <c-r>
 
 " zoom
-map <leader>z :ZoomWinTabToggle<CR>
+let g:goyo_width=120
+let g:goyo_height='100%'
+let g:goyo_linenr=1
+" map <leader>z :ZoomWinTabToggle<CR>
+map <leader>z :Goyo<CR>
 
 " Setting clipboard copy functionality
 if has('gui_macvim')
