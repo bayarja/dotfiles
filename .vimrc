@@ -182,6 +182,9 @@ let g:maplocalleader = ';'
 " r redo
 nmap r <c-r>
 
+" zoom
+map <leader>z :ZoomWinTabToggle<CR>
+
 " Setting clipboard copy functionality
 if has('gui_macvim')
   noremap <leader>y "*y

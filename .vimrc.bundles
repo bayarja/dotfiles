@@ -66,6 +66,8 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-easy-align'
 
+Plug 'troydm/zoomwintab.vim'
+
 " for c#
 Plug 'spf13/PIV'
 Plug 'StanAngeloff/php.vim', { 'for': 'php' }
