@@ -65,7 +65,6 @@ Plug 'kshenoy/vim-signature'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
-
 Plug 'troydm/zoomwintab.vim'
 
 " for c#
@@ -93,6 +92,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'moll/vim-node'
+Plug 'fleischie/vim-styled-components'
 
 Plug 'kchmck/vim-coffee-script'
 " for htmlbars
