@@ -93,6 +93,7 @@ Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'moll/vim-node'
 Plug 'fleischie/vim-styled-components'
+Plug 'jparise/vim-graphql'
 
 Plug 'kchmck/vim-coffee-script'
 " for htmlbars
