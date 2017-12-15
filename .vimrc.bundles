@@ -61,6 +61,7 @@ endif
 " git integration
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'terryma/vim-expand-region'
 Plug 'kshenoy/vim-signature'
