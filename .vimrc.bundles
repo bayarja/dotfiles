@@ -7,7 +7,9 @@ endif
 Plug 'morhetz/gruvbox'
 Plug 'w0ng/vim-hybrid'
 Plug 'chriskempson/base16-vim'
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+Plug 'scrooloose/nerdtree'
+Plug 'ryanoasis/vim-devicons', { 'branch': 'master' }
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 Plug 'Konfekt/FastFold'
 
@@ -66,6 +68,8 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'troydm/zoomwintab.vim'
+
+Plug 'keith/swift.vim'
 
 " for c#
 Plug 'spf13/PIV'

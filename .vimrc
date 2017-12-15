@@ -129,6 +129,7 @@ endif
 if has('nvim')
   set termguicolors
   set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+  set guifont=Inconsolata\ LGC\ Nerd\ Font:h12 " setting font and size
   " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
   " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   " Hack to get C-h working in neovim
@@ -362,10 +363,11 @@ let g:indentLine_char = '│'
 if has('win32') || has('win64')
   let g:NERDTreeCopyCmd= 'cp -r'
 endif
+let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
 
-let g:NERDTreeDirArrows = 1
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
+" let g:NERDTreeDirArrows = 1
+" let g:NERDTreeDirArrowExpandable = '▸'
+" let g:NERDTreeDirArrowCollapsible = '▾'
 let NERDTreeMinimalUI=1
 let NERDTreeAutoDeleteBuffer=1
 let NERDTreeIgnore=['\.sass-cache$[[dir]]','\.pyc', '\~$', '\.swo$', '\.swp$', '\.git[[dir]]', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc', '^\.$', '^\.\.$', '^Thumbs\.db$', '.DS_Store', '\.meta$']
