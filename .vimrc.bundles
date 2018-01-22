@@ -7,6 +7,7 @@ endif
 Plug 'morhetz/gruvbox'
 Plug 'w0ng/vim-hybrid'
 Plug 'chriskempson/base16-vim'
+Plug 'ayu-theme/ayu-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons', { 'branch': 'master' }
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -19,8 +20,7 @@ function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
 
-Plug 'ervandew/supertab'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 Plug 'SirVer/ultisnips'
 Plug 'yssl/QFEnter'
 Plug 'vim-scripts/tComment'
@@ -133,7 +133,7 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
 Plug 'janko-m/vim-test'
 " Plug 'spf13/vim-preview'
-Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'mxw/vim-jsx'
 
 Plug 'beyondwords/vim-twig'
 

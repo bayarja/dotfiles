@@ -94,9 +94,9 @@ set cursorline                  " Highlight current line
 set lazyredraw
 
 set background=dark
-let g:gruvbox_contrast_dark = "hard"
-let g:hybrid_custom_term_colors = 1
-let g:hybrid_reduced_contrast = 1
+" let g:gruvbox_contrast_dark = "hard"
+" let g:hybrid_custom_term_colors = 1
+" let g:hybrid_reduced_contrast = 1
 
 " Base16
 if filereadable(expand("~/.vimrc_background"))
@@ -104,6 +104,11 @@ if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
 endif
 
+" set termguicolors     " enable true colors support
+" let ayucolor="light"  " for light version of theme
+" let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
+" colorscheme ayu
 " ======================== GUI configs ==============================
 "
 hi NonText guifg=bg
@@ -309,8 +314,11 @@ imap <F1> <Esc>
 let g:ycm_key_detailed_diagnostics = ''
 let g:ycm_filepath_completion_use_working_dir = 1
 let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+" let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+
 let g:ycm_always_populate_location_list = 1
 let g:ycm_warning_symbol = '●'
 let g:ycm_error_symbol = '⦿'
@@ -322,20 +330,14 @@ nnoremap <F5> :YcmCompleter GetDoc<cr>
 
 highlight YcmErrorSign ctermbg=237 ctermfg=1
 
-" UltiSnip
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsListSnippets = '<s-tab>'
-" let g:UltiSnipsUsePythonVersion = 3
-" let g:UltiSnipsEditSplit="vertical"
-" let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
-
-" make YCM compatible with UltiSnips (using supertab)
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" If you have `brew install clang-format` (and why don't you?)
+" map <C-K> :pyf ~/bin/clang-format.py<cr>
+" imap <C-K> <c-o>:pyf ~/bin/clang-format.py<cr>
+"
+let g:UltiSnipsUsePythonVersion = 2
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetsDir=$HOME."/.vim/UltiSnips"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/.vim/UltiSnips"]
 
 "Airline
 let g:airline_powerline_fonts  = 1
