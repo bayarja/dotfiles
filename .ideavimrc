@@ -1,0 +1,89 @@
+set ignorecase
+set smartcase
+set scrolloff=3         " 3 lines above/below cursor when scrolling
+set incsearch
+set hlsearch
+set history=1000
+
+" Integrate with system clipboard
+set clipboard=unnamedplus,unnamed
+
+set surround
+nnoremap <Space>vs :source ~/.ideavimrc<CR>
+
+set visualbell
+set noerrorbells
+
+let mapleader = ","
+
+" Visual linewise up and down by default
+noremap j gj
+noremap k gk
+
+nmap <C-h> <c-w>h
+nmap <C-l> <c-w>l
+nmap <C-k> <c-w>k
+nmap <C-j> <c-w>j
+nnoremap <cr> :nohlsearch<cr>
+
+"cursor movement in insert mode
+imap <c-h> <left>
+imap <c-k> <up>
+imap <c-j> <down>
+imap <c-l> <right>
+
+nnoremap <s-h> gT
+nnoremap <s-l> gt
+
+nnoremap w [w
+nnoremap b [b
+nnoremap r :action $Redo<CR>
+
+nmap gcc Vgc
+vnoremap gc :<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action CommentByLineComment<cr>
+" nnoremap gcc :action CommentByLineComment<cr>
+map Y y$
+
+" Reformat whole file
+nnoremap <leader>ff :action ReformatCode<CR>
+
+nnoremap <leader>g :action Generate<cr>
+nnoremap <leader>z :action ToggleDistractionFreeMode<cr>
+
+nnoremap [ :action Back<cr>
+nnoremap ] :action Forward<cr>
+nnoremap <leader>v :action SplitVertically<cr>
+nnoremap <leader>h :action SplitHorizontally<cr>
+nnoremap <leader>d :action GotoDeclaration<cr>
+nnoremap <leader>i :action GotoImplementation<cr>
+nnoremap <leader>u :action ShowUsages<cr>
+nnoremap <leader>U :action FindUsages<cr>
+
+nnoremap <M-p> :action GotoFile<cr>
+nnoremap <leader>p :action ParameterInfo<cr>
+nnoremap <leader>c :action GotoClass<cr>
+nnoremap <leader>s :action FileStructurePopup<cr>
+nnoremap <M-/> :action GotoAction<cr>
+nnoremap <S-cr> :action EditorSplitLine<cr>
+nnoremap <space>s :action AceAction<cr>
+nnoremap <leader>e :action ShowErrorDescription<cr>
+nnoremap <leader>, :action VimFilePrevious<cr>
+nnoremap <leader>w :w<cr>
+nnoremap <leader>q :action CloseContent<cr>
+
+nnoremap <F1> :action QuickJavaDoc<cr>
+nnoremap <M-k> :action MoveLineUp<cr>
+nnoremap <M-j> :action MoveLineDown<cr>
+
+nmap <leader>t :action ShowIntentionActions<CR>
+nmap <leader>rr :action Refactorings.QuickListPopupAction<CR>
+" nnoremap <leader>rr :action RenameElement<cr>
+
+" nnoremap / :action Find<cr>
+" but preserve ideavim search
+nnoremap g/ :action Find<cr>
+
+" change font size
+nmap + :action EditorIncreaseFontSize<CR>
+nmap - :action EditorDecreaseFontSize<CR>
+nmap <leader>= :action EditorResetFontSize<CR>

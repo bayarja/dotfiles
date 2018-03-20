@@ -20,7 +20,7 @@ function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
 
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'SirVer/ultisnips'
 Plug 'yssl/QFEnter'
 Plug 'vim-scripts/tComment'
@@ -100,10 +100,6 @@ Plug 'moll/vim-node'
 Plug 'fleischie/vim-styled-components'
 Plug 'jparise/vim-graphql'
 
-Plug 'kchmck/vim-coffee-script'
-" for htmlbars
-Plug 'mustache/vim-mustache-handlebars'
-
 " Plug 'mattn/emmet-vim'
 if has('win32') || has('win64')
   Plug 'rstacruz/sparkup', {'rtp': 'vim'}
@@ -129,8 +125,6 @@ if has('nvim')
   Plug 'kassio/neoterm'
 endif
 Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-bundler'
 Plug 'janko-m/vim-test'
 " Plug 'spf13/vim-preview'
 Plug 'mxw/vim-jsx'
