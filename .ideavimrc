@@ -36,6 +36,8 @@ nnoremap <s-h> gT
 nnoremap <s-l> gt
 
 nnoremap w [w
+nmap dw d[w
+nmap cw c[w
 nnoremap b [b
 nnoremap r :action $Redo<CR>
 
