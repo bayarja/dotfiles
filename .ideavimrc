@@ -4,6 +4,7 @@ set scrolloff=3         " 3 lines above/below cursor when scrolling
 set incsearch
 set hlsearch
 set history=1000
+set autoreload
 
 " Integrate with system clipboard
 set clipboard=unnamedplus,unnamed
@@ -71,7 +72,7 @@ nnoremap <space>s :action AceAction<cr>
 nnoremap <leader>e :action ShowErrorDescription<cr>
 nnoremap <leader>, :action VimFilePrevious<cr>
 nnoremap <leader>w :w<cr>
-nnoremap <leader>q :action CloseContent<cr>
+nnoremap <leader>q :q<cr>
 
 nnoremap <F1> :action QuickJavaDoc<cr>
 nnoremap <M-k> :action MoveLineUp<cr>
