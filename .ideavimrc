@@ -39,19 +39,21 @@ nnoremap <s-l> gt
 nnoremap w [w
 nmap dw d[w
 nmap cw c[w
+nmap vw v[w
 nnoremap b [b
 nnoremap r :action $Redo<CR>
 
 nmap gcc Vgc
 vmap gc :<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action CommentByLineComment<cr>
-" nnoremap gcc :action CommentByLineComment<cr>
-map Y y$
 
+nnoremap <S-cr> :action EditorSplitLine<cr>
+nnoremap <leader>w :w<cr>
+nnoremap <leader>q :wq<cr>
 " Reformat whole file
 nnoremap <leader>ff :action ReformatCode<CR>
 
-nnoremap <leader>g :action Generate<cr>
-nnoremap <leader>z :action ToggleDistractionFreeMode<cr>
+nnoremap <leader>gg :action Vcs.QuickListPopupAction<cr>
+nnoremap <leader>zz :action ToggleDistractionFreeMode<cr>
 
 nnoremap [ :action Back<cr>
 nnoremap ] :action Forward<cr>
@@ -65,18 +67,20 @@ nnoremap <leader>U :action FindUsages<cr>
 nnoremap <leader>p :action GotoFile<cr>
 nnoremap <leader>c :action GotoClass<cr>
 nnoremap <leader>s :action FileStructurePopup<cr>
-nnoremap <leader>/ :action GotoAction<cr>
-nnoremap <S-cr> :action EditorSplitLine<cr>
+nnoremap <leader>. :action GotoAction<cr>
 nnoremap <space>s :action AceAction<cr>
 nnoremap <leader>e :action ShowErrorDescription<cr>
 nnoremap <leader>, :action VimFilePrevious<cr>
-nnoremap <leader>w :w<cr>
-nnoremap <leader>q :q<cr>
-nnoremap <leader>wq :wq<cr>
 
 nnoremap <S-k> :action MoveLineUp<cr>
 nnoremap <S-j> :action MoveLineDown<cr>
 nnoremap <S-y> :action EditorJoinLines<cr>
 
 nnoremap <leader>t :action ShowIntentionActions<CR>
-nnoremap <leader>rr :action Refactorings.QuickListPopupAction<CR>
+nnoremap <leader>rr :action RenameElement<CR>
+nnoremap <leader>o :action QuickList.MyList<CR>
+nnoremap <leader>m :action QuickList.FileActions<CR>
+" built in search looks better
+nnoremap / :action Find<cr>
+" but preserve ideavim search
+nnoremap g/ /
