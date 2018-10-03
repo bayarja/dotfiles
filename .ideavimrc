@@ -79,8 +79,4 @@ nnoremap <S-y> :action EditorJoinLines<cr>
 nnoremap <leader>t :action ShowIntentionActions<CR>
 nnoremap <leader>rr :action RenameElement<CR>
 nnoremap <leader>o :action QuickList.MyList<CR>
-nnoremap <leader>m :action QuickList.FileActions<CR>
-" built in search looks better
-nnoremap / :action Find<cr>
-" but preserve ideavim search
-nnoremap g/ /
+nnoremap g/ :action Find<cr>
