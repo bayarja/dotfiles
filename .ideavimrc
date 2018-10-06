@@ -79,4 +79,3 @@ nnoremap <S-y> :action EditorJoinLines<cr>
 nnoremap <leader>t :action ShowIntentionActions<CR>
 nnoremap <leader>rr :action RenameElement<CR>
 nnoremap <leader>o :action QuickList.MyList<CR>
-nnoremap g/ :action Find<cr>
