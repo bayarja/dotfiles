@@ -58,21 +58,34 @@ nnoremap <leader>k :action MoveEditorToOppositeTabGroup<cr>
 nnoremap <leader>gt :action GotoTest<cr>
 nnoremap <leader>d :action GotoDeclaration<cr>
 nnoremap <leader>i :action GotoImplementation<cr>
+nnoremap <leader>ic :action InspectCode<cr>
+nnoremap <leader>ff :action FindInPath<cr>
+nnoremap <leader>fu :action FindUsages<cr>
 nnoremap <leader>u :action ShowUsages<cr>
-nnoremap <leader>U :action FindUsages<cr>
+nnoremap <leader>bb :action ToggleLineBreakpoint<cr>
+nnoremap <leader>br :action ViewBreakpoints<cr>
+nnoremap <leader>oi :action OptimizeImports<cr>
+nnoremap <leader>re :action RenameElement<cr>
+nnoremap <leader>rf :action RenameFile<cr>
+nnoremap <leader>dd :action Debug<cr>
+nnoremap <leader>dc :action ChooseDebugConfiguration<cr>
+nnoremap <leader>rr :action Run<cr>
+nnoremap <leader>rc :action ChooseRunConfiguration<cr>
+
+nnoremap ma :action ToggleBookmark0<cr>
+nnoremap ;a :action GotoBookmark0<cr>
 
 nnoremap <leader>p :action GotoFile<cr>
 nnoremap <leader>c :action GotoClass<cr>
 nnoremap <leader>s :action FileStructurePopup<cr>
 nnoremap <leader>. :action GotoAction<cr>
-nnoremap <space>s :action AceAction<cr>
 nnoremap <leader>e :action ShowErrorDescription<cr>
 nnoremap <leader>, :action VimFilePrevious<cr>
+nnoremap <space>s :action AceAction<cr>
 
 nnoremap <S-k> :action MoveLineUp<cr>
 nnoremap <S-j> :action MoveLineDown<cr>
 nnoremap <S-y> :action EditorJoinLines<cr>
 
 nnoremap <leader>t :action ShowIntentionActions<CR>
-nnoremap <leader>rr :action RenameElement<CR>
 nnoremap <leader>o :action QuickList.MyList<CR>
