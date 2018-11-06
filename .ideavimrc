@@ -59,16 +59,11 @@ nnoremap <leader>gt :action GotoTest<cr>
 nnoremap <leader>d :action GotoDeclaration<cr>
 nnoremap <leader>i :action GotoImplementation<cr>
 nnoremap <leader>ic :action InspectCode<cr>
-nnoremap <leader>ff :action FindInPath<cr>
 nnoremap <leader>fu :action FindUsages<cr>
 nnoremap <leader>u :action ShowUsages<cr>
-nnoremap <leader>bb :action ToggleLineBreakpoint<cr>
-nnoremap <leader>br :action ViewBreakpoints<cr>
 nnoremap <leader>oi :action OptimizeImports<cr>
 nnoremap <leader>re :action RenameElement<cr>
 nnoremap <leader>rf :action RenameFile<cr>
-nnoremap <leader>dd :action Debug<cr>
-nnoremap <leader>dc :action ChooseDebugConfiguration<cr>
 nnoremap <leader>rr :action Run<cr>
 nnoremap <leader>rc :action ChooseRunConfiguration<cr>
 
@@ -88,4 +83,4 @@ nnoremap <S-j> :action MoveLineDown<cr>
 nnoremap <S-y> :action EditorJoinLines<cr>
 
 nnoremap <leader>t :action ShowIntentionActions<CR>
-nnoremap <leader>o :action QuickList.MyList<CR>
+nnoremap <leader>m :action QuickList.MyList<CR>
