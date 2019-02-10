@@ -1,19 +1,23 @@
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-if executable('ag')
-  Plug 'rking/ag.vim'
-endif
-
-Plug 'ayu-theme/ayu-vim'
-Plug 'scrooloose/nerdtree'
-Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-
+Plug 'mileszs/ack.vim'
+Plug 'Orgil/ayu-vim'
 Plug 'Konfekt/FastFold'
-
 Plug 'matze/vim-move'
+Plug 'thinca/vim-visualstar'
+Plug 'jiangmiao/auto-pairs'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'Yggdroot/indentLine'
+
+Plug 'vimwiki/vimwiki'
+
+Plug 'yuttie/comfortable-motion.vim'
 
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-ultisnips'
 
 Plug 'SirVer/ultisnips'
 Plug 'yssl/QFEnter'
@@ -22,8 +26,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 Plug 'Chiel92/vim-autoformat'
@@ -44,7 +46,8 @@ Plug 'thirtythreeforty/lessspace.vim'
 Plug 'sjl/gundo.vim'
 
 " syntax checker
-Plug 'benekastah/neomake'
+" Plug 'benekastah/neomake'
+Plug 'w0rp/ale'
 " git integration
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-fugitive'
@@ -57,62 +60,53 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'troydm/zoomwintab.vim'
 
+
 Plug 'spf13/PIV'
 Plug 'StanAngeloff/php.vim', { 'for': 'php' }
 Plug 'arnaud-lb/vim-php-namespace', { 'for': 'php' }
-Plug 'vim-scripts/phtml.vim'
-Plug 'thinca/vim-visualstar'
-Plug 'jiangmiao/auto-pairs'
-Plug 'christoomey/vim-tmux-navigator'
-" for go development
-Plug 'fatih/vim-go', { 'for' : ['go', 'markdown'] }
 
-" typescript highlight
+" for go development
+Plug 'fatih/vim-go'
+
 " Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 " Plug 'Quramy/tsuquyomi'
-Plug 'HerringtonDarkholme/yats.vim'
 
-Plug 'vimwiki/vimwiki'
 
 " for javascript
-Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'nathanaelkane/vim-indent-guides'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'othree/yajs.vim'
+Plug 'pangloss/vim-javascript'
 Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/es.next.syntax.vim'
 Plug 'moll/vim-node'
-Plug 'fleischie/vim-styled-components'
 Plug 'jparise/vim-graphql'
 
 " Plug 'mattn/emmet-vim'
-if has('win32') || has('win64')
-  Plug 'rstacruz/sparkup', {'rtp': 'vim'}
-else
-  Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
-endif
+Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 Plug 'elzr/vim-json'
 Plug 'jtratner/vim-flavored-markdown'
 
-Plug 'JulesWang/css.vim', { 'for': 'css' }
+Plug 'JulesWang/css.vim'
 Plug 'ap/vim-css-color'
 
 Plug 'othree/html5.vim'
 Plug 'othree/html5-syntax.vim'
-Plug 'wavded/vim-stylus'
 Plug 'cakebaker/scss-syntax.vim'
 
 Plug 'dsawardekar/portkey'
 Plug 'dsawardekar/ember.vim'
 
-if has('nvim')
-  Plug 'kassio/neoterm'
-endif
-Plug 'vim-ruby/vim-ruby'
+Plug 'kassio/neoterm'
 Plug 'janko-m/vim-test'
 " Plug 'spf13/vim-preview'
 Plug 'mxw/vim-jsx'
+Plug 'leafgarland/typescript-vim', {'for': ['typescript', 'typescript.tsx']}
+Plug 'ianks/vim-tsx', { 'for': 'typescript.tsx' }
 
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'beyondwords/vim-twig'
-
-set shortmess+=filmnrxoOtT      " abbrev. of messages (avoids 'hit enter')
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'

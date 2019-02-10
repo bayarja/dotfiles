@@ -1,12 +1,5 @@
 " ======================== Required configs ==============================
-" on windows, setting runtime path to .vim same as *nix system
-if has('win32') || has('win64')
-  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-endif
-
-if !has('nvim')
-  set nocompatible              " be iMproved, required
-endif
+set nocompatible              " be iMproved, required
 
 call plug#begin('~/.vim/bundle')
   if filereadable(expand("~/.vimrc.bundles"))
@@ -16,28 +9,24 @@ call plug#end()
 
 filetype plugin indent on    " required
 
-if !has('gui_running') && has('win32')
-  set term=xterm
-  set t_Co=256
-  let &t_AB="\e[48;5;%dm"
-  let &t_AF="\e[38;5;%dm"
-else
-  set t_Co=256
-endif
-
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1
 
+let g:LanguageClient_serverCommands = {
+  \ 'typescript': ['javascript-typescript-stdio'],
+  \ 'javascript': ['javascript-typescript-stdio']
+  \ }
+
 " Minimal LSP configuration for JavaScript
-let g:LanguageClient_serverCommands = {}
-if executable('javascript-typescript-stdio')
-  let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
-  " Use LanguageServer for omnifunc completion
-  autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
-else
-  echo "javascript-typescript-stdio not installed!\n"
-  :cq
-endif
+" let g:LanguageClient_serverCommands = {}
+" if executable('javascript-typescript-stdio')
+"   let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
+"   " Use LanguageServer for omnifunc completion
+"   autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
+" else
+"   echo "javascript-typescript-stdio not installed!\n"
+"   :cq
+" endif
 
 " ======================== Global configs ==============================
 set mouse=a
@@ -55,7 +44,7 @@ set laststatus=2
 
 syntax on
 
-set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
+set shortmess+=filmnrxoOtTc          " Abbrev. of messages (avoids 'hit enter')
 set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
 set nospell                         " disable spell checking
 set hidden                          " Allow buffer switching without saving
@@ -115,6 +104,10 @@ let ayucolor="mirage" " for mirage version of theme
 colorscheme ayu
 " ======================== GUI configs ==============================
 "
+if has('nvim')
+  " fix <c-h> in neovim
+  nmap <BS> <C-W>h
+endif
 " hi NonText guifg=bg
 
 " Setting font for GUI otherwise it sets terminal font
@@ -143,6 +136,15 @@ endif
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 au FileType cs set tabstop=4|set shiftwidth=4|set expandtab
 
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+
+au TextChangedI * call ncm2#auto_trigger()
+inoremap <c-c> <ESC>
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
 autocmd BufNewFile,BufRead *.c,*.h set filetype=c
 autocmd BufNewFile,BufRead *.cpp set filetype=cpp
 autocmd BufNewFile,BufRead *.php set filetype=php
@@ -162,19 +164,18 @@ autocmd BufReadPost *
       \ endif
 " Automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menu,preview,longest
 
 " omnifuncs
-augroup omnifuncs
-  autocmd!
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType phtml,html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-  autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
-  " autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-augroup end
+" augroup omnifuncs
+"   autocmd!
+"   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+"   autocmd FileType phtml,html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"   autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+"   " autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+" augroup end
 
 " <leader>ld to go to definition
 autocmd FileType javascript nnoremap <buffer>
@@ -185,6 +186,7 @@ autocmd FileType javascript nnoremap <buffer>
 " <leader>lr to rename variable under cursor
 autocmd FileType javascript nnoremap <buffer>
   \ <leader>r :call LanguageClient_textDocument_rename()<cr>
+
 
 
 " disable folding in javascript
@@ -215,14 +217,9 @@ endif
 " Preserve indentation while pasting text from the clipboard
 noremap <leader>p :set paste<CR>:put  +<CR>:set nopaste<CR>
 
-if has('win32') || has('win64')
-  "mapping Alt+m to run Make
-  nnoremap í :Make<CR>
-endif
-
 " save file
-nnoremap <leader>s :w<cr>
-inoremap <leader>s <C-c>:w<cr>
+nnoremap <leader>w :w<cr>
+inoremap <leader>w <C-c>:w<cr>
 
 " no highlight after press enter
 nnoremap <CR> :nohlsearch<cr>
@@ -231,10 +228,10 @@ nnoremap <CR> :nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
 
 " easier navigation between split windows
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 nnoremap j gj
@@ -315,30 +312,6 @@ map <F1> <Esc>
 imap <F1> <Esc>
 
 " =========================== Plugin configs & Keybindings ===============================
-" YouCompleteMe
-let g:ycm_key_detailed_diagnostics = ''
-let g:ycm_filepath_completion_use_working_dir = 1
-let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
-" let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-" let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
-
-let g:ycm_always_populate_location_list = 1
-let g:ycm_warning_symbol = '●'
-let g:ycm_error_symbol = '⦿'
-
-" find all references
-nnoremap <c-o> :YcmCompleter GoToReferences<cr>
-nnoremap <c-i> :YcmCompleter GoToDefinition<cr>
-nnoremap <F5> :YcmCompleter GetDoc<cr>
-
-highlight YcmErrorSign ctermbg=237 ctermfg=1
-
-" If you have `brew install clang-format` (and why don't you?)
-" map <C-K> :pyf ~/bin/clang-format.py<cr>
-" imap <C-K> <c-o>:pyf ~/bin/clang-format.py<cr>
-"
 let g:UltiSnipsUsePythonVersion = 2
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir=$HOME."/.vim/UltiSnips"
@@ -361,19 +334,26 @@ let g:PIVAutoClose = 0
 " Misc
 let b:match_ignorecase = 1
 
+let g:comfortable_motion_scroll_down_key = "j"
+let g:comfortable_motion_scroll_up_key = "k"
+
 " vertical line indentation
 let g:indentLine_color_term = 237
 let g:indentLine_color_gui = '#3a3a3a'
 let g:indentLine_char = '│'
 
-" let g:NERDTreeDirArrows = 1
-" let g:NERDTreeDirArrowExpandable = '▸'
-" let g:NERDTreeDirArrowCollapsible = '▾'
+" let g:NERDTreeDirArrowExpandable = ''
+" let g:NERDTreeDirArrowCollapsible = ''
+" let NERDTreeDirArrowExpandable = "\u00a0"
+" let NERDTreeDirArrowCollapsible = "\u00a0"
+" let NERDTreeNodeDelimiter = "\x07"
 let NERDTreeMinimalUI=1
 let NERDTreeAutoDeleteBuffer=1
-let NERDTreeIgnore=['\.sass-cache$[[dir]]','\.pyc', '\~$', '\.swo$', '\.swp$', '\.git[[dir]]', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc', '^\.$', '^\.\.$', '^Thumbs\.db$', '.DS_Store', '\.meta$']
+let NERDTreeIgnore=['\.sass-cache$[[dir]]','\.pyc', '\~$', '\.swo$', '\.swp$', '\.git[[dir]]', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc', '^\.$', '^\.\.$', '^Thumbs\.db$', '.DS_Store', '\.meta$', 'node_modules']
 let NERDTreeMouseMode=0
 let NERDTreeChDirMode=2
+
+highlight! link NERDTreeFlags NERDTreeDir
 
 " Increase tree width slightly
 let NERDTreeWinSize = 38
@@ -442,11 +422,29 @@ nnoremap <silent> <leader>gg :GitGutterToggle<CR>
 nnoremap <silent> <leader>ss :SaveSession<CR>
 nnoremap <silent> <leader>sd :DeleteSession<CR>
 
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+let g:DevIconsEnableFolderPatternMatching = 1
+let g:WebDevIconsUnicodeDecorateFileNodes = 1
+let g:NERDTreeHighlightFolders = 1
+let g:NERDTreeHighlightFoldersFullName = 1
+let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
+let g:webdevicons_enable_airline_tabline = 1
+let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+
+
+" let g:NERDTreeFileExtensionHighlightFullName = 1
+" let g:NERDTreeExactMatchHighlightFullName = 1
+" let g:NERDTreePatternMatchHighlightFullName = 1
+
+" ale
+let g:ale_sign_error = '⦿'
+let g:ale_sign_warning = '●'
+
 " rainbow
 let g:rainbow_active = 1
-
-"vim-flow
-let g:flow#autoclose = 1
 
 " auto session save
 let g:session_autosave = 'no'
@@ -454,13 +452,13 @@ let g:session_autoload = 'yes'
 
 " For snippet_complete marker.
 if has('conceal')
-  set conceallevel=2 concealcursor=i
+  set conceallevel=3 concealcursor=i
 endif
 
 " Disable the neosnippet preview candidate window
 " When enabled, there can be too much visual noise
 " especially when splits are used.
-set completeopt-=preview
+" set completeopt-=preview
 
 " nmap <F5> :TagbarToggle<CR>
 
@@ -475,100 +473,9 @@ let g:vim_json_syntax_conceal = 0
 " Numbers
 let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
 
-" jscs returns exit code when no config file is present.
-" Only load it when appropriate.
-let g:jsx_ext_required = 0
-
 " enable zen coding on jsx
 autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
-
-function! NeomakeESlintChecker()
-  let l:npm_bin = ''
-  let l:eslint = 'eslint'
-
-  if executable('npm')
-    let l:npm_bin = split(system('npm bin'), '\n')[0]
-  endif
-
-  if strlen(l:npm_bin) && executable(l:npm_bin . '/eslint')
-    let l:eslint = l:npm_bin . '/eslint'
-    let b:neomake_javascript_eslint_exe = l:eslint
-    let g:neomake_javascript_enabled_makers= ['eslint']
-    let g:neomake_jsx_enabled_makers= ['eslint']
-  endif
-
-endfunction
-
-if has('nvim')
-	let g:neomake_typescript_enabled_makers = ['tslint']
-	let g:neomake_scss_enabled_makers = ['stylelint']
-	let g:neomake_scss_stylelint_maker = {
-	\ 'exe': split(system('npm-which stylelint'))[0],
-	\ 'args': ['--syntax', 'scss'],
-	\ 'errorformat':
-		\ '%+P%f,' .
-			\ '%*\s%l:%c  %t  %m,' .
-		\ '%-Q'
-	\ }
-
-	let g:neomake_css_enabled_makers = ['stylelint']
-	let g:neomake_css_stylelint_maker = {
-	\ 'exe': split(system('npm-which stylelint'))[0],
-	\ 'errorformat':
-		\ '%+P%f,' .
-			\ '%*\s%l:%c  %t  %m,' .
-		\ '%-Q'
-	\ }
-
-  let test#strategy = "neovim"
-
-	autocmd FileType javascript :call NeomakeESlintChecker()
-	autocmd FileType javascript.jsx :call NeomakeESlintChecker()
-
-	autocmd! BufWritePost,BufReadPost * Neomake
-
-  let g:neomake_list_height=5
-  let g:neomake_place_signs=1
-
-  let g:neomake_warning_sign = {
-        \ 'text': '●',
-        \ 'texthl': 'NeomakeWarningMsg',
-        \ }
-  "
-  let g:neomake_error_sign = {
-        \ 'text': '⦿',
-        \ 'texthl': 'ErrorMsg',
-        \ }
-else
-  " Syntastic
-  let test#strategy = "dispatch"
-
-  function! JavascriptCheckers()
-    if filereadable(getcwd() . '/.jscsrc')
-      return ['eslint', 'jscs']
-    else
-      return ['eslint']
-    endif
-  endfunction
-
-  " check also when just opened the file
-  let g:syntastic_check_on_open = 1
-  let g:syntastic_filetype_map = { 'html.twig': 'twiglint' }
-  let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
-  let g:syntastic_javascript_checkers = JavascriptCheckers()
-  let g:syntastic_always_populate_loc_list = 1
-  let g:syntastic_loc_list_height = 5
-  let g:syntastic_auto_loc_list = 0
-  let g:syntastic_filetype_map = { 'hbs': 'handlebars' }
-
-  " don't put icons on the sign column (it hides the vcs status icons of signify)
-  let g:syntastic_enable_signs = 0
-  " custom icons (enable them if you use a patched font, and enable the previous setting)
-  let g:syntastic_error_symbol = '>>'
-  let g:syntastic_warning_symbol = '^^'
-  let g:syntastic_style_error_symbol = '>'
-  let g:syntastic_style_warning_symbol = '^'
-endif
+autocmd FileType typescript.tsx runtime! ftplugin/html/sparkup.vim
 
 " javascript-libraries-syntax
 let g:used_javascript_libs = 'jquery,chai,handlebars,underscore,react'
@@ -605,6 +512,13 @@ nmap <space>b <Plug>(easymotion-linebackward)
 nnoremap <Leader>w :w<cr><Space>
 " JS-Beautify
 noremap <c-f> :Autoformat<CR>
+
+" autoread
+let g:AutoPairsMapCR=0
+inoremap <silent> <Plug>(MyCR) <CR><C-R>=AutoPairsReturn()<CR>
+
+" example
+imap <expr> <CR> (pumvisible() ? "\<C-Y>\<Plug>(MyCR)" : "\<Plug>(MyCR)")
 
 
 " =========================== Custom functions ===============================
