@@ -4,23 +4,17 @@ if executable('ag')
   Plug 'rking/ag.vim'
 endif
 
-Plug 'morhetz/gruvbox'
-Plug 'w0ng/vim-hybrid'
-Plug 'chriskempson/base16-vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'scrooloose/nerdtree'
-Plug 'ryanoasis/vim-devicons', { 'branch': 'master' }
+Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 Plug 'Konfekt/FastFold'
 
 Plug 'matze/vim-move'
 
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'SirVer/ultisnips'
 Plug 'yssl/QFEnter'
 Plug 'vim-scripts/tComment'
@@ -43,7 +37,6 @@ Plug 'faceleg/CamelCaseMotion'
 Plug 'vim-scripts/restore_view.vim'
 
 Plug 'airblade/vim-gitgutter'
-Plug 'OrangeT/vim-csharp', { 'for': 'cs' }
 
 " remove whitespace
 Plug 'thirtythreeforty/lessspace.vim'
@@ -51,13 +44,7 @@ Plug 'thirtythreeforty/lessspace.vim'
 Plug 'sjl/gundo.vim'
 
 " syntax checker
-if has('nvim')
-  Plug 'benekastah/neomake'
-else
-  Plug 'scrooloose/syntastic'
-  Plug 'tpope/vim-dispatch'
-  Plug 'pmsorhaindo/syntastic-local-eslint.vim'
-endif
+Plug 'benekastah/neomake'
 " git integration
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-fugitive'
@@ -70,9 +57,6 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'troydm/zoomwintab.vim'
 
-Plug 'keith/swift.vim'
-
-" for c#
 Plug 'spf13/PIV'
 Plug 'StanAngeloff/php.vim', { 'for': 'php' }
 Plug 'arnaud-lb/vim-php-namespace', { 'for': 'php' }

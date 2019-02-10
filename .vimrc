@@ -25,6 +25,20 @@ else
   set t_Co=256
 endif
 
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+" Minimal LSP configuration for JavaScript
+let g:LanguageClient_serverCommands = {}
+if executable('javascript-typescript-stdio')
+  let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
+  " Use LanguageServer for omnifunc completion
+  autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
+else
+  echo "javascript-typescript-stdio not installed!\n"
+  :cq
+endif
+
 " ======================== Global configs ==============================
 set mouse=a
 set mousehide
@@ -94,24 +108,14 @@ set cursorline                  " Highlight current line
 set lazyredraw
 
 set background=dark
-" let g:gruvbox_contrast_dark = "hard"
-" let g:hybrid_custom_term_colors = 1
-" let g:hybrid_reduced_contrast = 1
-
-" Base16
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
-
-" set termguicolors     " enable true colors support
+set termguicolors     " enable true colors support
 " let ayucolor="light"  " for light version of theme
-" let ayucolor="mirage" " for mirage version of theme
+let ayucolor="mirage" " for mirage version of theme
 " let ayucolor="dark"   " for dark version of theme
-" colorscheme ayu
+colorscheme ayu
 " ======================== GUI configs ==============================
 "
-hi NonText guifg=bg
+" hi NonText guifg=bg
 
 " Setting font for GUI otherwise it sets terminal font
 if has('gui_running')
@@ -131,16 +135,7 @@ if has('gui_running')
   endif
   "set term=builtin_ansi       " Make arrow and other keys work
 endif
-if has('nvim')
-  set termguicolors
-  set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
-  set guifont=Inconsolata\ LGC\ Nerd\ Font:h12 " setting font and size
-  " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-  " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  " Hack to get C-h working in neovim
-  nmap <BS> <C-W>h
-  tnoremap <Esc> <C-\><C-n>
-endif
+
 " ======================== Filetype & Autocmd ==============================
 
 " Instead of reverting the cursor to the last position in the buffer, we
@@ -180,6 +175,17 @@ augroup omnifuncs
   autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
   " autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 augroup end
+
+" <leader>ld to go to definition
+autocmd FileType javascript nnoremap <buffer>
+  \ <leader>d :call LanguageClient_textDocument_definition()<cr>
+" <leader>lh for type info under cursor
+autocmd FileType javascript nnoremap <buffer>
+  \ <leader>h :call LanguageClient_textDocument_hover()<cr>
+" <leader>lr to rename variable under cursor
+autocmd FileType javascript nnoremap <buffer>
+  \ <leader>r :call LanguageClient_textDocument_rename()<cr>
+
 
 " disable folding in javascript
 let g:javascript_fold_enabled=1
@@ -274,7 +280,6 @@ vnoremap <silent> y y`]
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
 
-
 " Easier horizontal scrolling
 map zl zL
 map zh zH
@@ -341,7 +346,7 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/.vim/UltiSnips"]
 
 "Airline
 let g:airline_powerline_fonts  = 1
-let g:airline_theme            = 'powerlineish'
+let g:airline_theme            = 'ayu'
 let g:airline#extensions#hunks#enabled = 0
 
 " only showing filename
@@ -360,12 +365,6 @@ let b:match_ignorecase = 1
 let g:indentLine_color_term = 237
 let g:indentLine_color_gui = '#3a3a3a'
 let g:indentLine_char = '│'
-
-" NerdTree
-if has('win32') || has('win64')
-  let g:NERDTreeCopyCmd= 'cp -r'
-endif
-let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
 
 " let g:NERDTreeDirArrows = 1
 " let g:NERDTreeDirArrowExpandable = '▸'
