@@ -174,6 +174,9 @@ autocmd FileType typescript.tsx nnoremap <buffer>
   \ <leader>r :call LanguageClient_textDocument_rename()<cr>
 
 
+" vim-move
+let g:move_key_modifier = 'S'
+
 " disable folding in javascript
 let g:javascript_fold_enabled=1
 " =========================== Custom Global Keybindings ===============================
@@ -213,10 +216,10 @@ nnoremap <CR> :nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
 
 " easier navigation between split windows
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 nnoremap j gj
@@ -240,9 +243,12 @@ vnoremap . :norm.<CR>
 " For when you forget to sudo.. Really Write the file.
 cmap w!! w !sudo tee % >/dev/null
 
+
+nnoremap [ :lprev<cr>
+nnoremap ] :lnext<cr>
+
 inoremap <c-c> <ESC>
 " Use <TAB> to select the popup menu:
-inoremap <expr> <CR> pumvisible() ? "\<c-y>\<cr>" : "\<CR>"
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
@@ -330,18 +336,19 @@ let g:indentLine_char = '│'
 " let NERDTreeDirArrowExpandable = "\u00a0"
 " let NERDTreeDirArrowCollapsible = "\u00a0"
 " let NERDTreeNodeDelimiter = "\x07"
+let NERDTreeShowHidden=1
 let NERDTreeMinimalUI=1
 let NERDTreeAutoDeleteBuffer=1
-let NERDTreeIgnore=['\.sass-cache$[[dir]]','\.pyc', '\~$', '\.swo$', '\.swp$', '\.git[[dir]]', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc', '^\.$', '^\.\.$', '^Thumbs\.db$', '.DS_Store', '\.meta$', 'node_modules']
+let NERDTreeIgnore=['\.idea', '\.sass-cache$[[dir]]','\.pyc', '\~$', '\.swo$', '\.swp$', '\.git[[dir]]', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc', '^\.$', '^\.\.$', '^Thumbs\.db$', '.DS_Store', '\.meta$', 'node_modules']
 let NERDTreeMouseMode=0
 let NERDTreeChDirMode=2
 
-highlight! link NERDTreeFlags NERDTreeDir
-
 " Increase tree width slightly
-let NERDTreeWinSize = 38
+let NERDTreeWinSize = 40 
 " Change working directory to the root automatically
-
+"
+let g:lt_location_list_toggle_map = '<F2>'
+let g:lt_quickfix_list_toggle_map = '<F3>'
 nmap <F4> :NERDTreeToggle<CR>
 nmap <leader>nt :NERDTreeFind<CR>
 
@@ -411,14 +418,14 @@ nnoremap <silent> <leader>sd :DeleteSession<CR>
 let g:webdevicons_enable = 1
 let g:webdevicons_enable_nerdtree = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:DevIconsEnableFoldersOpenClose = 1
-let g:DevIconsEnableFolderPatternMatching = 1
 let g:WebDevIconsUnicodeDecorateFileNodes = 1
-let g:NERDTreeHighlightFolders = 1
-let g:NERDTreeHighlightFoldersFullName = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+" let g:DevIconsEnableFolderPatternMatching = 1
+" let g:NERDTreeHighlightFolders = 1
+" let g:NERDTreeHighlightFoldersFullName = 1
 let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
 let g:webdevicons_enable_airline_tabline = 1
-let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
 
 
 " let g:NERDTreeFileExtensionHighlightFullName = 1
@@ -439,7 +446,7 @@ let g:session_autoload = 'yes'
 
 " For snippet_complete marker.
 if has('conceal')
-  set conceallevel=3 concealcursor=i
+  set conceallevel=2 concealcursor=i
 endif
 
 " Disable the neosnippet preview candidate window
@@ -494,9 +501,6 @@ nmap <space>b <Plug>(easymotion-linebackward)
 " Show highlight group current location
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 
-" vim-move
-let g:move_key_modifier = 'S'
-
 function! FZFWithDevIcons()
   let l:fzf_files_options = ' -m --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up --preview "bat --color always --style numbers {2..}"'
 
@@ -510,7 +514,7 @@ function! FZFWithDevIcons()
     for candidate in a:candidates
       let filename = fnamemodify(candidate, ':p:t')
       let icon = WebDevIconsGetFileTypeSymbol(filename, isdirectory(filename))
-      call add(result, printf("%s %s", icon, candidate))
+      call add(result, printf("%s  %s", icon, candidate))
     endfor
 
     return result
