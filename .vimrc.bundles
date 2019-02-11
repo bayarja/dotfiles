@@ -6,15 +6,30 @@ Plug 'thinca/vim-visualstar'
 Plug 'jiangmiao/auto-pairs'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'Yggdroot/indentLine'
+Plug 'oblitum/rainbow'
+Plug 'Valloric/MatchTagAlways'
+let g:mta_filetypes = {
+        \ 'html' : 1,
+        \ 'javascript.jsx' : 1,
+        \ 'typescript.tsx' : 1,
+        \ 'jinja' : 1,
+        \ 'liquid' : 1,
+        \ 'markdown' : 1,
+        \ 'xhtml' : 1,
+        \ 'xml' : 1,
+        \}
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 Plug 'vimwiki/vimwiki'
 
 Plug 'yuttie/comfortable-motion.vim'
 
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 
-Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2'
 Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-ultisnips'
@@ -41,12 +56,11 @@ Plug 'vim-scripts/restore_view.vim'
 Plug 'airblade/vim-gitgutter'
 
 " remove whitespace
-Plug 'thirtythreeforty/lessspace.vim'
-" history tree
+" Plug 'thirtythreeforty/lessspace.vim'
+"h istory tree
 Plug 'sjl/gundo.vim'
 
 " syntax checker
-" Plug 'benekastah/neomake'
 Plug 'w0rp/ale'
 " git integration
 Plug 'tpope/vim-git'
@@ -97,6 +111,7 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'dsawardekar/portkey'
 Plug 'dsawardekar/ember.vim'
 
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'kassio/neoterm'
 Plug 'janko-m/vim-test'
 " Plug 'spf13/vim-preview'
@@ -105,8 +120,7 @@ Plug 'leafgarland/typescript-vim', {'for': ['typescript', 'typescript.tsx']}
 Plug 'ianks/vim-tsx', { 'for': 'typescript.tsx' }
 
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'beyondwords/vim-twig'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'sheerun/vim-polyglot'

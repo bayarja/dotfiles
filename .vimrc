@@ -9,25 +9,6 @@ call plug#end()
 
 filetype plugin indent on    " required
 
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 1
-
-let g:LanguageClient_serverCommands = {
-  \ 'typescript': ['javascript-typescript-stdio'],
-  \ 'javascript': ['javascript-typescript-stdio']
-  \ }
-
-" Minimal LSP configuration for JavaScript
-" let g:LanguageClient_serverCommands = {}
-" if executable('javascript-typescript-stdio')
-"   let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
-"   " Use LanguageServer for omnifunc completion
-"   autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
-" else
-"   echo "javascript-typescript-stdio not installed!\n"
-"   :cq
-" endif
-
 " ======================== Global configs ==============================
 set mouse=a
 set mousehide
@@ -134,16 +115,10 @@ endif
 " Instead of reverting the cursor to the last position in the buffer, we
 " set it to the first line when editing a git commit message
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-au FileType cs set tabstop=4|set shiftwidth=4|set expandtab
+au FileType cs set tabstop=2|set shiftwidth=2|set expandtab
 
 autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
-
-au TextChangedI * call ncm2#auto_trigger()
-inoremap <c-c> <ESC>
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 autocmd BufNewFile,BufRead *.c,*.h set filetype=c
 autocmd BufNewFile,BufRead *.cpp set filetype=cpp
@@ -152,6 +127,7 @@ autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
 autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 autocmd BufNewFile,BufRead *.hbs set filetype=handlebars.html syntax=mustache
 autocmd BufNewFile,BufRead *.ts set filetype=typescript
+autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
 autocmd BufNewFile,BufRead *.xml set filetype=xml
 
 " autocmd BufEnter * sign define dummy
@@ -177,16 +153,25 @@ au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 "   " autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 " augroup end
 
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+      " \ 'typescript': ['javascript-typescript-stdio'],
+let g:LanguageClient_serverCommands = {
+  \ 'typescript': ['typescript-language-server', '--stdio'],
+  \ 'typescript.tsx': ['typescript-language-server', '--stdio']
+  \ }
+let g:LanguageClient_diagnosticsEnable = 0
+
 " <leader>ld to go to definition
-autocmd FileType javascript nnoremap <buffer>
+autocmd FileType typescript nnoremap <buffer>
   \ <leader>d :call LanguageClient_textDocument_definition()<cr>
 " <leader>lh for type info under cursor
-autocmd FileType javascript nnoremap <buffer>
+autocmd FileType typescript nnoremap <buffer>
   \ <leader>h :call LanguageClient_textDocument_hover()<cr>
 " <leader>lr to rename variable under cursor
-autocmd FileType javascript nnoremap <buffer>
+autocmd FileType typescript nnoremap <buffer>
   \ <leader>r :call LanguageClient_textDocument_rename()<cr>
-
 
 
 " disable folding in javascript
@@ -242,28 +227,24 @@ vmap v <Plug>(expand_region_expand)
 vmap f <Plug>(expand_region_shrink)
 
 " navigating through tab
-map <S-H> gT
-map <S-L> gt
+nnoremap <S-H> gT
+nnoremap <S-L> gt
 
-" quit
+" quit & save
 noremap <leader>q :q<cr>
-" save and quit
-noremap <leader>wq :wq<cr>
+nnoremap <leader>w :w<cr><Space>
 
 " Make the dot command work as expected in visual mode
 vnoremap . :norm.<CR>
 
-" Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove"
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
-
 " For when you forget to sudo.. Really Write the file.
 cmap w!! w !sudo tee % >/dev/null
+
+inoremap <c-c> <ESC>
+" Use <TAB> to select the popup menu:
+inoremap <expr> <CR> pumvisible() ? "\<c-y>\<cr>" : "\<CR>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " vim-test
 nmap <silent> <leader>t :TestNearest<CR>
@@ -312,7 +293,6 @@ map <F1> <Esc>
 imap <F1> <Esc>
 
 " =========================== Plugin configs & Keybindings ===============================
-let g:UltiSnipsUsePythonVersion = 2
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir=$HOME."/.vim/UltiSnips"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/.vim/UltiSnips"]
@@ -326,6 +306,9 @@ let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = '|'
+
+" Ag
+let $FZF_DEFAULT_COMMAND = 'ag --hidden -l -g ""'
 
 " PIV
 let g:DisableAutoPHPFolding = 1
@@ -371,6 +354,9 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
+" Prettier
+nmap <Leader>ff <Plug>(Prettier)
+
 " Tabularize
 nmap <Leader>a& :Tabularize /&<CR>
 vmap <Leader>a& :Tabularize /&<CR>
@@ -385,29 +371,29 @@ vmap <Leader>a, :Tabularize /,<CR>
 nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 " ctrlP
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
-
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-let g:ctrlp_map=''
-nnoremap <silent> <C-p> :CtrlP<CR>
-nnoremap <silent> <C-b> :CtrlPBuffer<CR>
-
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/](node_modules|bower_components|dist|tmp)|(\.(git|hg|svn|sassc))$',
-      \ 'file': '\v\.(exe|so|dll|png|jpg|gif|jpeg|swf|pdf|mp3)$'
-      \}
-let g:ctrlp_extensions = ['funky']
-
-" Silver search
-let g:ag_working_path_mode="r"
+" if executable('ag')
+"   " Use Ag over Grep
+"   set grepprg=ag\ --nogroup\ --nocolor
+"   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+"   " ag is fast enough that CtrlP doesn't need to cache
+"   let g:ctrlp_use_caching = 0
+" endif
+"
+" let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+" let g:ctrlp_map=''
+" nnoremap <silent> <C-p> :CtrlP<CR>
+" nnoremap <silent> <C-b> :CtrlPBuffer<CR>
+"
+" let g:ctrlp_working_path_mode = 'ra'
+" let g:ctrlp_custom_ignore = {
+"       \ 'dir':  '\v[\/](node_modules|bower_components|dist|tmp)|(\.(git|hg|svn|sassc))$',
+"       \ 'file': '\v\.(exe|so|dll|png|jpg|gif|jpeg|swf|pdf|mp3)$'
+"       \}
+" let g:ctrlp_extensions = ['funky']
+"
+" " Silver search
+" let g:ag_working_path_mode="r"
 
 " Figutive
 nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -442,6 +428,7 @@ let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
 " ale
 let g:ale_sign_error = '⦿'
 let g:ale_sign_warning = '●'
+let g:ale_lint_on_text_changed = 'never'
 
 " rainbow
 let g:rainbow_active = 1
@@ -490,35 +477,17 @@ set signcolumn=yes
 nmap <Leader>hk <Plug>GitGutterPreviewHunk
 
 " Easy Motion
-" Turn on case insensitive feature
-let g:EasyMotion_smartcase = 1
 
+
+let g:EasyMotion_smartcase = 1 " Turn on case insensitive feature
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
-" Bi-directional find motion
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-" `s{char}{label}`
-nmap <space>s <Plug>(easymotion-s)
-" or `s{char}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
-" nmap <Leader>s <Plug>(easymotion-s2)
-
 
 " JK motions: Line motions
+nmap <space>s <Plug>(easymotion-s)
 nmap <space>w <Plug>(easymotion-lineforward)
 nmap <space>j <Plug>(easymotion-j)
 nmap <space>k <Plug>(easymotion-k)
 nmap <space>b <Plug>(easymotion-linebackward)
-
-nnoremap <Leader>w :w<cr><Space>
-" JS-Beautify
-noremap <c-f> :Autoformat<CR>
-
-" autoread
-let g:AutoPairsMapCR=0
-inoremap <silent> <Plug>(MyCR) <CR><C-R>=AutoPairsReturn()<CR>
-
-" example
-imap <expr> <CR> (pumvisible() ? "\<C-Y>\<Plug>(MyCR)" : "\<Plug>(MyCR)")
 
 
 " =========================== Custom functions ===============================
@@ -527,3 +496,47 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 
 " vim-move
 let g:move_key_modifier = 'S'
+
+function! FZFWithDevIcons()
+  let l:fzf_files_options = ' -m --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up --preview "bat --color always --style numbers {2..}"'
+
+  function! s:files()
+    let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
+    return s:prepend_icon(l:files)
+  endfunction
+
+  function! s:prepend_icon(candidates)
+    let result = []
+    for candidate in a:candidates
+      let filename = fnamemodify(candidate, ':p:t')
+      let icon = WebDevIconsGetFileTypeSymbol(filename, isdirectory(filename))
+      call add(result, printf("%s %s", icon, candidate))
+    endfor
+
+    return result
+  endfunction
+
+  function! s:edit_file(items)
+    let items = a:items
+    let i = 1
+    let ln = len(items)
+    while i < ln
+      let item = items[i]
+      let parts = split(item, ' ')
+      let file_path = get(parts, 1, '')
+      let items[i] = file_path
+      let i += 1
+    endwhile
+    call s:Sink(items)
+  endfunction
+
+  let opts = fzf#wrap({})
+  let opts.source = <sid>files()
+  let s:Sink = opts['sink*']
+  let opts['sink*'] = function('s:edit_file')
+  let opts.options .= l:fzf_files_options
+  call fzf#run(opts)
+
+endfunction
+
+map <C-p> :call FZFWithDevIcons()<CR>
