@@ -163,14 +163,14 @@ let g:LanguageClient_serverCommands = {
   \ }
 let g:LanguageClient_diagnosticsEnable = 0
 
-" <leader>ld to go to definition
 autocmd FileType typescript nnoremap <buffer>
   \ <leader>d :call LanguageClient_textDocument_definition()<cr>
-" <leader>lh for type info under cursor
-autocmd FileType typescript nnoremap <buffer>
-  \ <leader>h :call LanguageClient_textDocument_hover()<cr>
+autocmd FileType typescript.tsx nnoremap <buffer>
+  \ <leader>d :call LanguageClient_textDocument_definition()<cr>
 " <leader>lr to rename variable under cursor
 autocmd FileType typescript nnoremap <buffer>
+  \ <leader>r :call LanguageClient_textDocument_rename()<cr>
+autocmd FileType typescript.tsx nnoremap <buffer>
   \ <leader>r :call LanguageClient_textDocument_rename()<cr>
 
 
