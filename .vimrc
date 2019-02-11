@@ -216,10 +216,10 @@ nnoremap <CR> :nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
 
 " easier navigation between split windows
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-h> <C-w>h
+noremap <C-l> <C-w>l
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 nnoremap j gj
