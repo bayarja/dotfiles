@@ -55,6 +55,8 @@ set splitright
 set splitbelow
 set magic
 
+set sessionoptions+=tabpages,globals
+
 set nowrap                      " No Wrap long lines
 set synmaxcol=512
 set autoindent                  " Indent at the same level of the previous line
@@ -85,10 +87,10 @@ let ayucolor="mirage" " for mirage version of theme
 colorscheme ayu
 " ======================== GUI configs ==============================
 "
-if has('nvim')
-  " fix <c-h> in neovim
-  nmap <BS> <C-W>h
-endif
+" if has('nvim')
+"   " fix <c-h> in neovim
+"   nmap <BS> <C-W>h
+" endif
 " hi NonText guifg=bg
 
 " Setting font for GUI otherwise it sets terminal font
@@ -216,10 +218,10 @@ nnoremap <CR> :nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
 
 " easier navigation between split windows
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-h> <C-w>h
-noremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 nnoremap j gj
@@ -230,8 +232,8 @@ vmap v <Plug>(expand_region_expand)
 vmap f <Plug>(expand_region_shrink)
 
 " navigating through tab
-nnoremap <S-H> gT
-nnoremap <S-L> gt
+nnoremap <S-h> gT
+nnoremap <S-l> gt
 
 " quit & save
 noremap <leader>q :q<cr>
@@ -243,6 +245,11 @@ vnoremap . :norm.<CR>
 " For when you forget to sudo.. Really Write the file.
 cmap w!! w !sudo tee % >/dev/null
 
+" Moving line
+nnoremap <S-j> :m .+1<CR>==
+nnoremap <S-k> :m .-2<CR>==
+vnoremap <S-j> :m '>+1<CR>gv=gv
+vnoremap <S-k> :m '<-2<CR>gv=gv
 
 nnoremap [ :lprev<cr>
 nnoremap ] :lnext<cr>
@@ -302,6 +309,9 @@ imap <F1> <Esc>
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir=$HOME."/.vim/UltiSnips"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/.vim/UltiSnips"]
+let g:UltiSnipsExpandTrigger='<Tab>'
+let g:UltiSnipsJumpForwardTrigger='<c-n>'
+let g:UltiSnipsJumpBackwardTrigger='<c-p>'
 
 "Airline
 let g:airline_powerline_fonts  = 1
@@ -315,6 +325,10 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " Ag
 let $FZF_DEFAULT_COMMAND = 'ag --hidden -l -g ""'
+let g:fzf_action = {
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
 
 " PIV
 let g:DisableAutoPHPFolding = 1
@@ -444,6 +458,9 @@ let g:rainbow_active = 1
 let g:session_autosave = 'no'
 let g:session_autoload = 'yes'
 
+" Taboo tabline
+let g:taboo_renamed_tab_format = " %l %m "
+
 " For snippet_complete marker.
 if has('conceal')
   set conceallevel=2 concealcursor=i
@@ -466,6 +483,10 @@ let g:vim_json_syntax_conceal = 0
 
 " Numbers
 let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
+
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " enable zen coding on jsx
 autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
@@ -543,4 +564,5 @@ function! FZFWithDevIcons()
 
 endfunction
 
-map <C-p> :call FZFWithDevIcons()<CR>
+" map <C-p> :call FZFWithDevIcons()<CR>
+nnoremap <C-p> :FZF<CR>
