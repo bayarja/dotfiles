@@ -56,6 +56,7 @@ set splitbelow
 set magic
 
 set sessionoptions+=tabpages,globals
+set sessionoptions-=buffers
 
 set nowrap                      " No Wrap long lines
 set synmaxcol=512
@@ -160,15 +161,12 @@ let g:LanguageClient_serverCommands = {
   \ }
 let g:LanguageClient_diagnosticsEnable = 0
 
-autocmd FileType typescript nnoremap <buffer>
-  \ <leader>d :call LanguageClient_textDocument_definition()<cr>
-autocmd FileType typescript.tsx nnoremap <buffer>
-  \ <leader>d :call LanguageClient_textDocument_definition()<cr>
-" <leader>lr to rename variable under cursor
-autocmd FileType typescript nnoremap <buffer>
-  \ <leader>r :call LanguageClient_textDocument_rename()<cr>
-autocmd FileType typescript.tsx nnoremap <buffer>
-  \ <leader>r :call LanguageClient_textDocument_rename()<cr>
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+
+autocmd FileType typescript nnoremap <buffer> <leader>d :call LanguageClient_textDocument_definition()<cr>
+autocmd FileType typescript.tsx nnoremap <buffer> <leader>d :call LanguageClient_textDocument_definition()<cr>
+autocmd FileType typescript nnoremap <buffer> <leader>r :call LanguageClient_textDocument_rename()<cr>
+autocmd FileType typescript.tsx nnoremap <buffer> <leader>r :call LanguageClient_textDocument_rename()<cr>
 
 
 " vim-move
@@ -317,10 +315,7 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " Ag
 let $FZF_DEFAULT_COMMAND = 'ag --hidden -l -g ""'
-let g:fzf_action = {
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-x': 'split',
-      \ 'ctrl-v': 'vsplit' }
+let g:fzf_layout = { 'down': '~20%' }
 
 " PIV
 let g:DisableAutoPHPFolding = 1
@@ -350,7 +345,7 @@ let NERDTreeMouseMode=0
 let NERDTreeChDirMode=2
 
 " Increase tree width slightly
-let NERDTreeWinSize = 40 
+let NERDTreeWinSize = 40
 " Change working directory to the root automatically
 "
 let g:lt_location_list_toggle_map = '<F2>'
@@ -418,9 +413,6 @@ nnoremap <silent> <leader>gp :Git push<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>:GitGutter<CR>
 nnoremap <silent> <leader>gg :GitGutterToggle<CR>
 
-nnoremap <silent> <leader>ss :SaveSession<CR>
-nnoremap <silent> <leader>sd :DeleteSession<CR>
-
 let g:webdevicons_enable = 1
 let g:webdevicons_enable_nerdtree = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
@@ -477,8 +469,7 @@ let g:vim_json_syntax_conceal = 0
 let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
 
 autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
-      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+autocmd  FileType fzf set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " enable zen coding on jsx
 autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
