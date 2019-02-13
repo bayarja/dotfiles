@@ -413,6 +413,10 @@ nnoremap <silent> <leader>gp :Git push<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>:GitGutter<CR>
 nnoremap <silent> <leader>gg :GitGutterToggle<CR>
 
+" session saved to default
+nnoremap <silent> <leader>ss :SaveSession<CR>
+nnoremap <silent> <leader>sd :DeleteSession<CR>
+
 let g:webdevicons_enable = 1
 let g:webdevicons_enable_nerdtree = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
