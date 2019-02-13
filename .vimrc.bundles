@@ -32,7 +32,7 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'vimwiki/vimwiki'
 
-" Plug 'yuttie/comfortable-motion.vim'
+Plug 'yuttie/comfortable-motion.vim'
 
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 
