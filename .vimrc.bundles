@@ -57,8 +57,10 @@ Plug 'tmhedberg/matchit'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+Plug 'ntpeters/vim-better-whitespace'
+
 Plug 'easymotion/vim-easymotion'
-Plug 'faceleg/CamelCaseMotion'
+Plug 'chaoren/vim-wordmotion'
 Plug 'vim-scripts/restore_view.vim'
 
 Plug 'airblade/vim-gitgutter'

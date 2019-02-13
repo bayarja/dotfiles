@@ -85,14 +85,9 @@ set termguicolors     " enable true colors support
 let ayucolor="mirage" " for mirage version of theme
 " let ayucolor="dark"   " for dark version of theme
 colorscheme ayu
+" colorscheme jellybeans
 " ======================== GUI configs ==============================
 "
-" if has('nvim')
-"   " fix <c-h> in neovim
-"   nmap <BS> <C-W>h
-" endif
-" hi NonText guifg=bg
-
 " Setting font for GUI otherwise it sets terminal font
 if has('gui_running')
   set guioptions-=T           " Remove the toolbar
@@ -287,13 +282,10 @@ nnoremap Y J
 nnoremap ✠ i<CR><Esc>
 inoremap ✠ <CR><Esc>O
 
-" CamelCaseMotion
-map <silent> w <Plug>CamelCaseMotion_w
-map <silent> b <Plug>CamelCaseMotion_b
-map <silent> e <Plug>CamelCaseMotion_e
-sunmap w
-sunmap b
-sunmap e
+" better whitespace
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
+let g:strip_whitespace_confirm=0
 
 " Disabling arrow key motions
 noremap <Up> <NOP>
