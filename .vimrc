@@ -141,6 +141,9 @@ endfunction
 " Use <c-space> for trigger completion.
 inoremap <silent><expr> <A-space> coc#refresh()
 
+" projectionist
+let g:fuzzy_projectionist_preview = 1
+
 " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " vim-move
@@ -163,15 +166,13 @@ nmap <leader>u <Plug>(coc-references)
 
 " Remap for rename current word
 nmap <leader>r <Plug>(coc-rename)
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-vmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-" Remap for do codeAction of current line
-" nnoremap <silent> <localleader>c  :<C-u>CocList commands<cr>
-nnoremap <silent> <localleader>c <Plug>(coc-codeaction)
 
 " Use K for show documentation in preview window
 nnoremap <silent> <localleader>d :call <SID>show_documentation()<CR>
+
+nnoremap <localleader>c :Fmodule<cr>
+nnoremap <localleader>m :Fmodel<cr>
+nnoremap <localleader>g :Fgql<cr>
 
 function! s:show_documentation()
   if &filetype == 'vim'

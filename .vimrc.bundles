@@ -79,6 +79,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 
 Plug 'tpope/vim-unimpaired'
+Plug 'c-brenn/fuzzy-projectionist.vim'
 Plug 'terryma/vim-expand-region'
 Plug 'kshenoy/vim-signature'
 Plug 'junegunn/limelight.vim'
