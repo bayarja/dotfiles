@@ -6,6 +6,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'gcmt/taboo.vim'
 " Plug 'christoomey/vim-tmux-navigator'
 Plug 'Yggdroot/indentLine'
+Plug 'alvan/vim-closetag'
 " Plug 'oblitum/rainbow'
 " Plug 'kien/rainbow_parentheses.vim'
 " let g:rainbow_conf = {
@@ -16,6 +17,7 @@ Plug 'Yggdroot/indentLine'
 
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/MatchTagAlways'
+
 let g:mta_filetypes = {
         \ 'html' : 1,
         \ 'javascript.jsx' : 1,
@@ -32,27 +34,24 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'vimwiki/vimwiki'
 
-" Plug 'yuttie/comfortable-motion.vim'
-
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-ultisnips'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 
 Plug 'SirVer/ultisnips'
+
 Plug 'yssl/QFEnter'
 Plug 'vim-scripts/tComment'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-projectionist'
+Plug 'c-brenn/fuzzy-projectionist.vim'
+
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 Plug 'Chiel92/vim-autoformat'
 Plug 'tmhedberg/matchit'
+
 " replacement for powerline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -71,11 +70,14 @@ Plug 'airblade/vim-gitgutter'
 Plug 'sjl/gundo.vim'
 
 " syntax checker
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 " git integration
 Plug 'tpope/vim-git'
+
+" git browser
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
+
 Plug 'tpope/vim-unimpaired'
 Plug 'terryma/vim-expand-region'
 Plug 'kshenoy/vim-signature'
@@ -109,6 +111,7 @@ Plug 'jparise/vim-graphql'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 Plug 'elzr/vim-json'
+Plug 'neoclide/jsonc.vim'
 Plug 'jtratner/vim-flavored-markdown'
 
 " Plug 'JulesWang/css.vim'
@@ -117,9 +120,6 @@ Plug 'jtratner/vim-flavored-markdown'
 Plug 'othree/html5.vim'
 Plug 'othree/html5-syntax.vim'
 Plug 'cakebaker/scss-syntax.vim'
-
-Plug 'dsawardekar/portkey'
-Plug 'dsawardekar/ember.vim'
 
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'kassio/neoterm'
