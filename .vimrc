@@ -44,7 +44,7 @@ set hlsearch                    " Highlight search terms
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
 set wildmenu                    " Show list instead of just completing
-set wildmode=list:longest  " Command <Tab> completion, list matches, then longest common part, then all.
+set wildmode=longest:full,full  " Command <Tab> completion, list matches, then longest common part, then all.
 set scrolljump=3                " Lines to scroll when cursor leaves screen
 set scrolloff=5                 " Minimum lines to keep above and below cursor
 set nofoldenable
@@ -152,7 +152,6 @@ let g:move_key_modifier = 'S'
 
 " =========================== Custom Global Keybindings ===============================
 let mapleader = ','
-let g:maplocalleader = ';'
 
 " r redo
 nmap r <c-r>
@@ -162,16 +161,26 @@ nmap <leader>d <Plug>(coc-definition)
 " nmap <leader>gy <Plug>(coc-type-definition)
 nmap <leader>i <Plug>(coc-implementation)
 nmap <leader>u <Plug>(coc-references)
-
+nmap <leader>a <Plug>(coc-codeaction)
 " Remap for rename current word
 nmap <leader>r <Plug>(coc-rename)
 
-" Use K for show documentation in preview window
-nnoremap <silent> <localleader>d :call <SID>show_documentation()<CR>
 
-nnoremap <localleader>c :Fmodule<cr>
-nnoremap <localleader>m :Fmodel<cr>
-nnoremap <localleader>g :Fgql<cr>
+" Use K for show documentation in preview window
+nnoremap <silent> ; :call <SID>show_documentation()<CR>
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
 
 function! s:show_documentation()
   if &filetype == 'vim'
@@ -440,6 +449,12 @@ let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
+au FileType typescript.tsx
+    \ let b:closer = 1 |
+    \ let b:closer_flags = '([{;' |
+    \ let b:closer_no_semi = '^\s*\(function\|class\|if\|else\)' |
+    \ let b:closer_semi_ctx = ')\s*{$'
+
 " enable zen coding on jsx
 autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
 autocmd FileType typescript.tsx runtime! ftplugin/html/sparkup.vim
@@ -463,6 +478,8 @@ nmap <space>w <Plug>(easymotion-lineforward)
 nmap <space>j <Plug>(easymotion-j)
 nmap <space>k <Plug>(easymotion-k)
 nmap <space>b <Plug>(easymotion-linebackward)
+
+hi CocCodeLens ctermfg=59
 
 
 " =========================== Custom functions ===============================

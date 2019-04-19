@@ -2,6 +2,14 @@
   "diagnostic.warningSign": "●",
   "diagnostic.errorSign": "⦿",
   "diagnostic.infoSign": "-",
+  "suggest.snippetIndicator": "->",
+  "suggest.noselect": false,
+  "codeLens.enable": true,
+  "snippets.extends": {
+    "typescript": ["javascript"],
+    "typescript.tsx": ["typescript"],
+    "javascript.jsx": ["javascript"]
+  },
   "eslint.autoFixOnSave": true,
   "eslint.filetypes": ["typescript", "typescript.tsx", "javascript", "javascript.jsx"]
 }
