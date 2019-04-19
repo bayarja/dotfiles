@@ -20,13 +20,14 @@ set nobackup                                 " Disabling backup since files are 
 set noswapfile                               " Disabling swapfile
 set nowb
 set clipboard=unnamed
-set nottimeout
+set ttimeout
+set ttimeoutlen=0
 set laststatus=2
 
 syntax on
 
 set shortmess+=filmnrxoOtTc          " Abbrev. of messages (avoids 'hit enter')
-set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
+set viewoptions=cursor,folds,slash,unix " Better Unix / Windows compatibility
 set nospell                         " disable spell checking
 set hidden                          " Allow buffer switching without saving
 set cmdheight=1
@@ -58,7 +59,7 @@ set splitbelow
 set magic
 
 set sessionoptions+=tabpages,globals
-set sessionoptions-=buffers
+set sessionoptions-=folds
 
 set nowrap                      " No Wrap long lines
 set synmaxcol=512
@@ -149,8 +150,6 @@ let g:fuzzy_projectionist_preview = 1
 " vim-move
 let g:move_key_modifier = 'S'
 
-" disable folding in javascript
-let g:javascript_fold_enabled=1
 " =========================== Custom Global Keybindings ===============================
 let mapleader = ','
 let g:maplocalleader = ';'
@@ -332,6 +331,7 @@ let g:PIVAutoClose = 0
 
 " Misc
 let b:match_ignorecase = 1
+let g:loaded_matchparen = 1
 
 let g:comfortable_motion_scroll_down_key = "j"
 let g:comfortable_motion_scroll_up_key = "k"
@@ -400,15 +400,9 @@ let g:webdevicons_enable_airline_tabline = 1
 let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
 let g:WebDevIconsNerdTreeAfterGlyphPadding = "  "
 
-
 " let g:NERDTreeFileExtensionHighlightFullName = 1
 " let g:NERDTreeExactMatchHighlightFullName = 1
 " let g:NERDTreePatternMatchHighlightFullName = 1
-
-" ale
-let g:ale_sign_error = '⦿'
-let g:ale_sign_warning = '●'
-let g:ale_lint_on_text_changed = 'never'
 
 " rainbow
 let g:rainbow_active = 1
