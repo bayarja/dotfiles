@@ -333,6 +333,12 @@ let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_
 " Ag
 let $FZF_DEFAULT_COMMAND = 'ag --hidden -l -g ""'
 let g:fzf_layout = { 'down': '~20%' }
+let g:rg_command = '
+  \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
+  \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
+  \ -g "!{.git,node_modules,vendor}/*" '
+
+command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
 " PIV
 let g:DisableAutoPHPFolding = 1
@@ -359,7 +365,6 @@ let NERDTreeIgnore=[
       \ '^Thumbs\.db$', '.DS_Store', '\.meta$', 'node_modules'
       \ ]
 let NERDTreeMouseMode=1
-let NERDTreeChDirMode=2
 
 " Increase tree width slightly
 let NERDTreeWinSize = 40
@@ -449,7 +454,7 @@ let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-au FileType typescript.tsx
+au FileType typescript.tsx,graphq
     \ let b:closer = 1 |
     \ let b:closer_flags = '([{;' |
     \ let b:closer_no_semi = '^\s*\(function\|class\|if\|else\)' |
