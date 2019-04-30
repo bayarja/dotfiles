@@ -1,4 +1,4 @@
-Plug 'mileszs/ack.vim'
+" Plug 'mileszs/ack.vim'
 Plug 'Orgil/ayu-vim'
 Plug 'Konfekt/FastFold'
 Plug 'thinca/vim-visualstar'
@@ -12,8 +12,6 @@ Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 " Plug 'alvan/vim-closetag'
 Plug 'luochen1990/rainbow'
-" Plug 'oblitum/rainbow'
-" Plug 'kien/rainbow_parentheses.vim'
 let g:rainbow_conf = {
 	\	'separately': {
 	\		'nerdtree': 0,

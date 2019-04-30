@@ -335,14 +335,17 @@ let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_er
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 " Ag
-let $FZF_DEFAULT_COMMAND = 'ag --hidden -l -g ""'
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+set grepprg=rg\ --vimgrep
+command! -bang -nargs=* Find call fzf#vim#grep('rg
+      \ --column --line-number --no-heading
+      \ --fixed-strings --ignore-case --hidden --follow --glob "!.git/*"
+      \ --color "always" '.shellescape(<q-args>).'
+      \ | tr -d "\017"', 1, <bang>0
+      \)
+
 let g:fzf_layout = { 'down': '~20%' }
 let g:fzf_buffers_jump = 1
-
-let g:rg_command = '
-      \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
-      \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
-      \ -g "!{.git,node_modules,vendor}/*" '
 
 " PIV
 let g:DisableAutoPHPFolding = 1
@@ -533,5 +536,6 @@ function! FZFWithDevIcons()
 endfunction
 
 nmap <C-p> :call FZFWithDevIcons()<CR>
+nmap <C-f> :Find<space>
 nmap <C-b> :Buffers<CR>
 
