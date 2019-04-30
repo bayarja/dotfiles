@@ -191,6 +191,8 @@ let g:closetag_emptyTags_caseSensitive = 1
 let g:goyo_width=120
 let g:goyo_height='100%'
 let g:goyo_linenr=1
+map <leader>z :Goyo<CR>
+
 " Zoom / Restore window.
 function! s:ZoomToggle() abort
     if exists('t:zoomed') && t:zoomed
@@ -203,19 +205,13 @@ function! s:ZoomToggle() abort
         let t:zoomed = 1
     endif
 endfunction
+
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <leader>o :ZoomToggle<CR>
-" map <leader>o :ZoomWinTabToggle<CR>
-map <leader>z :Goyo<CR>
 
 " Setting clipboard copy functionality
-if has('gui_macvim')
-  noremap <leader>y "*y
-  noremap <leader>yy "*Y
-else
-  noremap <leader>y "+y
-  noremap <leader>yy "+Y
-endif
+noremap <leader>y "+y
+noremap <leader>yy "+Y
 
 " Preserve indentation while pasting text from the clipboard
 noremap <leader>p :set paste<CR>:put  +<CR>:set nopaste<CR>
