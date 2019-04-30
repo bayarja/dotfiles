@@ -2,14 +2,22 @@
   "diagnostic.warningSign": "●",
   "diagnostic.errorSign": "⦿",
   "diagnostic.infoSign": "-",
-  "suggest.snippetIndicator": "->",
+  "suggest.snippetIndicator": " ↝",
   "suggest.noselect": false,
   "codeLens.enable": true,
+  "suggest.disableMenu": true,
+  "suggest.maxCompleteItemCount": 20,
+  "diagnostic.enableMessage": "jump",
   "snippets.extends": {
     "typescript": ["javascript"],
     "typescript.tsx": ["typescript"],
     "javascript.jsx": ["javascript"]
   },
   "eslint.autoFixOnSave": true,
-  "eslint.filetypes": ["typescript", "typescript.tsx", "javascript", "javascript.jsx"]
+  "eslint.filetypes": [
+    "typescript",
+    "typescript.tsx",
+    "javascript",
+    "javascript.jsx"
+  ]
 }

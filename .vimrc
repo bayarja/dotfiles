@@ -2,9 +2,9 @@
 set nocompatible              " be iMproved, required
 
 call plug#begin('~/.vim/bundle')
-  if filereadable(expand("~/.vimrc.bundles"))
-    source ~/.vimrc.bundles
-  endif
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+endif
 call plug#end()
 
 filetype plugin indent on    " required
@@ -23,6 +23,7 @@ set clipboard=unnamed
 set ttimeout
 set ttimeoutlen=0
 set laststatus=2
+set signcolumn=auto:2
 
 syntax on
 
@@ -30,7 +31,6 @@ set shortmess+=filmnrxoOtTc          " Abbrev. of messages (avoids 'hit enter')
 set viewoptions=cursor,folds,slash,unix " Better Unix / Windows compatibility
 set nospell                         " disable spell checking
 set hidden                          " Allow buffer switching without saving
-set cmdheight=1
 set history=1000                    " Store a ton of history (default is 20)
 set updatetime=300
 
@@ -118,6 +118,8 @@ endif
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 autocmd BufNewFile,BufRead tsconfig.json setlocal filetype=jsonc
 
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -125,27 +127,9 @@ autocmd BufReadPost *
       \ endif
 " Automatically open and close the popup menu / preview window
 " au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> for trigger completion.
-inoremap <silent><expr> <A-space> coc#refresh()
-
+"
 " projectionist
 let g:fuzzy_projectionist_preview = 1
-
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " vim-move
 let g:move_key_modifier = 'S'
@@ -158,16 +142,22 @@ nmap r <c-r>
 
 " Remap keys for gotos
 nmap <leader>d <Plug>(coc-definition)
-" nmap <leader>gy <Plug>(coc-type-definition)
+nmap <leader>gd <Plug>(coc-type-definition)
 nmap <leader>i <Plug>(coc-implementation)
 nmap <leader>u <Plug>(coc-references)
 nmap <leader>a <Plug>(coc-codeaction)
-" Remap for rename current word
+vmap <leader>a  <Plug>(coc-codeaction-selected)
+"  Remap for rename current word
 nmap <leader>r <Plug>(coc-rename)
+
+nmap <silent> [ <Plug>(coc-diagnostic-prev)
+nmap <silent> ] <Plug>(coc-diagnostic-next)
+
 
 
 " Use K for show documentation in preview window
-nnoremap <silent> ; :call <SID>show_documentation()<CR>
+nnoremap <silent> t :call <SID>show_documentation()<CR>
+nmap <silent>; <Plug>(coc-diagnostic-info)
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
@@ -192,16 +182,30 @@ endfunction
 
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
 let g:closetag_regions = {
-    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
-    \ 'javascript.jsx': 'jsxRegion',
-    \ }
+      \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+      \ 'javascript.jsx': 'jsxRegion',
+      \ }
 let g:closetag_emptyTags_caseSensitive = 1
 
 " zoom
 let g:goyo_width=120
 let g:goyo_height='100%'
 let g:goyo_linenr=1
-" map <leader>z :ZoomWinTabToggle<CR>
+" Zoom / Restore window.
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <silent> <leader>o :ZoomToggle<CR>
+" map <leader>o :ZoomWinTabToggle<CR>
 map <leader>z :Goyo<CR>
 
 " Setting clipboard copy functionality
@@ -265,10 +269,6 @@ nnoremap ] :lnext<cr>
 
 inoremap <c-c> <ESC>
 
-" " Use <TAB> to select the popup menu:
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
 " vim-test
 nmap <silent> <leader>t :TestFile<CR>
 nmap <silent> <leader>T :TestSuite<CR>
@@ -310,9 +310,9 @@ map <F1> <Esc>
 imap <F1> <Esc>
 
 " =========================== Plugin configs & Keybindings ===============================
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetsDir=$HOME."/.vim/UltiSnips"
-let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/.vim/UltiSnips"]
+" let g:UltiSnipsEditSplit="vertical"
+" let g:UltiSnipsSnippetsDir=$HOME."/.vim/UltiSnips"
+" let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/.vim/UltiSnips"]
 " let g:UltiSnipsExpandTrigger='<Tab>'
 " let g:UltiSnipsJumpForwardTrigger='<c-n>'
 " let g:UltiSnipsJumpBackwardTrigger='<c-p>'
@@ -320,12 +320,20 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/.vim/UltiSnips"]
 "Airline
 let g:airline_powerline_fonts  = 1
 let g:airline_theme            = 'ayu'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_tabs = 1
+let g:airline#extensions#tabline#show_tab_nr = 0
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#close_symbol = '×'
+let g:airline#extensions#tabline#show_close_button = 1
 let g:airline#extensions#hunks#enabled = 0
 
 " only showing filename
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
 
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
@@ -333,16 +341,25 @@ let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_
 " Ag
 let $FZF_DEFAULT_COMMAND = 'ag --hidden -l -g ""'
 let g:fzf_layout = { 'down': '~20%' }
-let g:rg_command = '
-  \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
-  \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
-  \ -g "!{.git,node_modules,vendor}/*" '
+let g:fzf_buffers_jump = 1
 
-command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
+let g:rg_command = '
+      \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
+      \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
+      \ -g "!{.git,node_modules,vendor}/*" '
 
 " PIV
 let g:DisableAutoPHPFolding = 1
 let g:PIVAutoClose = 0
+
+" startify
+let g:startify_change_to_vcs_root = 1
+let g:startify_fortune_use_unicode = 1
+let g:startify_session_persistence = 1
+let g:startify_session_before_save = [
+        \ 'echo "Cleaning up before saving.."',
+        \ 'silent! NERDTreeTabsClose'
+        \ ]
 
 " Misc
 let b:match_ignorecase = 1
@@ -397,22 +414,25 @@ nnoremap <silent> <leader>gp :Git push<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>:GitGutter<CR>
 
 " session saved to default
-nnoremap <silent> <leader>ss :SaveSession<CR>
-nnoremap <silent> <leader>sd :DeleteSession<CR>
+nnoremap <silent> <leader>ss :SSave<CR>
+nnoremap <silent> <leader>sd :SDelete<CR>
 
 let g:webdevicons_enable = 1
 let g:webdevicons_enable_nerdtree = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:WebDevIconsUnicodeDecorateFileNodes = 1
+let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
 let g:DevIconsEnableFoldersOpenClose = 1
+let g:WebDevIconsOS = 'Darwin'
+
 autocmd FileType nerdtree setlocal signcolumn=no
-" autocmd FileType json syntax match Comment +\/\/.\+$+
+autocmd FileType json syntax match Comment +\/\/.\+$+
 " let g:DevIconsEnableFolderPatternMatching = 1
 " let g:NERDTreeHighlightFolders = 1
 " let g:NERDTreeHighlightFoldersFullName = 1
 let g:webdevicons_enable_airline_tabline = 1
 let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
-let g:WebDevIconsNerdTreeAfterGlyphPadding = "  "
+" let g:WebDevIconsNerdTreeAfterGlyphPadding = "  "
 
 " let g:NERDTreeFileExtensionHighlightFullName = 1
 " let g:NERDTreeExactMatchHighlightFullName = 1
@@ -420,25 +440,6 @@ let g:WebDevIconsNerdTreeAfterGlyphPadding = "  "
 
 " rainbow
 let g:rainbow_active = 1
-
-" auto session save
-let g:session_autosave = 'no'
-let g:session_autoload = 'yes'
-
-" Taboo tabline
-let g:taboo_renamed_tab_format = " %l %m "
-
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
-
-" Disable the neosnippet preview candidate window
-" When enabled, there can be too much visual noise
-" especially when splits are used.
-" set completeopt-=preview
-
-" nmap <F5> :TagbarToggle<CR>
 
 " Gundo history tree
 let g:gundo_right = 1
@@ -455,10 +456,10 @@ autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 au FileType typescript.tsx,graphq
-    \ let b:closer = 1 |
-    \ let b:closer_flags = '([{;' |
-    \ let b:closer_no_semi = '^\s*\(function\|class\|if\|else\)' |
-    \ let b:closer_semi_ctx = ')\s*{$'
+      \ let b:closer = 1 |
+      \ let b:closer_flags = '([{;' |
+      \ let b:closer_no_semi = '^\s*\(function\|class\|if\|else\)' |
+      \ let b:closer_semi_ctx = ')\s*{$'
 
 " enable zen coding on jsx
 autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
@@ -470,7 +471,6 @@ let g:used_javascript_libs = 'jquery,chai,handlebars,underscore,react'
 " Git Gutter
 let g:gitgutter_override_sign_column_highlight = 0
 " let g:gitgutter_sign_column_always = 1
-set signcolumn=yes
 nmap <Leader>hk <Plug>GitGutterPreviewHunk
 
 " Easy Motion
@@ -536,4 +536,6 @@ function! FZFWithDevIcons()
   call fzf#run(opts)
 endfunction
 
-map <C-p> :call FZFWithDevIcons()<CR>
+nmap <C-p> :call FZFWithDevIcons()<CR>
+nmap <C-b> :Buffers<CR>
+
