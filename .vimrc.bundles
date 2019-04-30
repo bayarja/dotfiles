@@ -5,7 +5,6 @@ Plug 'thinca/vim-visualstar'
 Plug 'jiangmiao/auto-pairs'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'mhinz/vim-startify'
-" Plug 'gcmt/taboo.vim'
 " Plug 'sheerun/vim-polyglot'
 " Plug 'airblade/vim-rooter'
 
@@ -80,8 +79,6 @@ Plug 'kshenoy/vim-signature'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'troydm/zoomwintab.vim'
-
 
 Plug 'spf13/PIV', { 'for': 'php' }
 Plug 'StanAngeloff/php.vim', { 'for': 'php' }
