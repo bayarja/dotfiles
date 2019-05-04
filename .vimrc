@@ -355,10 +355,6 @@ let g:PIVAutoClose = 0
 let g:startify_change_to_vcs_root = 1
 let g:startify_fortune_use_unicode = 1
 let g:startify_session_persistence = 1
-let g:startify_session_before_save = [
-        \ 'echo "Cleaning up before saving.."',
-        \ 'silent! NERDTreeTabsClose'
-        \ ]
 
 " Misc
 let b:match_ignorecase = 1
@@ -372,24 +368,24 @@ let g:indentLine_color_term = 237
 let g:indentLine_color_gui = '#3a3a3a'
 let g:indentLine_char = '│'
 
-let NERDTreeShowHidden=1
-let NERDTreeMinimalUI=1
-let NERDTreeAutoDeleteBuffer=1
-let NERDTreeIgnore=[
-      \ '\.idea', '\.sass-cache$[[dir]]','\.pyc', '\~$', '\.swo$', '\.swp$',
-      \ '\.git[[dir]]', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc', '^\.$', '^\.\.$',
-      \ '^Thumbs\.db$', '.DS_Store', '\.meta$', 'node_modules'
-      \ ]
-let NERDTreeMouseMode=1
-
-" Increase tree width slightly
-let NERDTreeWinSize = 40
+" let NERDTreeShowHidden=1
+" let NERDTreeMinimalUI=1
+" let NERDTreeAutoDeleteBuffer=1
+" let NERDTreeIgnore=[
+"       \ '\.idea', '\.sass-cache$[[dir]]','\.pyc', '\~$', '\.swo$', '\.swp$',
+"       \ '\.git[[dir]]', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc', '^\.$', '^\.\.$',
+"       \ '^Thumbs\.db$', '.DS_Store', '\.meta$', 'node_modules'
+"       \ ]
+" let NERDTreeMouseMode=1
+"
+" " Increase tree width slightly
+" let NERDTreeWinSize = 40
 " Change working directory to the root automatically
 "
 let g:lt_location_list_toggle_map = '<F2>'
 let g:lt_quickfix_list_toggle_map = '<F3>'
-nmap <F4> :NERDTreeToggle<CR>
-nmap <leader>nt :NERDTreeFind<CR>
+" nmap <F4> :NERDTreeToggle<CR>
+" nmap <leader>nt :NERDTreeFind<CR>
 
 "Vim-Go
 let g:go_disable_autoinstall = 0
@@ -417,20 +413,20 @@ nnoremap <silent> <leader>ss :SSave<CR>
 nnoremap <silent> <leader>sd :SDelete<CR>
 
 let g:webdevicons_enable = 1
-let g:webdevicons_enable_nerdtree = 1
+" let g:webdevicons_enable_nerdtree = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:WebDevIconsUnicodeDecorateFileNodes = 1
-let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
+" let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:WebDevIconsOS = 'Darwin'
 
-autocmd FileType nerdtree setlocal signcolumn=no
+" autocmd FileType nerdtree setlocal signcolumn=no
 autocmd FileType json syntax match Comment +\/\/.\+$+
 " let g:DevIconsEnableFolderPatternMatching = 1
 " let g:NERDTreeHighlightFolders = 1
 " let g:NERDTreeHighlightFoldersFullName = 1
 let g:webdevicons_enable_airline_tabline = 1
-let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
+" let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
 " let g:WebDevIconsNerdTreeAfterGlyphPadding = "  "
 
 " let g:NERDTreeFileExtensionHighlightFullName = 1
@@ -539,3 +535,57 @@ nmap <C-p> :call FZFWithDevIcons()<CR>
 nmap <C-f> :Find<space>
 nmap <C-b> :Buffers<CR>
 
+let g:loaded_netrwPlugin = 1 " Disable netrw.vim
+
+" autocmd FileType defx call s:defx_my_settings()
+
+augroup defxConfig
+  autocmd!
+  autocmd FileType defx call s:defx_my_settings()
+augroup END
+
+
+function! s:defx_my_settings() abort
+  " Open commands
+  " nnoremap <silent><buffer><expr> <CR> defx#do_action('open')
+  nnoremap <silent><buffer><expr> o
+		\ defx#is_directory() ?
+		\ defx#do_action('open_or_close_tree') :
+		\ defx#do_action('open', 'wincmd w \| drop')
+
+  " nnoremap <silent><buffer><expr> o defx#do_action('open_or_close_tree')
+  nnoremap <silent><buffer><expr> s defx#do_action('open', 'wincmd w \| vsplit \| drop')
+  nnoremap <silent><buffer><expr> i defx#do_action('open', 'wincmd w \| split \| drop')
+  " Preview current file
+  " nnoremap <silent><buffer><expr> s defx#do_action('open', 'pedit')
+
+  " File manipulation
+  nnoremap <silent><buffer><expr> ma defx#do_action('new_multiple_files')
+  nnoremap <silent><buffer><expr> md defx#do_action('remove')
+  nnoremap <silent><buffer><expr> mr defx#do_action('rename')
+  nnoremap <silent><buffer><expr> mc defx#do_action('multi', ['copy', 'paste'])
+  nnoremap <silent><buffer><expr> mm defx#do_action('move')
+  nnoremap <silent><buffer><expr> mp defx#do_action('paste')
+
+  "Navigation
+  nnoremap <silent><buffer><expr> <s-u> defx#do_action('cd', ['..'])
+  nnoremap <silent><buffer><expr> ~ defx#do_action('cd', [getcwd()])
+
+  " Miscellaneous actions
+  nnoremap <silent><buffer><expr> <s-i> defx#do_action('toggle_ignored_files')
+  nnoremap <silent><buffer><expr> mo defx#do_action('execute_system')
+  nnoremap <silent><buffer><expr> yp defx#do_action('yank_path')
+  nnoremap <silent><buffer><expr> <C-l> defx#do_action('redraw') . ':nohlsearch<cr>:syntax sync fromstart<cr><c-l>'
+
+  nnoremap <silent><buffer><expr><nowait> <Space> defx#do_action('toggle_select') . 'j'
+  nnoremap <silent><buffer><expr> * defx#do_action('toggle_select_all')
+
+  nnoremap <silent><buffer><expr> C defx#do_action('toggle_columns', 'indent:mark:icons:filename:size')
+
+endfunction
+
+" nnoremap <silent> <leader>o :call OpenRanger()<cr>
+nnoremap <silent><leader>nt :Defx `expand('%:p:h')` -show-ignored-files -search=`expand('%:p')`<CR>
+nnoremap <silent><f4> :Defx -buffer-name='' -toggle -split=vertical -winwidth=40
+      \ -columns=mark:indent:icons:filename
+      \ -direction=topleft -show-ignored-files -resume<CR>
