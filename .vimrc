@@ -580,12 +580,12 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr><nowait> <Space> defx#do_action('toggle_select') . 'j'
   nnoremap <silent><buffer><expr> * defx#do_action('toggle_select_all')
 
-  nnoremap <silent><buffer><expr> C defx#do_action('toggle_columns', 'indent:mark:icons:filename:size')
+  nnoremap <silent><buffer><expr> C defx#do_action('toggle_columns', 'mark:size:filename')
 
 endfunction
 
 " nnoremap <silent> <leader>o :call OpenRanger()<cr>
 nnoremap <silent><leader>nt :Defx `expand('%:p:h')` -show-ignored-files -search=`expand('%:p')`<CR>
 nnoremap <silent><f4> :Defx -buffer-name='' -toggle -split=vertical -winwidth=40
-      \ -columns=mark:indent:icons:filename
+      \ -columns=indent:mark:icons:filename
       \ -direction=topleft -show-ignored-files -resume<CR>

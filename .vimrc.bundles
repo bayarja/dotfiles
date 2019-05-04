@@ -122,6 +122,7 @@ Plug 'leafgarland/typescript-vim', {'for': ['typescript', 'typescript.tsx']}
 Plug 'ianks/vim-tsx', { 'for': 'typescript.tsx' }
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'kristijanhusak/defx-icons'
+Plug 'kristijanhusak/defx-git'
 " Plug 'mhartington/defx-devicons'
 " Plug 'scrooloose/nerdtree'
 " Plug 'beyondwords/vim-twig'
