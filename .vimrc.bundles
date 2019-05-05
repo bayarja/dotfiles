@@ -1,22 +1,14 @@
-" Plug 'mileszs/ack.vim'
-Plug 'Orgil/ayu-vim'
 Plug 'Konfekt/FastFold'
+Plug 'rakr/vim-one'
 Plug 'thinca/vim-visualstar'
-Plug 'jiangmiao/auto-pairs'
 Plug 'gorkunov/smartpairs.vim'
+Plug 'tmsvg/pear-tree'
+
 Plug 'mhinz/vim-startify'
-" Plug 'sheerun/vim-polyglot'
-" Plug 'airblade/vim-rooter'
 
 " Plug 'christoomey/vim-tmux-navigator'
 Plug 'Yggdroot/indentLine'
-" Plug 'alvan/vim-closetag'
-Plug 'luochen1990/rainbow'
-let g:rainbow_conf = {
-	\	'separately': {
-	\		'nerdtree': 0,
-	\	}
-	\}
+Plug 'alvan/vim-closetag'
 
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/MatchTagAlways'
@@ -51,13 +43,12 @@ Plug 'andymass/vim-matchup'
 " replacement for powerline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'airblade/vim-gitgutter'
 
 Plug 'ntpeters/vim-better-whitespace'
 
 Plug 'easymotion/vim-easymotion'
 Plug 'chaoren/vim-wordmotion' " camel case movement
-
-Plug 'airblade/vim-gitgutter'
 
 " history tree
 Plug 'sjl/gundo.vim'
@@ -72,7 +63,6 @@ Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-projectionist'
 Plug 'c-brenn/fuzzy-projectionist.vim'
-Plug 'terryma/vim-expand-region'
 Plug 'kshenoy/vim-signature'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'
@@ -84,10 +74,6 @@ Plug 'arnaud-lb/vim-php-namespace', { 'for': 'php' }
 
 " for go development
 Plug 'fatih/vim-go', { 'for': 'go' }
-
-" Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-" Plug 'Quramy/tsuquyomi'
-
 
 " for javascript
 Plug 'othree/yajs.vim'
@@ -115,7 +101,7 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'janko-m/vim-test'
 " Plug 'spf13/vim-preview'
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mxw/vim-jsx'
+Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
 Plug 'neoclide/vim-jsx-improve'
 
 Plug 'leafgarland/typescript-vim', {'for': ['typescript', 'typescript.tsx']}
@@ -124,7 +110,5 @@ Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'kristijanhusak/defx-icons'
 Plug 'kristijanhusak/defx-git'
 " Plug 'mhartington/defx-devicons'
-" Plug 'scrooloose/nerdtree'
-" Plug 'beyondwords/vim-twig'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
+Plug 'junegunn/rainbow_parentheses.vim'

@@ -84,32 +84,13 @@ set cursorline                  " Highlight current line
 set lazyredraw
 
 set background=dark
-set termguicolors     " enable true colors support
-" let ayucolor="light"  " for light version of theme
-let ayucolor="mirage" " for mirage version of theme
-" let ayucolor="dark"   " for dark version of theme
-colorscheme ayu
-" colorscheme jellybeans
-" ======================== GUI configs ==============================
-"
-" Setting font for GUI otherwise it sets terminal font
-if has('gui_running')
-  set guioptions-=T           " Remove the toolbar
-  set guioptions-=r           " Remove scrollbars
-  set lines=80
-  if has("gui_gtk2")
-    set guifont=Ubuntu\ Mono:h16,Menlo\ Regular:h15,Consolas\ Regular:h16,Courier\ New\ Regular:h18
-  elseif has("gui_win32")
-    " fullscreen on gvim
-    au GUIEnter * simalt ~x
-    set guifont=Powerline\ Consolas:h11
-  elseif has('gui_macvim')
-    set guifont=Inconsolata-dz\ for\ Powerline:h12 " setting font and size
-    set transparency=2      " Make the window slightly transparent
-    set guioptions-=L
-  endif
-  "set term=builtin_ansi       " Make arrow and other keys work
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
+set termguicolors
+colorscheme one
+
 
 " ======================== Filetype & Autocmd ==============================
 
@@ -180,7 +161,7 @@ function! s:show_documentation()
   endif
 endfunction
 
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx,*.html'
 let g:closetag_regions = {
       \ 'typescript.tsx': 'jsxRegion,tsxRegion',
       \ 'javascript.jsx': 'jsxRegion',
@@ -236,10 +217,6 @@ nnoremap <C-l> <C-w>l
 nnoremap j gj
 nnoremap k gk
 
-" Expand selection
-vmap v <Plug>(expand_region_expand)
-vmap f <Plug>(expand_region_shrink)
-
 " navigating through tab
 nnoremap <S-h> gT
 nnoremap <S-l> gt
@@ -288,12 +265,14 @@ nnoremap Y J
 " Need to remap ✠ char to Shift+Enter in iterm2
 " Splitting lines
 nnoremap ✠ i<CR><Esc>
-inoremap ✠ <CR><Esc>O
 
 " better whitespace
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
 let g:strip_whitespace_confirm=0
+
+let g:smartpairs_start_from_word = 1
+let g:smartpairs_revert_key = 'f'
 
 " Disabling arrow key motions
 noremap <Up> <NOP>
@@ -315,7 +294,7 @@ imap <F1> <Esc>
 
 "Airline
 let g:airline_powerline_fonts  = 1
-let g:airline_theme            = 'ayu'
+let g:airline_theme            = 'one'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_splits = 0
@@ -328,15 +307,14 @@ let g:airline#extensions#hunks#enabled = 0
 
 " only showing filename
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-
 
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 " Ag
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 set grepprg=rg\ --vimgrep
+
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 command! -bang -nargs=* Find call fzf#vim#grep('rg
       \ --column --line-number --no-heading
       \ --fixed-strings --ignore-case --hidden --follow --glob "!.git/*"
@@ -356,36 +334,13 @@ let g:startify_change_to_vcs_root = 1
 let g:startify_fortune_use_unicode = 1
 let g:startify_session_persistence = 1
 
-" Misc
-let b:match_ignorecase = 1
-let g:loaded_matchparen = 1
-
-let g:comfortable_motion_scroll_down_key = "j"
-let g:comfortable_motion_scroll_up_key = "k"
-
 " vertical line indentation
 let g:indentLine_color_term = 237
 let g:indentLine_color_gui = '#3a3a3a'
 let g:indentLine_char = '│'
 
-" let NERDTreeShowHidden=1
-" let NERDTreeMinimalUI=1
-" let NERDTreeAutoDeleteBuffer=1
-" let NERDTreeIgnore=[
-"       \ '\.idea', '\.sass-cache$[[dir]]','\.pyc', '\~$', '\.swo$', '\.swp$',
-"       \ '\.git[[dir]]', '\.hg', '\.svn', '\.bzr', '\.scssc', '\.sassc', '^\.$', '^\.\.$',
-"       \ '^Thumbs\.db$', '.DS_Store', '\.meta$', 'node_modules'
-"       \ ]
-" let NERDTreeMouseMode=1
-"
-" " Increase tree width slightly
-" let NERDTreeWinSize = 40
-" Change working directory to the root automatically
-"
 let g:lt_location_list_toggle_map = '<F2>'
 let g:lt_quickfix_list_toggle_map = '<F3>'
-" nmap <F4> :NERDTreeToggle<CR>
-" nmap <leader>nt :NERDTreeFind<CR>
 
 "Vim-Go
 let g:go_disable_autoinstall = 0
@@ -413,25 +368,12 @@ nnoremap <silent> <leader>ss :SSave<CR>
 nnoremap <silent> <leader>sd :SDelete<CR>
 
 let g:webdevicons_enable = 1
-" let g:webdevicons_enable_nerdtree = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:WebDevIconsUnicodeDecorateFileNodes = 1
-" let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:WebDevIconsOS = 'Darwin'
 
-" autocmd FileType nerdtree setlocal signcolumn=no
-autocmd FileType json syntax match Comment +\/\/.\+$+
 " let g:DevIconsEnableFolderPatternMatching = 1
-" let g:NERDTreeHighlightFolders = 1
-" let g:NERDTreeHighlightFoldersFullName = 1
-let g:webdevicons_enable_airline_tabline = 1
-" let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
-" let g:WebDevIconsNerdTreeAfterGlyphPadding = "  "
-
-" let g:NERDTreeFileExtensionHighlightFullName = 1
-" let g:NERDTreeExactMatchHighlightFullName = 1
-" let g:NERDTreePatternMatchHighlightFullName = 1
 
 " rainbow
 let g:rainbow_active = 1
@@ -444,24 +386,26 @@ nnoremap <F6> :GundoToggle<CR>
 "vim-json
 let g:vim_json_syntax_conceal = 0
 
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
+let g:pear_tree_repeatable_expand = 0
+
 " Numbers
-let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
+let g:numbers_exclude = ['gundo']
 
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-au FileType typescript.tsx,graphq
-      \ let b:closer = 1 |
-      \ let b:closer_flags = '([{;' |
-      \ let b:closer_no_semi = '^\s*\(function\|class\|if\|else\)' |
-      \ let b:closer_semi_ctx = ')\s*{$'
-
+autocmd FileType json syntax match Comment +\/\/.\+$+
 " enable zen coding on jsx
+autocmd FileType typescript runtime! ftplugin/html/sparkup.vim
 autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
 autocmd FileType typescript.tsx runtime! ftplugin/html/sparkup.vim
 
+
 " javascript-libraries-syntax
-let g:used_javascript_libs = 'jquery,chai,handlebars,underscore,react'
+let g:used_javascript_libs = 'jquery,chai,handlebars,underscore,react,react-dom'
 
 " Git Gutter
 let g:gitgutter_override_sign_column_highlight = 0
@@ -479,7 +423,40 @@ nmap <space>j <Plug>(easymotion-j)
 nmap <space>k <Plug>(easymotion-k)
 nmap <space>b <Plug>(easymotion-linebackward)
 
-hi CocCodeLens ctermfg=59
+" =========================== Custom colors ===============================
+call one#highlight('CocCodeLens', '5c6370', '', 'none')
+call one#highlight('Label', 'e5c07b', '', 'none')
+call one#highlight('Keyword', 'e5c07b', '', 'none')
+call one#highlight('Identifier', 'e5c07b', '', 'none')
+call one#highlight('xmlTag', '61afef', '', 'none')
+call one#highlight('xmlTagName', '61afef', '', 'none')
+call one#highlight('xmlEndTag', '61afef', '', 'none')
+call one#highlight('htmlTag', '61afef', '', 'none')
+call one#highlight('htmlTagName', '61afef', '', 'none')
+call one#highlight('htmlEndTag', '61afef', '', 'none')
+call one#highlight('jsonKeyword', '61afef', '', 'none')
+call one#highlight('graphqlType', '61afef', '', 'none')
+
+call one#highlight('jsonQuote', '919baa', '', 'none')
+
+call one#highlight('doxygenBrief', '5c6370', '', 'none')
+
+call one#highlight('embeddedTs', '98c379', '', 'none')
+call one#highlight('typescriptCall', '56b6c2', '', 'none')
+call one#highlight('typescriptFuncCallArg', '56b6c2', '', 'none')
+call one#highlight('typescriptVariable', '56b6c2', '', 'none')
+call one#highlight('typescriptVariableDeclaration', '56b6c2', '', 'none')
+
+call one#highlight('typescriptClassKeyword', 'c678dd', '', 'none')
+call one#highlight('typescriptAliasKeyword', 'c678dd', '', 'none')
+call one#highlight('typescriptExport', 'c678dd', '', 'none')
+call one#highlight('typescriptClassExtends', 'c678dd', '', 'none')
+
+call one#highlight('Structure', 'e69176', '', 'none')
+call one#highlight('typescriptClassName', 'e06c75', '', 'none')
+call one#highlight('typescriptClassHeritage', 'e06c75', '', 'none')
+call one#highlight('typescriptInterfaceName', 'e06c75', '', 'none')
+
 
 
 " =========================== Custom functions ===============================
@@ -575,7 +552,7 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> <s-i> defx#do_action('toggle_ignored_files')
   nnoremap <silent><buffer><expr> mo defx#do_action('execute_system')
   nnoremap <silent><buffer><expr> yp defx#do_action('yank_path')
-  nnoremap <silent><buffer><expr> <C-l> defx#do_action('redraw') . ':nohlsearch<cr>:syntax sync fromstart<cr><c-l>'
+  nnoremap <silent><buffer><expr> <C-r> defx#do_action('redraw') . ':nohlsearch<cr>:syntax sync fromstart<cr><c-l>'
 
   nnoremap <silent><buffer><expr><nowait> <Space> defx#do_action('toggle_select') . 'j'
   nnoremap <silent><buffer><expr> * defx#do_action('toggle_select_all')
