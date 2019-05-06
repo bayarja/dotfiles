@@ -523,6 +523,10 @@ augroup END
 
 
 function! s:defx_my_settings() abort
+  call defx#custom#column('filename', {
+	      \ 'min_width': 20,
+	      \ 'max_width': 40,
+	      \ })
   " Open commands
   " nnoremap <silent><buffer><expr> <CR> defx#do_action('open')
   nnoremap <silent><buffer><expr> o
@@ -545,6 +549,7 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> mp defx#do_action('paste')
 
   "Navigation
+  nnoremap <silent><buffer><expr> p defx#do_action('close_tree')
   nnoremap <silent><buffer><expr> l defx#do_action('open')
   nnoremap <silent><buffer><expr> <cr> defx#do_action('open')
   nnoremap <silent><buffer><expr> h defx#do_action('cd', ['..'])
