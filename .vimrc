@@ -374,6 +374,11 @@ let g:DevIconsEnableFoldersOpenClose = 1
 let g:WebDevIconsOS = 'Darwin'
 
 " let g:DevIconsEnableFolderPatternMatching = 1
+let g:matchup_matchparen_enabled = 0
+
+" match tag always
+let g:mta_use_matchparen_group = 0
+let g:mta_set_default_matchtag_color = 0
 
 " rainbow
 let g:rainbow_active = 1
@@ -423,11 +428,21 @@ nmap <space>j <Plug>(easymotion-j)
 nmap <space>k <Plug>(easymotion-k)
 nmap <space>b <Plug>(easymotion-linebackward)
 
+nnoremap <silent>% :MtaJumpToOtherTag<cr>
+
 " =========================== Custom colors ===============================
 call one#highlight('CocCodeLens', '5c6370', '', 'none')
+call one#highlight('doxygenBrief', '5c6370', '', 'none')
+call one#highlight('jsonQuote', '919baa', '', 'none')
+
 call one#highlight('Label', 'e5c07b', '', 'none')
 call one#highlight('Keyword', 'e5c07b', '', 'none')
 call one#highlight('Identifier', 'e5c07b', '', 'none')
+call one#highlight('typescriptParenExp', 'e5c07b', '', 'none')
+
+" blue
+call one#highlight('MatchTag', '61afef', '', 'underline,bold')
+call one#highlight('typescriptVariableDeclaration', '61afef', '', 'none')
 call one#highlight('xmlTag', '61afef', '', 'none')
 call one#highlight('xmlTagName', '61afef', '', 'none')
 call one#highlight('xmlEndTag', '61afef', '', 'none')
@@ -437,21 +452,22 @@ call one#highlight('htmlEndTag', '61afef', '', 'none')
 call one#highlight('jsonKeyword', '61afef', '', 'none')
 call one#highlight('graphqlType', '61afef', '', 'none')
 
-call one#highlight('jsonQuote', '919baa', '', 'none')
-
-call one#highlight('doxygenBrief', '5c6370', '', 'none')
-
+" green
 call one#highlight('embeddedTs', '98c379', '', 'none')
 call one#highlight('typescriptCall', '56b6c2', '', 'none')
 call one#highlight('typescriptFuncCallArg', '56b6c2', '', 'none')
 call one#highlight('typescriptVariable', '56b6c2', '', 'none')
 call one#highlight('typescriptVariableDeclaration', '56b6c2', '', 'none')
 
+" purple
+call one#highlight('typescriptAmbientDeclaration', 'c678dd', '', 'none')
 call one#highlight('typescriptClassKeyword', 'c678dd', '', 'none')
 call one#highlight('typescriptAliasKeyword', 'c678dd', '', 'none')
 call one#highlight('typescriptExport', 'c678dd', '', 'none')
 call one#highlight('typescriptClassExtends', 'c678dd', '', 'none')
 
+" red
+call one#highlight('MatchParen', 'e69176', '', 'bold')
 call one#highlight('Structure', 'e69176', '', 'none')
 call one#highlight('typescriptClassName', 'e06c75', '', 'none')
 call one#highlight('typescriptClassHeritage', 'e06c75', '', 'none')
