@@ -112,6 +112,9 @@ autocmd BufReadPost *
 " projectionist
 let g:fuzzy_projectionist_preview = 1
 
+" vim-test
+let test#strategy = "neovim"
+
 " vim-move
 let g:move_key_modifier = 'S'
 
@@ -243,8 +246,8 @@ nnoremap ] :lnext<cr>
 inoremap <c-c> <ESC>
 
 " vim-test
-nmap <silent> <leader>t :TestFile<CR>
-nmap <silent> <leader>T :TestSuite<CR>
+nmap <silent> ;t :TestFile<CR>
+nmap <silent> ;T :TestSuite<CR>
 
 " go to end of copy or paste
 vnoremap <silent> y y`]
