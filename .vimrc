@@ -265,6 +265,7 @@ nnoremap Y J
 " Need to remap ✠ char to Shift+Enter in iterm2
 " Splitting lines
 nnoremap ✠ i<CR><Esc>
+inoremap ✠ <CR><Esc>O
 
 " better whitespace
 let g:better_whitespace_enabled=1
