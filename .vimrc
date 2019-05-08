@@ -438,6 +438,8 @@ nnoremap <silent>% :MtaJumpToOtherTag<cr>
 call one#highlight('CocCodeLens', '5c6370', '', 'none')
 call one#highlight('doxygenBrief', '5c6370', '', 'none')
 call one#highlight('jsonQuote', '919baa', '', 'none')
+call one#highlight('EndOfBuffer', '282c34', '', 'none')
+
 
 call one#highlight('Label', 'e5c07b', '', 'none')
 call one#highlight('Keyword', 'e5c07b', '', 'none')
@@ -593,4 +595,4 @@ endfunction
 nnoremap <silent><leader>nt :Defx `expand('%:p:h')` -show-ignored-files -search=`expand('%:p')`<CR>
 nnoremap <silent><f4> :Defx -buffer-name='' -toggle -split=vertical -winwidth=40
       \ -columns=indent:mark:icons:filename
-      \ -direction=topleft -show-ignored-files -resume<CR>
+      \ -direction=topleft -show-ignored-files -listed -resume<CR>
