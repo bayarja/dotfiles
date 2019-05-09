@@ -136,6 +136,7 @@ nmap <leader>r <Plug>(coc-rename)
 
 nmap <silent> [ <Plug>(coc-diagnostic-prev)
 nmap <silent> ] <Plug>(coc-diagnostic-next)
+nnoremap <c-o> :call CocAction('runCommand', 'tsserver.organizeImports')<CR>
 
 
 
@@ -144,17 +145,20 @@ nnoremap <silent> t :call <SID>show_documentation()<CR>
 nmap <silent>; <Plug>(coc-diagnostic-info)
 
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
+      \ pumvisible() ? "\<C-y>" :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
+
+inoremap <silent><expr> <cr> pumvisible() ? "\<C-y>" :
+      \ coc#expandableOrJumpable() ?
+      \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<Plug>(PearTreeExpand)" :
+      \ pear_tree#insert_mode#PrepareExpansion()
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-
-let g:coc_snippet_next = '<tab>'
 
 function! s:show_documentation()
   if &filetype == 'vim'
@@ -163,13 +167,6 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
-
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx,*.html'
-let g:closetag_regions = {
-      \ 'typescript.tsx': 'jsxRegion,tsxRegion',
-      \ 'javascript.jsx': 'jsxRegion',
-      \ }
-let g:closetag_emptyTags_caseSensitive = 1
 
 " zoom
 let g:goyo_width=120
@@ -205,7 +202,7 @@ nnoremap <leader>w :w<cr>
 inoremap <leader>w <C-c>:w<cr>
 
 " no highlight after press enter
-nnoremap <CR> :nohlsearch<cr>
+nnoremap <silent><CR> :nohlsearch<cr>
 
 " switch between last buffer
 nnoremap <leader><leader> <c-^>
@@ -399,6 +396,15 @@ let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
 let g:pear_tree_repeatable_expand = 0
+let g:pear_tree_pairs = {
+            \ '(': {'closer': ')'},
+            \ '[': {'closer': ']'},
+            \ '{': {'closer': '}'},
+            \ "'": {'closer': "'"},
+            \ '"': {'closer': '"'},
+            \ '<*/': {'closer': '>' },
+            \ '<*>': {'closer': '</*>', 'not_like': '/$' }
+            \ }
 
 " Numbers
 let g:numbers_exclude = ['gundo']
@@ -462,6 +468,8 @@ call one#highlight('MatchTag', '61afef', '', 'underline,bold')
 call one#highlight('xmlTag', '61afef', '', 'none')
 call one#highlight('xmlTagName', '61afef', '', 'none')
 call one#highlight('xmlEndTag', '61afef', '', 'none')
+call one#highlight('tsxTagName', '61afef', '', 'none')
+call one#highlight('tsxCloseString', '61afef', '', 'none')
 call one#highlight('htmlTag', '61afef', '', 'none')
 call one#highlight('htmlTagName', '61afef', '', 'none')
 call one#highlight('htmlEndTag', '61afef', '', 'none')

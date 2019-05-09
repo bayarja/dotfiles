@@ -8,7 +8,7 @@ Plug 'mhinz/vim-startify'
 
 " Plug 'christoomey/vim-tmux-navigator'
 Plug 'Yggdroot/indentLine'
-Plug 'alvan/vim-closetag'
+" Plug 'alvan/vim-closetag'
 
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/MatchTagAlways'
@@ -34,7 +34,6 @@ Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install()} }
 Plug 'yssl/QFEnter'
 Plug 'vim-scripts/tComment'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 
