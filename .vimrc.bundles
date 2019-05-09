@@ -40,6 +40,7 @@ Plug 'tpope/vim-sleuth'
 " replacement for powerline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'enricobacis/vim-airline-clock'
 Plug 'airblade/vim-gitgutter'
 
 Plug 'ntpeters/vim-better-whitespace'

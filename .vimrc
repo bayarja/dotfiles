@@ -442,6 +442,7 @@ nnoremap <silent>% :MtaJumpToOtherTag<cr>
 
 " =========================== Custom colors ===============================
 call one#highlight('CocCodeLens', '5c6370', '', 'none')
+call one#highlight('VertSplit', '3a424f', '', 'none')
 call one#highlight('doxygenBrief', '5c6370', '', 'none')
 call one#highlight('jsonQuote', '919baa', '', 'none')
 call one#highlight('EndOfBuffer', '282c34', '', 'none')
@@ -463,6 +464,7 @@ call one#highlight('typescriptFuncCallArg', '88cee8', '', 'none')
 call one#highlight('typescriptReact', 'ffae57', '', 'none')
 call one#highlight('typescriptVariableDeclaration', 'ffae57', '', 'none')
 call one#highlight('typescriptClassName', 'ffae57', '', 'none')
+call one#highlight('Defx_filename_3_nested_opened_tree_icon', 'ffae57', '', 'none')
 
 " blue
 call one#highlight('MatchTag', '61afef', '', 'underline,bold')
@@ -481,8 +483,13 @@ call one#highlight('typescriptClassHeritage', '61afef', '', 'none')
 
 " green
 call one#highlight('embeddedTs', '98c379', '', 'none')
+call one#highlight('Defx_filename_3_parent_directory', '98c379', '', 'none')
+
+
+
 call one#highlight('typescriptCall', '56b6c2', '', 'none')
 call one#highlight('typescriptVariable', '56b6c2', '', 'none')
+
 
 " purple
 call one#highlight('typescriptAmbientDeclaration', 'c678dd', '', 'none')
@@ -562,12 +569,29 @@ augroup defxConfig
   autocmd FileType defx call s:defx_my_settings()
 augroup END
 
+let g:defx_icons_directory_icon = ''
+let g:defx_icons_column_length = 2
+let g:defx_icons_root_opened_tree_icon = ''
+let g:defx_icons_nested_closed_tree_icon = ''
+let g:defx_icons_nested_opened_tree_icon = ''
+let g:defx_icons_mark_icon = '•'
+let g:defx_icons_parent_icon = ''
+
+call defx#custom#option('_', {
+      \ 'root_marker': ':',
+      \ 'buffer_name': '',
+      \ 'columns': 'mark:indent:icons:filename',
+      \ })
+
+call defx#custom#column('filename', {
+      \ 'min_width': 20,
+      \ 'max_width': 30,
+      \ })
+call defx#custom#column('indent', {
+      \ 'indent': '  ',
+      \ })
 
 function! s:defx_my_settings() abort
-  call defx#custom#column('filename', {
-	      \ 'min_width': 20,
-	      \ 'max_width': 40,
-	      \ })
   " Open commands
   " nnoremap <silent><buffer><expr> <CR> defx#do_action('open')
   nnoremap <silent><buffer><expr> o
@@ -611,7 +635,6 @@ function! s:defx_my_settings() abort
 endfunction
 
 " nnoremap <silent> <leader>o :call OpenRanger()<cr>
-nnoremap <silent><leader>nt :Defx `expand('%:p:h')` -show-ignored-files -search=`expand('%:p')`<CR>
-nnoremap <silent><f4> :Defx -buffer-name='' -toggle -split=vertical -winwidth=40
-      \ -columns=indent:mark:icons:filename
-      \ -direction=topleft -show-ignored-files -listed -resume<CR>
+nnoremap <silent><leader>nt :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
+nnoremap <silent><f4> :Defx -toggle -split=vertical -winwidth=40
+      \ -direction=topleft -listed -resume<CR>

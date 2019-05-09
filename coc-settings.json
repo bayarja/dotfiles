@@ -1,7 +1,7 @@
 {
-  "diagnostic.warningSign": "●",
+  "diagnostic.warningSign": "•",
   "diagnostic.errorSign": "⦿",
-  "diagnostic.infoSign": "-",
+  "diagnostic.infoSign": "⇢",
   "suggest.snippetIndicator": " ↝",
   "suggest.noselect": false,
   "codeLens.enable": true,
