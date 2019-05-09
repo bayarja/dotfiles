@@ -445,6 +445,7 @@ call one#highlight('CocCodeLens', '5c6370', '', 'none')
 call one#highlight('doxygenBrief', '5c6370', '', 'none')
 call one#highlight('jsonQuote', '919baa', '', 'none')
 call one#highlight('EndOfBuffer', '282c34', '', 'none')
+call one#highlight('CocErrorFloat', 'ff3f3f', '', 'none')
 
 " yellow
 call one#highlight('Label', 'e5c07b', '', 'none')
@@ -476,6 +477,7 @@ call one#highlight('htmlEndTag', '61afef', '', 'none')
 call one#highlight('jsonKeyword', '61afef', '', 'none')
 call one#highlight('graphqlType', '61afef', '', 'none')
 call one#highlight('typescriptRProps', '61afef', '', 'none')
+call one#highlight('typescriptClassHeritage', '61afef', '', 'none')
 
 " green
 call one#highlight('embeddedTs', '98c379', '', 'none')
@@ -488,12 +490,12 @@ call one#highlight('typescriptClassStatic', 'c678dd', '', 'none')
 call one#highlight('typescriptClassKeyword', 'c678dd', '', 'none')
 call one#highlight('typescriptAliasKeyword', 'c678dd', '', 'none')
 call one#highlight('typescriptExport', 'c678dd', '', 'none')
+call one#highlight('typescriptOperator', 'c678dd', '', 'none')
 call one#highlight('typescriptClassExtends', 'c678dd', '', 'none')
 
 " red
 call one#highlight('MatchParen', 'e69176', '', 'bold')
 call one#highlight('Structure', 'e69176', '', 'none')
-call one#highlight('typescriptClassHeritage', 'e06c75', '', 'none')
 call one#highlight('typescriptInterfaceName', 'e06c75', '', 'none')
 
 
