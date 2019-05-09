@@ -440,15 +440,25 @@ call one#highlight('doxygenBrief', '5c6370', '', 'none')
 call one#highlight('jsonQuote', '919baa', '', 'none')
 call one#highlight('EndOfBuffer', '282c34', '', 'none')
 
-
+" yellow
 call one#highlight('Label', 'e5c07b', '', 'none')
 call one#highlight('Keyword', 'e5c07b', '', 'none')
 call one#highlight('Identifier', 'e5c07b', '', 'none')
 call one#highlight('typescriptParenExp', 'e5c07b', '', 'none')
+call one#highlight('typescriptConditionalParen', 'e5c07b', '', 'none')
+
+" cyan
+call one#highlight('typescriptMember', '88cee8', '', 'none')
+call one#highlight('typescriptObjectLabel', '88cee8', '', 'none')
+call one#highlight('typescriptFuncCallArg', '88cee8', '', 'none')
+
+" dark orange
+call one#highlight('typescriptReact', 'ffae57', '', 'none')
+call one#highlight('typescriptVariableDeclaration', 'ffae57', '', 'none')
+call one#highlight('typescriptClassName', 'ffae57', '', 'none')
 
 " blue
 call one#highlight('MatchTag', '61afef', '', 'underline,bold')
-call one#highlight('typescriptVariableDeclaration', '61afef', '', 'none')
 call one#highlight('xmlTag', '61afef', '', 'none')
 call one#highlight('xmlTagName', '61afef', '', 'none')
 call one#highlight('xmlEndTag', '61afef', '', 'none')
@@ -457,16 +467,16 @@ call one#highlight('htmlTagName', '61afef', '', 'none')
 call one#highlight('htmlEndTag', '61afef', '', 'none')
 call one#highlight('jsonKeyword', '61afef', '', 'none')
 call one#highlight('graphqlType', '61afef', '', 'none')
+call one#highlight('typescriptRProps', '61afef', '', 'none')
 
 " green
 call one#highlight('embeddedTs', '98c379', '', 'none')
 call one#highlight('typescriptCall', '56b6c2', '', 'none')
-call one#highlight('typescriptFuncCallArg', '56b6c2', '', 'none')
 call one#highlight('typescriptVariable', '56b6c2', '', 'none')
-call one#highlight('typescriptVariableDeclaration', '56b6c2', '', 'none')
 
 " purple
 call one#highlight('typescriptAmbientDeclaration', 'c678dd', '', 'none')
+call one#highlight('typescriptClassStatic', 'c678dd', '', 'none')
 call one#highlight('typescriptClassKeyword', 'c678dd', '', 'none')
 call one#highlight('typescriptAliasKeyword', 'c678dd', '', 'none')
 call one#highlight('typescriptExport', 'c678dd', '', 'none')
@@ -475,7 +485,6 @@ call one#highlight('typescriptClassExtends', 'c678dd', '', 'none')
 " red
 call one#highlight('MatchParen', 'e69176', '', 'bold')
 call one#highlight('Structure', 'e69176', '', 'none')
-call one#highlight('typescriptClassName', 'e06c75', '', 'none')
 call one#highlight('typescriptClassHeritage', 'e06c75', '', 'none')
 call one#highlight('typescriptInterfaceName', 'e06c75', '', 'none')
 
