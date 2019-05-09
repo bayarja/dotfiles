@@ -334,11 +334,36 @@ let g:PIVAutoClose = 0
 let g:startify_change_to_vcs_root = 1
 let g:startify_fortune_use_unicode = 1
 let g:startify_session_persistence = 1
+let g:startify_files_number = 5
+let g:ascii = [
+      \ '',
+      \ '',
+      \ '',
+      \'       __    __  ________   ______   __     __  ______  __       __',
+      \'      /  \  /  |/        | /      \ /  |   /  |/      |/  \     /  |',
+      \'      $$  \ $$ |$$$$$$$$/ /$$$$$$  |$$ |   $$ |$$$$$$/ $$  \   /$$ |',
+      \'      $$$  \$$ |$$ |__    $$ |  $$ |$$ |   $$ |  $$ |  $$$  \ /$$$ |',
+      \'      $$ $$ $$ |$$$$$/    $$ |  $$ | $$  /$$/    $$ |  $$ $$ $$/$$ |',
+      \'      $$ | $$$ |$$       |$$    $$/    $$$/    / $$   |$$ | $/  $$ |',
+      \'      $$/   $$/ $$$$$$$$/  $$$$$$/      $/     $$$$$$/ $$/      $$/',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \]
+let g:startify_custom_header = g:ascii
+" let g:startify_custom_header =
+"             \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val')
 
 " vertical line indentation
 let g:indentLine_color_term = 237
 let g:indentLine_color_gui = '#3a3a3a'
 let g:indentLine_char = '│'
+let g:indentLine_fileType = [
+      \'typescript', 'javascript', 'typescript.tsx', 'javascript.jsx'
+      \'php', 'phtml'
+      \]
+let g:indentLine_bufTypeExclude = ['help', 'terminal']
 
 let g:lt_location_list_toggle_map = '<F2>'
 let g:lt_quickfix_list_toggle_map = '<F3>'
@@ -459,6 +484,7 @@ call one#highlight('typescriptConditionalParen', 'e5c07b', '', 'none')
 call one#highlight('typescriptMember', '88cee8', '', 'none')
 call one#highlight('typescriptObjectLabel', '88cee8', '', 'none')
 call one#highlight('typescriptFuncCallArg', '88cee8', '', 'none')
+call one#highlight('StartifyHeader', '88cee8', '', 'none')
 
 " dark orange
 call one#highlight('typescriptReact', 'ffae57', '', 'none')
@@ -484,8 +510,6 @@ call one#highlight('typescriptClassHeritage', '61afef', '', 'none')
 " green
 call one#highlight('embeddedTs', '98c379', '', 'none')
 call one#highlight('Defx_filename_3_parent_directory', '98c379', '', 'none')
-
-
 
 call one#highlight('typescriptCall', '56b6c2', '', 'none')
 call one#highlight('typescriptVariable', '56b6c2', '', 'none')
@@ -584,8 +608,8 @@ call defx#custom#option('_', {
       \ })
 
 call defx#custom#column('filename', {
-      \ 'min_width': 20,
-      \ 'max_width': 30,
+      \ 'min_width': 30,
+      \ 'max_width': 40,
       \ })
 call defx#custom#column('indent', {
       \ 'indent': '  ',

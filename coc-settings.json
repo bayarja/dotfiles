@@ -1,6 +1,6 @@
 {
-  "diagnostic.warningSign": "•",
-  "diagnostic.errorSign": "⦿",
+  "diagnostic.warningSign": "→",
+  "diagnostic.errorSign": "»",
   "diagnostic.infoSign": "⇢",
   "suggest.snippetIndicator": " ↝",
   "suggest.noselect": false,
