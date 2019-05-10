@@ -483,7 +483,6 @@ call one#highlight('typescriptConditionalParen', 'e5c07b', '', 'none')
 " cyan
 call one#highlight('typescriptMember', '88cee8', '', 'none')
 call one#highlight('typescriptObjectLabel', '88cee8', '', 'none')
-call one#highlight('typescriptFuncCallArg', '88cee8', '', 'none')
 call one#highlight('StartifyHeader', '88cee8', '', 'none')
 
 " dark orange
@@ -506,6 +505,7 @@ call one#highlight('jsonKeyword', '61afef', '', 'none')
 call one#highlight('graphqlType', '61afef', '', 'none')
 call one#highlight('typescriptRProps', '61afef', '', 'none')
 call one#highlight('typescriptClassHeritage', '61afef', '', 'none')
+call one#highlight('typescriptFuncCallArg', '61afef', '', 'none')
 
 " green
 call one#highlight('embeddedTs', '98c379', '', 'none')
