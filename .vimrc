@@ -644,6 +644,7 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> h defx#do_action('cd', ['..'])
   nnoremap <silent><buffer><expr> <s-u> defx#do_action('cd', ['..'])
   nnoremap <silent><buffer><expr> ~ defx#do_action('cd', [getcwd()])
+  nnoremap <silent><buffer><expr> <s-t> defx#do_action('open', 'tabnew \| drop')
 
   " Miscellaneous actions
   nnoremap <silent><buffer><expr> <s-i> defx#do_action('toggle_ignored_files')
