@@ -1,9 +1,11 @@
 {
+  "tsserver.npm": "/Users/orgil/.nvm/versions/node/v8.12.0/bin/npm",
   "diagnostic.warningSign": "→",
   "diagnostic.errorSign": "»",
   "diagnostic.infoSign": "⇢",
   "suggest.snippetIndicator": " ↝",
   "suggest.noselect": false,
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript", "javascript.jsx", "typescript.tsx"],
   "codeLens.enable": true,
   "suggest.disableMenu": true,
   "suggest.maxCompleteItemCount": 20,

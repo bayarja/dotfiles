@@ -323,7 +323,29 @@ command! -bang -nargs=* Find call fzf#vim#grep('rg
       \ | tr -d "\017"', 1, <bang>0
       \)
 
-let g:fzf_layout = { 'down': '~20%' }
+" let g:fzf_layout = { 'down': '~20%' }
+let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+
+function! FloatingFZF()
+  let buf = nvim_create_buf(v:false, v:true)
+  call setbufvar(buf, '&signcolumn', 'no')
+
+  let width = float2nr(&columns - (&columns * 2 / 10) * 2)
+  let height = &lines - 25
+  let y = &lines - 3
+  let x = float2nr((&columns - width) / 2)
+
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': y,
+        \ 'col': x,
+        \ 'width': width,
+        \ 'height': height
+        \ }
+
+  call nvim_open_win(buf, v:true, opts)
+endfunction
+
 let g:fzf_buffers_jump = 1
 
 " PIV
@@ -359,10 +381,7 @@ let g:startify_custom_header = g:ascii
 let g:indentLine_color_term = 237
 let g:indentLine_color_gui = '#3a3a3a'
 let g:indentLine_char = '│'
-let g:indentLine_fileType = [
-      \'typescript', 'javascript', 'typescript.tsx', 'javascript.jsx'
-      \'php', 'phtml'
-      \]
+let g:indentLine_fileType = ['typescript', 'javascript', 'typescript.tsx', 'javascript.jsx', 'php', 'phtml']
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 
 let g:lt_location_list_toggle_map = '<F2>'
@@ -416,7 +435,6 @@ nnoremap <F6> :GundoToggle<CR>
 
 "vim-json
 let g:vim_json_syntax_conceal = 0
-
 let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
@@ -427,14 +445,15 @@ let g:pear_tree_pairs = {
             \ '{': {'closer': '}'},
             \ "'": {'closer': "'"},
             \ '"': {'closer': '"'},
-            \ '<*/': {'closer': '>' },
-            \ '<*>': {'closer': '</*>', 'not_like': '/$' }
+            \ '<*/': {'closer': '>'},
+            \ '<*>': {'closer': '</*>', 'not_like': '/$'}
             \ }
 
 " Numbers
 let g:numbers_exclude = ['gundo']
 
 autocmd! FileType fzf
+au FileType fzf set nonu nornu
 autocmd  FileType fzf set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
@@ -602,20 +621,28 @@ let g:defx_icons_mark_icon = '•'
 let g:defx_icons_parent_icon = ''
 
 call defx#custom#option('_', {
-      \ 'root_marker': ':',
+      \ 'root_marker': '» ',
       \ 'buffer_name': '',
-      \ 'columns': 'mark:indent:icons:filename',
+      \ 'columns': 'indent:mark:icons:filename',
       \ })
 
 call defx#custom#column('filename', {
-      \ 'min_width': 30,
-      \ 'max_width': 40,
+      \ 'min_width': 36,
+      \ 'max_width': 36,
       \ })
 call defx#custom#column('indent', {
       \ 'indent': '  ',
       \ })
 
 function! s:defx_my_settings() abort
+
+  function! Root(path) abort
+    return fnamemodify(a:path, ':t')
+  endfunction
+
+  call defx#custom#source('file', {
+        \ 'root': 'Root',
+        \})
   " Open commands
   " nnoremap <silent><buffer><expr> <CR> defx#do_action('open')
   nnoremap <silent><buffer><expr> o
@@ -656,10 +683,10 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> * defx#do_action('toggle_select_all')
 
   nnoremap <silent><buffer><expr> C defx#do_action('toggle_columns', 'mark:size:filename')
-
 endfunction
 
-" nnoremap <silent> <leader>o :call OpenRanger()<cr>
-nnoremap <silent><leader>nt :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
+nnoremap <silent><leader>nf :Defx -new `expand('%:p:h')` -search=`expand('%:p')`<CR>
+nnoremap <silent><leader>nt :Defx -resume -split=vertical -winwidth=40
+      \ -direction=topleft -search=`expand('%:p')` `getcwd()`<CR>
 nnoremap <silent><f4> :Defx -toggle -split=vertical -winwidth=40
-      \ -direction=topleft -listed -resume<CR>
+      \ -direction=topleft -resume<CR>

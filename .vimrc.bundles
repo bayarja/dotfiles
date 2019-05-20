@@ -107,7 +107,6 @@ Plug 'ianks/vim-tsx', { 'for': 'typescript.tsx' }
 Plug 'peitalin/vim-jsx-typescript',  {'for': ['typescript', 'typescript.tsx']}
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'kristijanhusak/defx-icons'
-Plug 'kristijanhusak/defx-git'
-" Plug 'mhartington/defx-devicons'
+" Plug 'kristijanhusak/defx-git'
 Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/rainbow_parentheses.vim'
