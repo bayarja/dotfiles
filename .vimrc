@@ -600,7 +600,7 @@ function! FZFWithDevIcons()
 endfunction
 
 nmap <C-p> :call FZFWithDevIcons()<CR>
-nmap <C-f> :Find<space>
+nmap <C-f> :Find<cr>
 nmap <C-b> :Buffers<CR>
 
 let g:loaded_netrwPlugin = 1 " Disable netrw.vim
