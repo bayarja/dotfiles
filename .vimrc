@@ -312,13 +312,13 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
-" Ag
+" Rg
 set grepprg=rg\ --vimgrep
 
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 command! -bang -nargs=* Find call fzf#vim#grep('rg
       \ --column --line-number --no-heading
-      \ --fixed-strings --ignore-case --hidden --follow --glob "!.git/*"
+      \ --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --glob "!*.lock"
       \ --color "always" '.shellescape(<q-args>).'
       \ | tr -d "\017"', 1, <bang>0
       \)
@@ -503,6 +503,7 @@ call one#highlight('typescriptConditionalParen', 'e5c07b', '', 'none')
 call one#highlight('typescriptMember', '88cee8', '', 'none')
 call one#highlight('typescriptObjectLabel', '88cee8', '', 'none')
 call one#highlight('StartifyHeader', '88cee8', '', 'none')
+call one#highlight('graphqlName', '88cee8', '', 'none')
 
 " dark orange
 call one#highlight('typescriptReact', 'ffae57', '', 'none')
@@ -542,6 +543,7 @@ call one#highlight('typescriptAliasKeyword', 'c678dd', '', 'none')
 call one#highlight('typescriptExport', 'c678dd', '', 'none')
 call one#highlight('typescriptOperator', 'c678dd', '', 'none')
 call one#highlight('typescriptClassExtends', 'c678dd', '', 'none')
+call one#highlight('graphqlDirective', 'c678dd', '', 'none')
 
 " red
 call one#highlight('MatchParen', 'e69176', '', 'bold')
