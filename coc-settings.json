@@ -1,5 +1,4 @@
 {
-  "tsserver.npm": "/Users/orgil/.nvm/versions/node/v8.12.0/bin/npm",
   "diagnostic.warningSign": "→",
   "diagnostic.errorSign": "»",
   "diagnostic.infoSign": "⇢",
