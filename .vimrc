@@ -23,7 +23,6 @@ set clipboard=unnamed
 set ttimeout
 set ttimeoutlen=0
 set laststatus=2
-set signcolumn=auto:2
 
 syntax on
 
@@ -44,6 +43,7 @@ set hlsearch                    " Highlight search terms
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
 set wildmenu                    " Show list instead of just completing
+set undofile
 set wildmode=longest:full,full  " Command <Tab> completion, list matches, then longest common part, then all.
 set scrolljump=3                " Lines to scroll when cursor leaves screen
 set scrolloff=5                 " Minimum lines to keep above and below cursor
@@ -68,7 +68,6 @@ set shiftwidth=2                " Use indents of 2 spaces
 set expandtab                   " Tabs are spaces, not tabs
 
 set tabstop=2                   " An indentation every four columns
-set softtabstop=2               " Let backspace delete indent
 "set matchpairs+=<:>             " Match, to be used with %
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
 set colorcolumn=120             " Since we mostly use widescreen monitor so we monitor it should be longer than 80
@@ -93,22 +92,36 @@ colorscheme one
 
 
 " ======================== Filetype & Autocmd ==============================
+augroup autocmds
+  autocmd!
+  " Instead of reverting the cursor to the last position in the buffer, we
+  " set it to the first line when editing a git commit message
+  au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+  autocmd BufNewFile,BufRead tsconfig.json setlocal filetype=jsonc
+  autocmd BufNewFile,BufRead *rc setlocal filetype=json
+  autocmd BufNewFile,BufRead .vimrc setlocal filetype=vim
 
-" Instead of reverting the cursor to the last position in the buffer, we
-" set it to the first line when editing a git commit message
-au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-autocmd BufNewFile,BufRead tsconfig.json setlocal filetype=jsonc
+  " Return to last edit position when opening files (You want this!)
+  autocmd BufReadPost *
+	\ if line("'\"") > 0 && line("'\"") <= line("$") |
+	\   exe "normal! g`\"" |
+	\ endif
 
-autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  autocmd FileType html,css,javascript.jsx,typescript.tsx EmmetInstall
 
-" Return to last edit position when opening files (You want this!)
-autocmd BufReadPost *
-      \ if line("'\"") > 0 && line("'\"") <= line("$") |
-      \   exe "normal! g`\"" |
-      \ endif
-" Automatically open and close the popup menu / preview window
-" au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-"
+  autocmd! FileType fzf
+  au FileType fzf set nonu nornu
+
+  autocmd FileType json syntax match Comment +\/\/.\+$+
+  " enable zen coding on jsx
+  autocmd FileType typescript runtime! ftplugin/html/sparkup.vim
+  autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
+  autocmd FileType typescript.tsx runtime! ftplugin/html/sparkup.vim
+
+  " autocmd FileType defx call s:defx_my_settings()
+  autocmd FileType defx call s:defx_my_settings()
+augroup END
+
 " projectionist
 let g:fuzzy_projectionist_preview = 1
 
@@ -136,7 +149,8 @@ nmap <leader>r <Plug>(coc-rename)
 
 nmap <silent> [ <Plug>(coc-diagnostic-prev)
 nmap <silent> ] <Plug>(coc-diagnostic-next)
-nnoremap <c-o> :call CocAction('runCommand', 'tsserver.organizeImports')<CR>
+nnoremap <silent><c-o> :call CocAction('runCommand', 'tsserver.organizeImports')<CR>
+nnoremap <silent><f9> :call CocAction('runCommand', 'tsserver.restart')<CR>
 
 
 
@@ -145,15 +159,13 @@ nnoremap <silent> t :call <SID>show_documentation()<CR>
 nmap <silent>; <Plug>(coc-diagnostic-info)
 
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-y>" :
+      \ pumvisible() ? coc#_select_confirm() :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 
-inoremap <silent><expr> <cr> pumvisible() ? "\<C-y>" :
-      \ coc#expandableOrJumpable() ?
-      \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<Plug>(PearTreeExpand)" :
-      \ pear_tree#insert_mode#PrepareExpansion()
+inoremap <silent><expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <silent><expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -172,27 +184,24 @@ endfunction
 let g:goyo_width=120
 let g:goyo_height='100%'
 let g:goyo_linenr=1
-map <leader>z :Goyo<CR>
+command! -nargs=? -bar -bang Goyo call goyo#execute(<bang>0, <q-args>)
+map <leader>o :Goyo<CR>
 
-" Zoom / Restore window.
-function! s:ZoomToggle() abort
-    if exists('t:zoomed') && t:zoomed
-        execute t:zoom_winrestcmd
-        let t:zoomed = 0
-    else
-        let t:zoom_winrestcmd = winrestcmd()
-        resize
-        vertical resize
-        let t:zoomed = 1
-    endif
-endfunction
-
-command! ZoomToggle call s:ZoomToggle()
-nnoremap <silent> <leader>o :ZoomToggle<CR>
-
-" Setting clipboard copy functionality
-noremap <leader>y "+y
-noremap <leader>yy "+Y
+" " Zoom / Restore window.
+" function! s:ZoomToggle() abort
+"   if exists('t:zoomed') && t:zoomed
+"     execute t:zoom_winrestcmd
+"     let t:zoomed = 0
+"   else
+"     let t:zoom_winrestcmd = winrestcmd()
+"     resize
+"     vertical resize
+"     let t:zoomed = 1
+"   endif
+" endfunction
+"
+" command! ZoomToggle call s:ZoomToggle()
+" nnoremap <silent> <leader>o :ZoomToggle<CR>
 
 " Preserve indentation while pasting text from the clipboard
 noremap <leader>p :set paste<CR>:put  +<CR>:set nopaste<CR>
@@ -222,7 +231,8 @@ nnoremap <S-h> gT
 nnoremap <S-l> gt
 
 " quit & save
-noremap <leader>q :q<cr>
+nnoremap <silent>;q :Bwipeout<cr>
+nnoremap <leader>q :q<cr>
 nnoremap <leader>w :w<cr><Space>
 
 " Make the dot command work as expected in visual mode
@@ -293,9 +303,18 @@ imap <F1> <Esc>
 " let g:UltiSnipsJumpForwardTrigger='<c-n>'
 " let g:UltiSnipsJumpBackwardTrigger='<c-p>'
 
+
+" emmet
+let g:user_emmet_install_global=0
+
+let g:windowswap_map_keys = 0 "prevent default bindings
+nnoremap <silent> <leader>y :call WindowSwap#EasyWindowSwap()<CR>
+
 "Airline
 let g:airline_powerline_fonts  = 1
 let g:airline_theme            = 'one'
+let g:airline_section_c = '%t'
+let g:airline_section_b = ''
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_splits = 0
@@ -306,11 +325,27 @@ let g:airline#extensions#tabline#close_symbol = '×'
 let g:airline#extensions#tabline#show_close_button = 1
 let g:airline#extensions#hunks#enabled = 0
 
+let g:airline_mode_map = {
+      \ '__' : '-',
+      \ 'c'  : 'C',
+      \ 'i'  : 'I',
+      \ 'ic' : 'I',
+      \ 'ix' : 'I',
+      \ 'n'  : 'N',
+      \ 'ni' : 'N',
+      \ 'no' : 'N',
+      \ 'R'  : 'R',
+      \ 'Rv' : 'R',
+      \ 's'  : 'S',
+      \ 'S'  : 'S',
+      \ '' : 'S',
+      \ 't'  : 'T',
+      \ 'v'  : 'V',
+      \ 'V'  : 'V',
+      \ '' : 'V',
+      \ }
 " only showing filename
 let g:airline#extensions#tabline#fnamemod = ':t'
-
-let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 " Rg
 set grepprg=rg\ --vimgrep
@@ -336,12 +371,12 @@ function! FloatingFZF()
   let x = float2nr((&columns - width) / 2)
 
   let opts = {
-        \ 'relative': 'editor',
-        \ 'row': y,
-        \ 'col': x,
-        \ 'width': width,
-        \ 'height': height
-        \ }
+	\ 'relative': 'editor',
+	\ 'row': y,
+	\ 'col': x,
+	\ 'width': width,
+	\ 'height': height
+	\ }
 
   call nvim_open_win(buf, v:true, opts)
 endfunction
@@ -357,17 +392,18 @@ let g:startify_change_to_vcs_root = 1
 let g:startify_fortune_use_unicode = 1
 let g:startify_session_persistence = 1
 let g:startify_files_number = 5
+let g:startify_padding_left = 50
 let g:ascii = [
       \ '',
       \ '',
       \ '',
-      \'       __    __  ________   ______   __     __  ______  __       __',
-      \'      /  \  /  |/        | /      \ /  |   /  |/      |/  \     /  |',
-      \'      $$  \ $$ |$$$$$$$$/ /$$$$$$  |$$ |   $$ |$$$$$$/ $$  \   /$$ |',
-      \'      $$$  \$$ |$$ |__    $$ |  $$ |$$ |   $$ |  $$ |  $$$  \ /$$$ |',
-      \'      $$ $$ $$ |$$$$$/    $$ |  $$ | $$  /$$/    $$ |  $$ $$ $$/$$ |',
-      \'      $$ | $$$ |$$       |$$    $$/    $$$/    / $$   |$$ | $/  $$ |',
-      \'      $$/   $$/ $$$$$$$$/  $$$$$$/      $/     $$$$$$/ $$/      $$/',
+      \'                                                   __    __  ________   ______   __     __  ______  __       __',
+      \'                                                  /  \  /  |/        | /      \ /  |   /  |/      |/  \     /  |',
+      \'                                                  $$  \ $$ |$$$$$$$$/ /$$$$$$  |$$ |   $$ |$$$$$$/ $$  \   /$$ |',
+      \'                                                  $$$  \$$ |$$ |__    $$ |  $$ |$$ |   $$ |  $$ |  $$$  \ /$$$ |',
+      \'                                                  $$ $$ $$ |$$$$$/    $$ |  $$ | $$  /$$/    $$ |  $$ $$ $$/$$ |',
+      \'                                                  $$ | $$$ |$$       |$$    $$/    $$$/    / $$   |$$ | $/  $$ |',
+      \'                                                  $$/   $$/ $$$$$$$$/  $$$$$$/      $/     $$$$$$/ $$/      $$/',
       \ '',
       \ '',
       \ '',
@@ -425,9 +461,6 @@ let g:matchup_matchparen_enabled = 0
 let g:mta_use_matchparen_group = 0
 let g:mta_set_default_matchtag_color = 0
 
-" rainbow
-let g:rainbow_active = 1
-
 " Gundo history tree
 let g:gundo_right = 1
 let g:gundo_preview_bottom = 1
@@ -440,27 +473,18 @@ let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
 let g:pear_tree_repeatable_expand = 0
 let g:pear_tree_pairs = {
-            \ '(': {'closer': ')'},
-            \ '[': {'closer': ']'},
-            \ '{': {'closer': '}'},
-            \ "'": {'closer': "'"},
-            \ '"': {'closer': '"'},
-            \ '<*/': {'closer': '>'},
-            \ '<*>': {'closer': '</*>', 'not_like': '/$'}
-            \ }
+      \ '(': {'closer': ')'},
+      \ '[': {'closer': ']'},
+      \ '{': {'closer': '}'},
+      \ "'": {'closer': "'"},
+      \ '"': {'closer': '"'},
+      \ '<*/': {'closer': '>'},
+      \ '<*>': {'closer': '</*>', 'not_like': '/$'}
+      \ }
 
 " Numbers
 let g:numbers_exclude = ['gundo']
 
-autocmd! FileType fzf
-au FileType fzf set nonu nornu
-autocmd  FileType fzf set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
-autocmd FileType json syntax match Comment +\/\/.\+$+
-" enable zen coding on jsx
-autocmd FileType typescript runtime! ftplugin/html/sparkup.vim
-autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim
-autocmd FileType typescript.tsx runtime! ftplugin/html/sparkup.vim
 
 
 " javascript-libraries-syntax
@@ -501,11 +525,13 @@ call one#highlight('typescriptConditionalParen', 'e5c07b', '', 'none')
 
 " cyan
 call one#highlight('typescriptMember', '88cee8', '', 'none')
-call one#highlight('typescriptObjectLabel', '88cee8', '', 'none')
 call one#highlight('StartifyHeader', '88cee8', '', 'none')
+call one#highlight('typescriptObjectLabel', '88cee8', '', 'none')
 call one#highlight('graphqlName', '88cee8', '', 'none')
 
 " dark orange
+call one#highlight('javascriptTemplateSB', 'ffae57', '', 'none')
+call one#highlight('typescriptTemplateSB', 'ffae57', '', 'none')
 call one#highlight('typescriptReact', 'ffae57', '', 'none')
 call one#highlight('typescriptVariableDeclaration', 'ffae57', '', 'none')
 call one#highlight('typescriptClassName', 'ffae57', '', 'none')
@@ -561,7 +587,7 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 
 function! FZFWithDevIcons()
   let l:fzf_files_options = ' -m --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up '
-        \.'--preview "bat --color always --style numbers {2..}"'
+	\.'--preview "bat --color always --style numbers {2..}"'
 
   function! s:files()
     let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
@@ -607,13 +633,6 @@ nmap <C-b> :Buffers<CR>
 
 let g:loaded_netrwPlugin = 1 " Disable netrw.vim
 
-" autocmd FileType defx call s:defx_my_settings()
-
-augroup defxConfig
-  autocmd!
-  autocmd FileType defx call s:defx_my_settings()
-augroup END
-
 let g:defx_icons_directory_icon = ''
 let g:defx_icons_column_length = 2
 let g:defx_icons_root_opened_tree_icon = ''
@@ -643,14 +662,14 @@ function! s:defx_my_settings() abort
   endfunction
 
   call defx#custom#source('file', {
-        \ 'root': 'Root',
-        \})
+	\ 'root': 'Root',
+	\})
   " Open commands
   " nnoremap <silent><buffer><expr> <CR> defx#do_action('open')
   nnoremap <silent><buffer><expr> o
-		\ defx#is_directory() ?
-		\ defx#do_action('open_or_close_tree') :
-		\ defx#do_action('open', 'wincmd w \| drop')
+	\ defx#is_directory() ?
+	\ defx#do_action('open_or_close_tree') :
+	\ defx#do_action('open', 'wincmd w \| drop')
 
   " nnoremap <silent><buffer><expr> o defx#do_action('open_or_close_tree')
   nnoremap <silent><buffer><expr> s defx#do_action('open', 'wincmd w \| vsplit \| drop')
@@ -690,5 +709,4 @@ endfunction
 nnoremap <silent><leader>nf :Defx -new `expand('%:p:h')` -search=`expand('%:p')`<CR>
 nnoremap <silent><leader>nt :Defx -resume -split=vertical -winwidth=40
       \ -direction=topleft -search=`expand('%:p')` `getcwd()`<CR>
-nnoremap <silent><f4> :Defx -toggle -split=vertical -winwidth=40
-      \ -direction=topleft -resume<CR>
+nnoremap <silent><f4> :Defx -toggle -split=vertical -winwidth=40 -direction=topleft -resume<CR>

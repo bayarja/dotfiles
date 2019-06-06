@@ -3,12 +3,15 @@ Plug 'rakr/vim-one'
 Plug 'thinca/vim-visualstar'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'tmsvg/pear-tree'
-
+" Plug 'jiangmiao/auto-pairs'
+Plug 'moll/vim-bbye'
+" find replace plugin
+Plug 'wincent/scalpel'
 Plug 'mhinz/vim-startify'
 
 " Plug 'christoomey/vim-tmux-navigator'
 Plug 'Yggdroot/indentLine'
-" Plug 'alvan/vim-closetag'
+Plug 'alvan/vim-closetag'
 
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/MatchTagAlways'
@@ -35,6 +38,7 @@ Plug 'yssl/QFEnter'
 Plug 'vim-scripts/tComment'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'kreskij/Repeatable.vim', { 'on': 'Repeatable' }
 Plug 'tpope/vim-sleuth'
 
 " replacement for powerline
@@ -62,8 +66,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-projectionist'
 Plug 'c-brenn/fuzzy-projectionist.vim'
 Plug 'kshenoy/vim-signature'
-Plug 'junegunn/limelight.vim'
-Plug 'junegunn/goyo.vim'
+" Plug 'junegunn/limelight.vim'
+" Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
 
 Plug 'spf13/PIV', { 'for': 'php' }
@@ -81,7 +85,8 @@ Plug 'othree/es.next.syntax.vim'
 Plug 'moll/vim-node'
 Plug 'jparise/vim-graphql'
 
-Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plug 'mattn/emmet-vim'
+Plug 'wesQ3/vim-windowswap'
 
 Plug 'elzr/vim-json'
 Plug 'neoclide/jsonc.vim'
@@ -103,10 +108,9 @@ Plug 'mxw/vim-jsx'
 Plug 'neoclide/vim-jsx-improve'
 
 Plug 'leafgarland/typescript-vim', {'for': ['typescript', 'typescript.tsx']}
-Plug 'ianks/vim-tsx', { 'for': 'typescript.tsx' }
+Plug 'ianks/vim-tsx', { 'for': ['typescript', 'typescript.tsx'] }
 Plug 'peitalin/vim-jsx-typescript',  {'for': ['typescript', 'typescript.tsx']}
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'kristijanhusak/defx-icons'
 " Plug 'kristijanhusak/defx-git'
 Plug 'ryanoasis/vim-devicons'
-Plug 'junegunn/rainbow_parentheses.vim'
