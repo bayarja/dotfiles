@@ -350,14 +350,17 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " Rg
 set grepprg=rg\ --vimgrep
 
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+let $FZF_DEFAULT_COMMAND = 'rg --files --fixed-strings --hidden --follow --glob "!.git/*"'
 command! -bang -nargs=* Find call fzf#vim#grep('rg
       \ --column --line-number --no-heading
       \ --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --glob "!*.lock"
-      \ --color "always" '.shellescape(<q-args>).'
-      \ | tr -d "\017"', 1, <bang>0
+      \ --colors "path:fg:118,137,168" --colors "line:fg:97,175,239" --colors "match:fg:0,0,0"
+      \ --color "always" '.shellescape(<q-args>).' | tr -d "\017"', 1,
+      \{ 'options': '--color fg:#ABB2BF,hl:#61afef,fg+:#ffae57,bg+:-1,hl+:229 --color info:150,prompt:110,spinner:150,pointer:167,marker:174' }, <bang>0
       \)
 
+"171,178,191 ABB2BF
+"118,137,168 7689A8
 " let g:fzf_layout = { 'down': '~20%' }
 let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
@@ -510,6 +513,8 @@ nnoremap <silent>% :MtaJumpToOtherTag<cr>
 
 " =========================== Custom colors ===============================
 call one#highlight('CocCodeLens', '5c6370', '', 'none')
+call one#highlight('Search', 'f0f2f4', '4d5566', 'none')
+call one#highlight('IncSearch', 'f0f2f4', '4d5566', 'none')
 call one#highlight('VertSplit', '3a424f', '', 'none')
 call one#highlight('doxygenBrief', '5c6370', '', 'none')
 call one#highlight('jsonQuote', '919baa', '', 'none')
@@ -586,8 +591,10 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 
 function! FZFWithDevIcons()
-  let l:fzf_files_options = ' -m --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up '
-	\.'--preview "bat --color always --style numbers {2..}"'
+  let l:fzf_files_options = ' --color fg:#7689A8,hl:#61afef,fg+:#ffae57,bg+:-1,hl+:229
+	\ --color info:150,prompt:110,spinner:150,pointer:167,marker:174
+	\ -m --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up'
+	\.' --preview "bat --theme=OneHalfDark --color always --style numbers {2..}"'
 
   function! s:files()
     let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
