@@ -5,6 +5,9 @@
   "suggest.snippetIndicator": " ↝",
   "suggest.noselect": true,
   "suggest.triggerAfterInsertEnter": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
     "variable": "\ue79b",
