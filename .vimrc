@@ -39,7 +39,6 @@ set relativenumber
 set number                      " Showing line numbers
 set showmatch                   " Show matching brackets/parenthesis
 set incsearch                   " Find as you type search
-set hlsearch                    " Highlight search terms
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
 set wildmenu                    " Show list instead of just completing
@@ -120,6 +119,14 @@ augroup autocmds
 
   " autocmd FileType defx call s:defx_my_settings()
   autocmd FileType defx call s:defx_my_settings()
+  autocmd FileType typescript.tsx let b:pear_tree_pairs = {
+      \ '(': {'closer': ')'},
+      \ '[': {'closer': ']'},
+      \ '{': {'closer': '}'},
+      \ "'": {'closer': "'"},
+      \ '"': {'closer': '"'},
+      \ '<*>': {'closer': '</*>', 'not_like': '=\|/$'}
+      \ }
 augroup END
 
 " projectionist
@@ -209,9 +216,6 @@ noremap <leader>p :set paste<CR>:put  +<CR>:set nopaste<CR>
 " save file
 nnoremap <leader>w :w<cr>
 inoremap <leader>w <C-c>:w<cr>
-
-" no highlight after press enter
-nnoremap <silent><CR> :nohlsearch<cr>
 
 " switch between last buffer
 nnoremap <leader><leader> <c-^>
@@ -481,8 +485,6 @@ let g:pear_tree_pairs = {
       \ '{': {'closer': '}'},
       \ "'": {'closer': "'"},
       \ '"': {'closer': '"'},
-      \ '<*/': {'closer': '>'},
-      \ '<*>': {'closer': '</*>', 'not_like': '/$'}
       \ }
 
 " Numbers
@@ -705,7 +707,7 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> <s-i> defx#do_action('toggle_ignored_files')
   nnoremap <silent><buffer><expr> mo defx#do_action('execute_system')
   nnoremap <silent><buffer><expr> yp defx#do_action('yank_path')
-  nnoremap <silent><buffer><expr> <C-r> defx#do_action('redraw') . ':nohlsearch<cr>:syntax sync fromstart<cr><c-l>'
+  nnoremap <silent><buffer><expr> <C-r> defx#do_action('redraw') . ':syntax sync fromstart<cr><c-l>'
 
   nnoremap <silent><buffer><expr><nowait> <Space> defx#do_action('toggle_select') . 'j'
   nnoremap <silent><buffer><expr> * defx#do_action('toggle_select_all')
