@@ -1,6 +1,8 @@
 Plug 'Konfekt/FastFold'
 Plug 'rakr/vim-one'
 Plug 'thinca/vim-visualstar'
+" Plug 'gorkunov/smartpairs.vim'
+Plug 'tmsvg/pear-tree'
 Plug 'romainl/vim-cool'
 Plug 'jiangmiao/auto-pairs'
 Plug 'gorkunov/smartpairs.vim'
@@ -67,7 +69,15 @@ Plug 'arnaud-lb/vim-php-namespace', { 'for': 'php' }
 Plug 'fatih/vim-go', { 'for': 'go' }
 
 " for javascript
-Plug 'rstacruz/sparkup'
+Plug 'sheerun/vim-polyglot'
+" Plug 'othree/yajs.vim'
+" Plug 'pangloss/vim-javascript'
+" Plug 'othree/javascript-libraries-syntax.vim'
+" Plug 'othree/es.next.syntax.vim'
+Plug 'moll/vim-node'
+Plug 'jparise/vim-graphql'
+
+Plug 'mattn/emmet-vim'
 Plug 'wesQ3/vim-windowswap'
 
 Plug 'elzr/vim-json'
@@ -76,8 +86,15 @@ Plug 'jtratner/vim-flavored-markdown'
 
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'janko-m/vim-test'
+" Plug 'spf13/vim-preview'
+" Plug 'HerringtonDarkholme/yats.vim'
+" Plug 'mxw/vim-jsx'
 Plug 'keith/swift.vim'
+" Plug 'neoclide/vim-jsx-improve'
 
+" Plug 'leafgarland/typescript-vim', {'for': ['typescript', 'typescript.tsx']}
+" Plug 'ianks/vim-tsx', { 'for': ['typescript', 'typescript.tsx'] }
+" Plug 'peitalin/vim-jsx-typescript',  {'for': ['typescript', 'typescript.tsx']}
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'kristijanhusak/defx-icons'
 Plug 'ryanoasis/vim-devicons'
