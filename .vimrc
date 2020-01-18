@@ -357,7 +357,7 @@ set grepprg=rg\ --vimgrep
 let $FZF_DEFAULT_COMMAND = 'rg --files --fixed-strings --hidden --follow --glob "!.git/*"'
 command! -bang -nargs=* Find call fzf#vim#grep('rg
       \ --column --line-number --no-heading
-      \ --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --glob "!*.lock"
+      \ --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --glob "!*.lock" --glob "!*-lock.json"
       \ --colors "path:fg:118,137,168" --colors "line:fg:97,175,239" --colors "match:fg:0,0,0"
       \ --color "always" '.shellescape(<q-args>).' | tr -d "\017"', 1,
       \{ 'options': '--color fg:#ABB2BF,hl:#61afef,fg+:#ffae57,bg+:-1,hl+:229 --color info:150,prompt:110,spinner:150,pointer:167,marker:174' }, <bang>0
