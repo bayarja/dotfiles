@@ -35,7 +35,7 @@ set updatetime=300
 
 set backspace=indent,eol,start  " Backspace for dummies
 set linespace=0                 " No extra spaces between rows
-set relativenumber
+" set relativenumber
 set number                      " Showing line numbers
 set showmatch                   " Show matching brackets/parenthesis
 set incsearch                   " Find as you type search
