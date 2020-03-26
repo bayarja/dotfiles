@@ -5,9 +5,6 @@
   "suggest.snippetIndicator": " ↝",
   "suggest.noselect": true,
   "suggest.triggerAfterInsertEnter": false,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
     "variable": "\ue79b",
@@ -35,12 +32,6 @@
     "typeParameter": "\uf728",
     "default": "\uf29c"
   },
-  "coc.preferences.formatOnSaveFiletypes": [
-    "javascript",
-    "typescript",
-    "javascript.jsx",
-    "typescript.tsx"
-  ],
   "codeLens.enable": true,
   "suggest.maxCompleteItemCount": 20,
   "suggest.disableMenu": true,
