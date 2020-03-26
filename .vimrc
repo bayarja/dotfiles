@@ -522,6 +522,7 @@ call one#highlight('doxygenBrief', '5c6370', '', 'none')
 call one#highlight('jsonQuote', '919baa', '', 'none')
 call one#highlight('EndOfBuffer', '282c34', '', 'none')
 call one#highlight('CocErrorFloat', 'ff3f3f', '', 'none')
+call one#highlight('NonText', '282c34', '', 'none')
 
 " yellow
 call one#highlight('Label', 'e5c07b', '', 'none')
@@ -535,6 +536,7 @@ call one#highlight('typescriptMember', '88cee8', '', 'none')
 call one#highlight('StartifyHeader', '88cee8', '', 'none')
 call one#highlight('typescriptObjectLabel', '88cee8', '', 'none')
 call one#highlight('graphqlName', '88cee8', '', 'none')
+call one#highlight('jsoncString', '88cee8', '', 'none')
 
 " dark orange
 call one#highlight('javascriptTemplateSB', 'ffae57', '', 'none')
@@ -582,8 +584,6 @@ call one#highlight('graphqlDirective', 'c678dd', '', 'none')
 call one#highlight('MatchParen', 'e69176', '', 'bold')
 call one#highlight('Structure', 'e69176', '', 'none')
 call one#highlight('typescriptInterfaceName', 'e06c75', '', 'none')
-
-
 
 " =========================== Custom functions ===============================
 " Show highlight group current location
