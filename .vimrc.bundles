@@ -74,6 +74,7 @@ Plug 'jtratner/vim-flavored-markdown'
 
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'janko-m/vim-test'
+Plug 'keith/swift.vim'
 
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'kristijanhusak/defx-icons'
