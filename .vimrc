@@ -145,6 +145,7 @@ let mapleader = ','
 nmap r <c-r>
 
 " Remap keys for gotos
+nmap <silent>; <Plug>(coc-diagnostic-info)
 nmap <leader>d <Plug>(coc-definition)
 nmap <leader>gd <Plug>(coc-type-definition)
 nmap <leader>i <Plug>(coc-implementation)
@@ -159,11 +160,19 @@ nmap <silent> ] <Plug>(coc-diagnostic-next)
 nnoremap <silent><c-o> :call CocAction('runCommand', 'tsserver.organizeImports')<CR>
 nnoremap <silent><f9> :call CocAction('runCommand', 'tsserver.restart')<CR>
 
-
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
 
 " Use K for show documentation in preview window
 nnoremap <silent> t :call <SID>show_documentation()<CR>
-nmap <silent>; <Plug>(coc-diagnostic-info)
+nmap <silent>; :<C-u>CocList diagnostics<cr>
+" nmap <silent>; <Plug>(coc-action-diagnosticInfo)
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
