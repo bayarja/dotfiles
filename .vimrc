@@ -145,7 +145,6 @@ let mapleader = ','
 nmap r <c-r>
 
 " Remap keys for gotos
-nmap <silent>; <Plug>(coc-diagnostic-info)
 nmap <leader>d <Plug>(coc-definition)
 nmap <leader>gd <Plug>(coc-type-definition)
 nmap <leader>i <Plug>(coc-implementation)
@@ -171,8 +170,8 @@ omap ac <Plug>(coc-classobj-a)
 
 " Use K for show documentation in preview window
 nnoremap <silent> t :call <SID>show_documentation()<CR>
-nmap <silent>; :<C-u>CocList diagnostics<cr>
-" nmap <silent>; <Plug>(coc-action-diagnosticInfo)
+" nmap <silent>; :<C-u>CocList diagnostics<cr>
+nmap <silent>; <Plug>(coc-diagnostic-info)
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
@@ -478,6 +477,7 @@ let g:mta_use_matchparen_group = 0
 let g:mta_set_default_matchtag_color = 0
 
 " Gundo history tree
+let g:gundo_prefer_python3 = 1
 let g:gundo_right = 1
 let g:gundo_preview_bottom = 1
 nnoremap <F6> :GundoToggle<CR>
@@ -553,7 +553,8 @@ call one#highlight('typescriptTemplateSB', 'ffae57', '', 'none')
 call one#highlight('typescriptReact', 'ffae57', '', 'none')
 call one#highlight('typescriptVariableDeclaration', 'ffae57', '', 'none')
 call one#highlight('typescriptClassName', 'ffae57', '', 'none')
-call one#highlight('Defx_filename_3_nested_opened_tree_icon', 'ffae57', '', 'none')
+call one#highlight('DefxIconsOpenedTreeIcon', 'ffae57', '', 'none')
+call one#highlight('DefxIconsNestedTreeIcon', 'ffae57', '', 'none')
 
 " blue
 call one#highlight('MatchTag', '61afef', '', 'underline,bold')
@@ -570,6 +571,7 @@ call one#highlight('graphqlType', '61afef', '', 'none')
 call one#highlight('typescriptRProps', '61afef', '', 'none')
 call one#highlight('typescriptClassHeritage', '61afef', '', 'none')
 call one#highlight('typescriptFuncCallArg', '61afef', '', 'none')
+call one#highlight('Defx_filename_directory', '61afef', '', 'none')
 
 " green
 call one#highlight('embeddedTs', '98c379', '', 'none')

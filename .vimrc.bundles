@@ -27,7 +27,7 @@ let g:mta_filetypes = {
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install()} }
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
 Plug 'yssl/QFEnter'
 Plug 'vim-scripts/tComment'
