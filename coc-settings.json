@@ -41,7 +41,7 @@
     "typescript.tsx": ["typescript"],
     "javascript.jsx": ["javascript"]
   },
-  "eslint.autoFixOnSave": true,
+  "eslint.autoFixOnSave": false,
   "eslint.filetypes": [
     "typescript",
     "typescript.tsx",
