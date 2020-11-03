@@ -7,6 +7,7 @@ Plug 'gorkunov/smartpairs.vim'
 Plug 'moll/vim-bbye'
 Plug 'wincent/scalpel'
 Plug 'mhinz/vim-startify'
+Plug 'wakatime/vim-wakatime'
 
 " Plug 'christoomey/vim-tmux-navigator'
 Plug 'Yggdroot/indentLine'
