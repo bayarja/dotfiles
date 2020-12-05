@@ -87,8 +87,9 @@ if exists('+termguicolors')
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 set termguicolors
-colorscheme one
 
+let g:palenight_terminal_italics=1
+colorscheme palenight
 
 " ======================== Filetype & Autocmd ==============================
 augroup autocmds
@@ -324,7 +325,7 @@ nnoremap <silent> <leader>y :call WindowSwap#EasyWindowSwap()<CR>
 
 "Airline
 let g:airline_powerline_fonts  = 1
-let g:airline_theme            = 'one'
+let g:airline_theme            = 'palenight'
 let g:airline_section_c = '%t'
 let g:airline_section_b = ''
 let g:airline#extensions#tabline#enabled = 1
@@ -398,10 +399,6 @@ endfunction
 
 let g:fzf_buffers_jump = 1
 
-" PIV
-let g:DisableAutoPHPFolding = 1
-let g:PIVAutoClose = 0
-
 " startify
 let g:startify_change_to_vcs_root = 1
 let g:startify_fortune_use_unicode = 1
@@ -433,10 +430,11 @@ let g:indentLine_color_term = 237
 let g:indentLine_color_gui = '#3a3a3a'
 let g:indentLine_char = '│'
 let g:indentLine_fileType = ['typescript', 'javascript', 'typescript.tsx', 'javascript.jsx', 'php', 'phtml']
-let g:indentLine_bufTypeExclude = ['help', 'terminal']
+let g:indentLine_bufTypeExclude = ['help', 'terminal', 'defx']
 
 let g:lt_location_list_toggle_map = '<F2>'
 let g:lt_quickfix_list_toggle_map = '<F3>'
+let g:lt_height = 6
 
 "Vim-Go
 let g:go_disable_autoinstall = 0
@@ -523,78 +521,78 @@ nmap <space>b <Plug>(easymotion-linebackward)
 nnoremap <silent>% :MtaJumpToOtherTag<cr>
 
 " =========================== Custom colors ===============================
-call one#highlight('CocCodeLens', '5c6370', '', 'none')
-call one#highlight('Search', 'f0f2f4', '4d5566', 'none')
-call one#highlight('IncSearch', 'f0f2f4', '4d5566', 'none')
-call one#highlight('VertSplit', '3a424f', '', 'none')
-call one#highlight('doxygenBrief', '5c6370', '', 'none')
-call one#highlight('jsonQuote', '919baa', '', 'none')
-call one#highlight('EndOfBuffer', '282c34', '', 'none')
-call one#highlight('CocErrorFloat', 'ff3f3f', '', 'none')
-call one#highlight('NonText', '282c34', '', 'none')
-
-" yellow
-call one#highlight('Label', 'e5c07b', '', 'none')
-call one#highlight('Keyword', 'e5c07b', '', 'none')
-call one#highlight('Identifier', 'e5c07b', '', 'none')
-call one#highlight('typescriptParenExp', 'e5c07b', '', 'none')
-call one#highlight('typescriptConditionalParen', 'e5c07b', '', 'none')
-
-" cyan
-call one#highlight('typescriptMember', '88cee8', '', 'none')
-call one#highlight('StartifyHeader', '88cee8', '', 'none')
-call one#highlight('typescriptObjectLabel', '88cee8', '', 'none')
-call one#highlight('graphqlName', '88cee8', '', 'none')
-call one#highlight('jsoncString', '88cee8', '', 'none')
-
-" dark orange
-call one#highlight('javascriptTemplateSB', 'ffae57', '', 'none')
-call one#highlight('typescriptTemplateSB', 'ffae57', '', 'none')
-call one#highlight('typescriptReact', 'ffae57', '', 'none')
-call one#highlight('typescriptVariableDeclaration', 'ffae57', '', 'none')
-call one#highlight('typescriptClassName', 'ffae57', '', 'none')
-call one#highlight('DefxIconsOpenedTreeIcon', 'ffae57', '', 'none')
-call one#highlight('DefxIconsNestedTreeIcon', 'ffae57', '', 'none')
-
-" blue
-call one#highlight('MatchTag', '61afef', '', 'underline,bold')
-call one#highlight('xmlTag', '61afef', '', 'none')
-call one#highlight('xmlTagName', '61afef', '', 'none')
-call one#highlight('xmlEndTag', '61afef', '', 'none')
-call one#highlight('tsxTagName', '61afef', '', 'none')
-call one#highlight('tsxCloseString', '61afef', '', 'none')
-call one#highlight('htmlTag', '61afef', '', 'none')
-call one#highlight('htmlTagName', '61afef', '', 'none')
-call one#highlight('htmlEndTag', '61afef', '', 'none')
-call one#highlight('jsonKeyword', '61afef', '', 'none')
-call one#highlight('graphqlType', '61afef', '', 'none')
-call one#highlight('typescriptRProps', '61afef', '', 'none')
-call one#highlight('typescriptClassHeritage', '61afef', '', 'none')
-call one#highlight('typescriptFuncCallArg', '61afef', '', 'none')
-call one#highlight('Defx_filename_directory', '61afef', '', 'none')
-
-" green
-call one#highlight('embeddedTs', '98c379', '', 'none')
-call one#highlight('Defx_filename_3_parent_directory', '98c379', '', 'none')
-
-call one#highlight('typescriptCall', '56b6c2', '', 'none')
-call one#highlight('typescriptVariable', '56b6c2', '', 'none')
-
-
-" purple
-call one#highlight('typescriptAmbientDeclaration', 'c678dd', '', 'none')
-call one#highlight('typescriptClassStatic', 'c678dd', '', 'none')
-call one#highlight('typescriptClassKeyword', 'c678dd', '', 'none')
-call one#highlight('typescriptAliasKeyword', 'c678dd', '', 'none')
-call one#highlight('typescriptExport', 'c678dd', '', 'none')
-call one#highlight('typescriptOperator', 'c678dd', '', 'none')
-call one#highlight('typescriptClassExtends', 'c678dd', '', 'none')
-call one#highlight('graphqlDirective', 'c678dd', '', 'none')
-
-" red
-call one#highlight('MatchParen', 'e69176', '', 'bold')
-call one#highlight('Structure', 'e69176', '', 'none')
-call one#highlight('typescriptInterfaceName', 'e06c75', '', 'none')
+" call one#highlight('CocCodeLens', '5c6370', '', 'none')
+" call one#highlight('Search', 'f0f2f4', '4d5566', 'none')
+" call one#highlight('IncSearch', 'f0f2f4', '4d5566', 'none')
+" call one#highlight('VertSplit', '3a424f', '', 'none')
+" call one#highlight('doxygenBrief', '5c6370', '', 'none')
+" call one#highlight('jsonQuote', '919baa', '', 'none')
+" call one#highlight('EndOfBuffer', '282c34', '', 'none')
+" call one#highlight('CocErrorFloat', 'ff3f3f', '', 'none')
+" call one#highlight('NonText', '282c34', '', 'none')
+"
+" " yellow
+" call one#highlight('Label', 'e5c07b', '', 'none')
+" call one#highlight('Keyword', 'e5c07b', '', 'none')
+" call one#highlight('Identifier', 'e5c07b', '', 'none')
+" call one#highlight('typescriptParenExp', 'e5c07b', '', 'none')
+" call one#highlight('typescriptConditionalParen', 'e5c07b', '', 'none')
+"
+" " cyan
+" call one#highlight('typescriptMember', '88cee8', '', 'none')
+" call one#highlight('StartifyHeader', '88cee8', '', 'none')
+" call one#highlight('typescriptObjectLabel', '88cee8', '', 'none')
+" call one#highlight('graphqlName', '88cee8', '', 'none')
+" call one#highlight('jsoncString', '88cee8', '', 'none')
+"
+" " dark orange
+" call one#highlight('javascriptTemplateSB', 'ffae57', '', 'none')
+" call one#highlight('typescriptTemplateSB', 'ffae57', '', 'none')
+" call one#highlight('typescriptReact', 'ffae57', '', 'none')
+" call one#highlight('typescriptVariableDeclaration', 'ffae57', '', 'none')
+" call one#highlight('typescriptClassName', 'ffae57', '', 'none')
+" call one#highlight('DefxIconsOpenedTreeIcon', 'ffae57', '', 'none')
+" call one#highlight('DefxIconsNestedTreeIcon', 'ffae57', '', 'none')
+"
+" " blue
+" call one#highlight('MatchTag', '61afef', '', 'underline,bold')
+" call one#highlight('xmlTag', '61afef', '', 'none')
+" call one#highlight('xmlTagName', '61afef', '', 'none')
+" call one#highlight('xmlEndTag', '61afef', '', 'none')
+" call one#highlight('tsxTagName', '61afef', '', 'none')
+" call one#highlight('tsxCloseString', '61afef', '', 'none')
+" call one#highlight('htmlTag', '61afef', '', 'none')
+" call one#highlight('htmlTagName', '61afef', '', 'none')
+" call one#highlight('htmlEndTag', '61afef', '', 'none')
+" call one#highlight('jsonKeyword', '61afef', '', 'none')
+" call one#highlight('graphqlType', '61afef', '', 'none')
+" call one#highlight('typescriptRProps', '61afef', '', 'none')
+" call one#highlight('typescriptClassHeritage', '61afef', '', 'none')
+" call one#highlight('typescriptFuncCallArg', '61afef', '', 'none')
+" call one#highlight('Defx_filename_directory', '61afef', '', 'none')
+"
+" " green
+" call one#highlight('embeddedTs', '98c379', '', 'none')
+" call one#highlight('Defx_filename_3_parent_directory', '98c379', '', 'none')
+"
+" call one#highlight('typescriptCall', '56b6c2', '', 'none')
+" call one#highlight('typescriptVariable', '56b6c2', '', 'none')
+"
+"
+" " purple
+" call one#highlight('typescriptAmbientDeclaration', 'c678dd', '', 'none')
+" call one#highlight('typescriptClassStatic', 'c678dd', '', 'none')
+" call one#highlight('typescriptClassKeyword', 'c678dd', '', 'none')
+" call one#highlight('typescriptAliasKeyword', 'c678dd', '', 'none')
+" call one#highlight('typescriptExport', 'c678dd', '', 'none')
+" call one#highlight('typescriptOperator', 'c678dd', '', 'none')
+" call one#highlight('typescriptClassExtends', 'c678dd', '', 'none')
+" call one#highlight('graphqlDirective', 'c678dd', '', 'none')
+"
+" " red
+" call one#highlight('MatchParen', 'e69176', '', 'bold')
+" call one#highlight('Structure', 'e69176', '', 'none')
+" call one#highlight('typescriptInterfaceName', 'e06c75', '', 'none')
 
 " =========================== Custom functions ===============================
 " Show highlight group current location

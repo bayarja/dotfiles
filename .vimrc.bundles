@@ -1,7 +1,5 @@
 Plug 'Konfekt/FastFold'
-Plug 'rakr/vim-one'
 Plug 'thinca/vim-visualstar'
-" Plug 'gorkunov/smartpairs.vim'
 Plug 'tmsvg/pear-tree'
 Plug 'romainl/vim-cool'
 Plug 'jiangmiao/auto-pairs'
@@ -10,8 +8,9 @@ Plug 'moll/vim-bbye'
 Plug 'wincent/scalpel'
 Plug 'mhinz/vim-startify'
 Plug 'wakatime/vim-wakatime'
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'OmniSharp/omnisharp-vim'
 
-" Plug 'christoomey/vim-tmux-navigator'
 Plug 'Yggdroot/indentLine'
 
 Plug 'Valloric/ListToggle'
@@ -38,7 +37,6 @@ Plug 'vim-scripts/tComment'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'kreskij/Repeatable.vim', { 'on': 'Repeatable' }
-Plug 'tpope/vim-sleuth'
 
 " replacement for powerline
 Plug 'vim-airline/vim-airline'
@@ -98,4 +96,3 @@ Plug 'keith/swift.vim'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'kristijanhusak/defx-icons'
 Plug 'ryanoasis/vim-devicons'
-Plug 'sheerun/vim-polyglot'

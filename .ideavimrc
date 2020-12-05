@@ -75,8 +75,7 @@ nnoremap <leader>c :action GotoClass<cr>
 nnoremap <leader>s :action FileStructurePopup<cr>
 nnoremap <leader>. :action GotoAction<cr>
 nnoremap <leader>e :action ShowErrorDescription<cr>
-nnoremap <leader>, :action VimFilePrevious<cr>
-nnoremap <space>s :action AceAction<cr>
+nnoremap <leader> :action AceAction<cr>
 
 nnoremap <S-k> :action MoveLineUp<cr>
 nnoremap <S-j> :action MoveLineDown<cr>

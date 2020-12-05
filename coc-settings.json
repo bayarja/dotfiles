@@ -1,6 +1,7 @@
 {
-  "diagnostic.warningSign": "→",
-  "diagnostic.errorSign": "»",
+  "coc.preferences.useQuickfixForLocations":true,
+  "diagnostic.warningSign": "⇢",
+  "diagnostic.errorSign": "⇢",
   "diagnostic.infoSign": "⇢",
   "suggest.snippetIndicator": " ↝",
   "suggest.noselect": true,
@@ -43,10 +44,12 @@
   },
   "eslint.autoFixOnSave": false,
   "eslint.filetypes": [
+    "javascript",
+    "javascript.jsx",
+    "javascriptreact",
     "typescript",
     "typescript.tsx",
-    "javascript",
-    "javascript.jsx"
+    "typescriptreact"
   ],
   "languageserver": {
     "ccls": {
