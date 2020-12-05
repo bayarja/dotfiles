@@ -436,15 +436,6 @@ let g:lt_location_list_toggle_map = '<F2>'
 let g:lt_quickfix_list_toggle_map = '<F3>'
 let g:lt_height = 6
 
-"Vim-Go
-let g:go_disable_autoinstall = 0
-"" Highlight
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-
 " Prettier
 nmap <Leader>ff <Plug>(Prettier)
 
@@ -473,6 +464,16 @@ let g:matchup_matchparen_enabled = 0
 " match tag always
 let g:mta_use_matchparen_group = 0
 let g:mta_set_default_matchtag_color = 0
+let g:mta_filetypes = {
+        \ 'html' : 1,
+        \ 'javascript.jsx' : 1,
+        \ 'typescript.tsx' : 1,
+        \ 'jinja' : 1,
+        \ 'liquid' : 1,
+        \ 'markdown' : 1,
+        \ 'xhtml' : 1,
+        \ 'xml' : 1,
+        \}
 
 " Gundo history tree
 let g:gundo_prefer_python3 = 1

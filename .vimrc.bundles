@@ -14,25 +14,15 @@ Plug 'OmniSharp/omnisharp-vim'
 Plug 'Yggdroot/indentLine'
 
 Plug 'Valloric/ListToggle'
-Plug 'Valloric/MatchTagAlways'
 
-let g:mta_filetypes = {
-        \ 'html' : 1,
-        \ 'javascript.jsx' : 1,
-        \ 'typescript.tsx' : 1,
-        \ 'jinja' : 1,
-        \ 'liquid' : 1,
-        \ 'markdown' : 1,
-        \ 'xhtml' : 1,
-        \ 'xml' : 1,
-        \}
+Plug 'Valloric/MatchTagAlways'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
-Plug 'yssl/QFEnter'
+" Plug 'yssl/QFEnter'
 Plug 'vim-scripts/tComment'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -59,23 +49,13 @@ Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'kshenoy/vim-signature'
 
-Plug 'spf13/PIV', { 'for': 'php' }
-Plug 'StanAngeloff/php.vim', { 'for': 'php' }
-Plug 'arnaud-lb/vim-php-namespace', { 'for': 'php' }
-
-" for go development
-Plug 'fatih/vim-go', { 'for': 'go' }
-
 " for javascript
 Plug 'sheerun/vim-polyglot'
-" Plug 'othree/yajs.vim'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-" Plug 'othree/javascript-libraries-syntax.vim'
-" Plug 'othree/es.next.syntax.vim'
 Plug 'moll/vim-node'
+
 Plug 'jparise/vim-graphql'
 
-Plug 'mattn/emmet-vim'
 Plug 'wesQ3/vim-windowswap'
 
 Plug 'elzr/vim-json'
@@ -84,15 +64,8 @@ Plug 'jtratner/vim-flavored-markdown'
 
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'janko-m/vim-test'
-" Plug 'spf13/vim-preview'
-" Plug 'HerringtonDarkholme/yats.vim'
-" Plug 'mxw/vim-jsx'
 Plug 'keith/swift.vim'
-" Plug 'neoclide/vim-jsx-improve'
 
-" Plug 'leafgarland/typescript-vim', {'for': ['typescript', 'typescript.tsx']}
-" Plug 'ianks/vim-tsx', { 'for': ['typescript', 'typescript.tsx'] }
-" Plug 'peitalin/vim-jsx-typescript',  {'for': ['typescript', 'typescript.tsx']}
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'kristijanhusak/defx-icons'
 Plug 'ryanoasis/vim-devicons'
