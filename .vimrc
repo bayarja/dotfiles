@@ -7,6 +7,8 @@ if filereadable(expand("~/.vimrc.bundles"))
 endif
 call plug#end()
 
+filetype off                 " required
+syntax on
 filetype plugin indent on    " required
 
 " ======================== Global configs ==============================
@@ -23,15 +25,15 @@ set clipboard=unnamed
 set ttimeout
 set ttimeoutlen=0
 set laststatus=2
-
-syntax on
+set nojoinspaces
+set gdefault
 
 set shortmess+=filmnrxoOtTc          " Abbrev. of messages (avoids 'hit enter')
 set viewoptions=cursor,folds,slash,unix " Better Unix / Windows compatibility
 set nospell                         " disable spell checking
 set hidden                          " Allow buffer switching without saving
 set history=1000                    " Store a ton of history (default is 20)
-set updatetime=300
+" set updatetime=300
 
 set backspace=indent,eol,start  " Backspace for dummies
 set linespace=0                 " No extra spaces between rows
@@ -46,7 +48,6 @@ set undofile
 set wildmode=longest:full,full  " Command <Tab> completion, list matches, then longest common part, then all.
 set scrolljump=3                " Lines to scroll when cursor leaves screen
 set scrolloff=5                 " Minimum lines to keep above and below cursor
-set nofoldenable
 set foldmethod=indent
 set foldlevel=99
 set foldlevelstart=99
@@ -80,6 +81,8 @@ set tabpagemax=15               " Only show 15 tabs
 set noshowmode                  " Hiding current mode under statusline
 set cursorline                  " Highlight current line
 set lazyredraw
+" Smoother scrolling when moving horizontally
+set sidescroll=1
 
 set background=dark
 if exists('+termguicolors')
@@ -88,12 +91,76 @@ if exists('+termguicolors')
 endif
 set termguicolors
 
+" colorizer setup
+lua require'colorizer'.setup({'*';},
+      \{
+      \RGB      = true;
+      \RRGGBB   = true;
+      \names    = true;
+      \RRGGBBAA = true;
+      \rgb_fn   = true;
+      \hsl_fn   = true;
+      \css      = true;
+      \css_fn   = true;
+      \})
+
 let g:palenight_terminal_italics=1
+
+function! MyHighlights() abort
+    highlight Identifier guifg=#FFCB6B guibg=NONE
+    highlight CocExplorerSelectUI guifg=#FF5370 guibg=NONE
+    highlight CocErrorSign guifg=#FF5370 guibg=NONE
+    highlight CocExplorerGitPathChange guifg=#C3E88D guibg=NONE
+    highlight CocExplorerGitContentChange guifg=#FFAE57 guibg=NONE
+
+    hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
+    " highlight CursorLine guifg=NONE guibg=#252938
+    highlight CursorLine guifg=NONE guibg=#32374A
+    hi! VertSplit ctermbg=bg ctermfg=bg guibg=bg guifg=bg
+    highlight Operator guifg=#FFCB6B guibg=NONE
+    highlight graphqlStructure guifg=#89DDFF guibg=NONE
+    highlight graphqlName guifg=#A6ACCD guibg=NONE
+    highlight jsoncKeywordMatch guifg=#A6ACCD guibg=NONE
+    highlight Search guifg=NONE guibg=#606480
+    highlight shVariable guifg=#82B1FF guibg=NONE
+    highlight typescriptVariable guifg=#C792EA guibg=NONE
+    highlight typescriptBraces guifg=#82B1FF guibg=NONE
+    highlight typescriptClassHeritage guifg=#82B1FF guibg=NONE
+    highlight typescriptProp guifg=#82B1FF guibg=NONE
+    highlight Keyword guifg=#C792EA guibg=NONE
+    highlight yamlBlockMappingKey guifg=#FFCB6B guibg=NONE
+    highlight typescriptClassName guifg=#FFCB6B guibg=NONE
+    highlight CocExplorerFileDirectoryExpanded guifg=#FFCB6B guibg=NONE
+    highlight typescriptDOMEventTargetMethod guifg=#FFCB6B guibg=NONE
+    highlight typescriptFuncCallArg guifg=#FFCB6B guibg=NONE
+    highlight typescriptConditionalParen guifg=#D8DFEB guibg=NONE
+    highlight typescriptInterfaceName guifg=#FFAE57 guibg=NONE
+    highlight typescriptInterfaceHeritage guifg=#FFCB6B guibg=NONE
+    highlight typescriptExceptions guifg=#82B1FF guibg=NONE
+    highlight typescriptDOMEventTargetMethod guifg=#89DDFF guibg=NONE
+    highlight typescriptObjectLabel guifg=#A6ACCD guibg=NONE
+    highlight typescriptObjectLiteral guifg=#82B1FF guibg=NONE
+    highlight typescriptBoolean guifg=#FFAE57 guibg=NONE
+    highlight jsoncBoolean guifg=#FFAE57 guibg=NONE
+    highlight typescriptBinaryOp guifg=#FFAE57 guibg=NONE
+    highlight typescriptAliasDeclaration guifg=#FFAE57 guibg=NONE
+    highlight typescriptTypeReference guifg=#FFAE57 guibg=NONE
+
+    highlight typescriptIdentifierName guifg=#FFCB6B guibg=NONE
+    highlight typescriptVariableDeclaration guifg=#89DDFF guibg=NONE
+endfunction
+
+augroup MyColors
+    autocmd!
+    autocmd ColorScheme * call MyHighlights()
+augroup END
+
 colorscheme palenight
 
 " ======================== Filetype & Autocmd ==============================
 augroup autocmds
   autocmd!
+  autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
   " Instead of reverting the cursor to the last position in the buffer, we
   " set it to the first line when editing a git commit message
   au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
@@ -109,8 +176,11 @@ augroup autocmds
 
   autocmd FileType html,css,javascript.jsx,typescript.tsx EmmetInstall
 
-  autocmd! FileType fzf
-  au FileType fzf set nonu nornu
+  if has('nvim') && !exists('g:fzf_layout')
+    autocmd! FileType fzf
+    autocmd  FileType fzf set laststatus=0 noshowmode noruler
+      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+  endif
 
   autocmd FileType json syntax match Comment +\/\/.\+$+
   " enable zen coding on jsx
@@ -119,7 +189,6 @@ augroup autocmds
   autocmd FileType typescript.tsx runtime! ftplugin/html/sparkup.vim
 
   " autocmd FileType defx call s:defx_my_settings()
-  autocmd FileType defx call s:defx_my_settings()
   autocmd FileType typescript.tsx let b:pear_tree_pairs = {
       \ '(': {'closer': ')'},
       \ '[': {'closer': ']'},
@@ -130,6 +199,10 @@ augroup autocmds
       \ }
 augroup END
 
+let g:coc_fzf_preview_toggle_key = 'ctrl-/'
+let g:fzf_preview_window=['up:40%:hidden', 'ctrl-/']
+call coc_fzf#common#add_list_source('fzf-files', 'display files', 'Files')
+
 " projectionist
 let g:fuzzy_projectionist_preview = 1
 
@@ -138,6 +211,10 @@ let test#strategy = "neovim"
 
 " vim-move
 let g:move_key_modifier = 'S'
+
+let g:coc_global_extensions=[
+      \ 'coc-explorer', 'coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-pairs',
+      \ 'coc-bookmark', 'coc-snippets', 'coc-actions', 'coc-stylelint']
 
 " =========================== Custom Global Keybindings ===============================
 let mapleader = ','
@@ -157,7 +234,7 @@ nmap <leader>r <Plug>(coc-rename)
 
 nmap <silent> [ <Plug>(coc-diagnostic-prev)
 nmap <silent> ] <Plug>(coc-diagnostic-next)
-nnoremap <silent><c-o> :call CocAction('runCommand', 'tsserver.organizeImports')<CR>
+" nnoremap <silent><c-o> :call CocAction('runCommand', 'tsserver.organizeImports')<CR>
 nnoremap <silent><f9> :call CocAction('runCommand', 'tsserver.restart')<CR>
 
 xmap if <Plug>(coc-funcobj-i)
@@ -291,7 +368,7 @@ nnoremap ✠ i<CR><Esc>
 inoremap ✠ <CR><Esc>O
 
 " better whitespace
-let g:better_whitespace_enabled=1
+let g:better_whitespace_enabled=0
 let g:strip_whitespace_on_save=1
 let g:strip_whitespace_confirm=0
 
@@ -364,38 +441,14 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 set grepprg=rg\ --vimgrep
 
 let $FZF_DEFAULT_COMMAND = 'rg --files --fixed-strings --hidden --follow --glob "!.git/*"'
-command! -bang -nargs=* Find call fzf#vim#grep('rg
-      \ --column --line-number --no-heading
+
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading
       \ --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --glob "!*.lock" --glob "!*-lock.json"
-      \ --colors "path:fg:118,137,168" --colors "line:fg:97,175,239" --colors "match:fg:0,0,0"
       \ --color "always" '.shellescape(<q-args>).' | tr -d "\017"', 1,
-      \{ 'options': '--color fg:#ABB2BF,hl:#61afef,fg+:#ffae57,bg+:-1,hl+:229 --color info:150,prompt:110,spinner:150,pointer:167,marker:174' }, <bang>0
+      \{ 'options': '--delimiter : --nth 4.. --color fg:#ABB2BF,hl:#61afef,fg+:#ffae57,bg+:-1,hl+:150 --color info:150,prompt:110,spinner:150,pointer:167,marker:174' }, <bang>0
       \)
 
-"171,178,191 ABB2BF
-"118,137,168 7689A8
-" let g:fzf_layout = { 'down': '~20%' }
-let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-
-function! FloatingFZF()
-  let buf = nvim_create_buf(v:false, v:true)
-  call setbufvar(buf, '&signcolumn', 'no')
-
-  let width = float2nr(&columns - (&columns * 2 / 10) * 2)
-  let height = &lines - 25
-  let y = &lines - 3
-  let x = float2nr((&columns - width) / 2)
-
-  let opts = {
-	\ 'relative': 'editor',
-	\ 'row': y,
-	\ 'col': x,
-	\ 'width': width,
-	\ 'height': height
-	\ }
-
-  call nvim_open_win(buf, v:true, opts)
-endfunction
+inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'window': { 'width': 0.2, 'height': 0.9, 'xoffset': 1 }})
 
 let g:fzf_buffers_jump = 1
 
@@ -430,11 +483,7 @@ let g:indentLine_color_term = 237
 let g:indentLine_color_gui = '#3a3a3a'
 let g:indentLine_char = '│'
 let g:indentLine_fileType = ['typescript', 'javascript', 'typescript.tsx', 'javascript.jsx', 'php', 'phtml']
-let g:indentLine_bufTypeExclude = ['help', 'terminal', 'defx']
-
-let g:lt_location_list_toggle_map = '<F2>'
-let g:lt_quickfix_list_toggle_map = '<F3>'
-let g:lt_height = 6
+let g:indentLine_bufTypeExclude = ['help', 'terminal', 'defx', 'coc-explorer']
 
 " Prettier
 nmap <Leader>ff <Plug>(Prettier)
@@ -605,8 +654,7 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 function! FZFWithDevIcons()
   let l:fzf_files_options = ' --color fg:#7689A8,hl:#61afef,fg+:#ffae57,bg+:-1,hl+:229
 	\ --color info:150,prompt:110,spinner:150,pointer:167,marker:174
-	\ -m --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up'
-	\.' --preview "bat --theme=OneHalfDark --color always --style numbers {2..}"'
+	\ -m'
 
   function! s:files()
     let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
@@ -650,82 +698,5 @@ nmap <C-p> :call FZFWithDevIcons()<CR>
 nmap <C-f> :Find<cr>
 nmap <C-b> :Buffers<CR>
 
-let g:loaded_netrwPlugin = 1 " Disable netrw.vim
-
-let g:defx_icons_directory_icon = ''
-let g:defx_icons_column_length = 2
-let g:defx_icons_root_opened_tree_icon = ''
-let g:defx_icons_nested_closed_tree_icon = ''
-let g:defx_icons_nested_opened_tree_icon = ''
-let g:defx_icons_mark_icon = '•'
-let g:defx_icons_parent_icon = ''
-
-call defx#custom#option('_', {
-      \ 'root_marker': '» ',
-      \ 'buffer_name': '',
-      \ 'columns': 'indent:mark:icons:filename',
-      \ })
-
-call defx#custom#column('filename', {
-      \ 'min_width': 36,
-      \ 'max_width': 36,
-      \ })
-call defx#custom#column('indent', {
-      \ 'indent': '  ',
-      \ })
-
-function! s:defx_my_settings() abort
-
-  function! Root(path) abort
-    return fnamemodify(a:path, ':t')
-  endfunction
-
-  call defx#custom#source('file', {
-	\ 'root': 'Root',
-	\})
-  " Open commands
-  " nnoremap <silent><buffer><expr> <CR> defx#do_action('open')
-  nnoremap <silent><buffer><expr> o
-	\ defx#is_directory() ?
-	\ defx#do_action('open_or_close_tree') :
-	\ defx#do_action('open', 'wincmd w \| drop')
-
-  " nnoremap <silent><buffer><expr> o defx#do_action('open_or_close_tree')
-  nnoremap <silent><buffer><expr> s defx#do_action('open', 'wincmd w \| vsplit \| drop')
-  nnoremap <silent><buffer><expr> i defx#do_action('open', 'wincmd w \| split \| drop')
-  " Preview current file
-  " nnoremap <silent><buffer><expr> s defx#do_action('open', 'pedit')
-
-  " File manipulation
-  nnoremap <silent><buffer><expr> ma defx#do_action('new_multiple_files')
-  nnoremap <silent><buffer><expr> md defx#do_action('remove')
-  nnoremap <silent><buffer><expr> mr defx#do_action('rename')
-  nnoremap <silent><buffer><expr> mc defx#do_action('multi', ['copy', 'paste'])
-  nnoremap <silent><buffer><expr> mm defx#do_action('move')
-  nnoremap <silent><buffer><expr> mp defx#do_action('paste')
-
-  "Navigation
-  nnoremap <silent><buffer><expr> p defx#do_action('close_tree')
-  nnoremap <silent><buffer><expr> l defx#do_action('open')
-  nnoremap <silent><buffer><expr> <cr> defx#do_action('open')
-  nnoremap <silent><buffer><expr> h defx#do_action('cd', ['..'])
-  nnoremap <silent><buffer><expr> <s-u> defx#do_action('cd', ['..'])
-  nnoremap <silent><buffer><expr> ~ defx#do_action('cd', [getcwd()])
-  nnoremap <silent><buffer><expr> <s-t> defx#do_action('open', 'tabnew \| drop')
-
-  " Miscellaneous actions
-  nnoremap <silent><buffer><expr> <s-i> defx#do_action('toggle_ignored_files')
-  nnoremap <silent><buffer><expr> mo defx#do_action('execute_system')
-  nnoremap <silent><buffer><expr> yp defx#do_action('yank_path')
-  nnoremap <silent><buffer><expr> <C-r> defx#do_action('redraw') . ':syntax sync fromstart<cr><c-l>'
-
-  nnoremap <silent><buffer><expr><nowait> <Space> defx#do_action('toggle_select') . 'j'
-  nnoremap <silent><buffer><expr> * defx#do_action('toggle_select_all')
-
-  nnoremap <silent><buffer><expr> C defx#do_action('toggle_columns', 'mark:size:filename')
-endfunction
-
-nnoremap <silent><leader>nf :Defx -new `expand('%:p:h')` -search=`expand('%:p')`<CR>
-nnoremap <silent><leader>nt :Defx -resume -split=vertical -winwidth=40
-      \ -direction=topleft -search=`expand('%:p')` `getcwd()`<CR>
-nnoremap <silent><f4> :Defx -toggle -split=vertical -winwidth=40 -direction=topleft -resume<CR>
+:nmap <silent><f4> :CocCommand explorer<CR>
+:nmap <silent><leader>nt :CocCommand explorer<CR>

@@ -1,8 +1,11 @@
 {
-  "coc.preferences.useQuickfixForLocations":true,
+  "coc.preferences.colorSupport": true,
+  "tsserver.disableAutomaticTypeAcquisition": false,
   "diagnostic.warningSign": "⇢",
   "diagnostic.errorSign": "⇢",
   "diagnostic.infoSign": "⇢",
+  "diagnostic.enableHighlightLineNumber": false,
+  "suggest.removeDuplicateItems": true,
   "suggest.snippetIndicator": " ↝",
   "suggest.noselect": true,
   "suggest.triggerAfterInsertEnter": false,
@@ -57,10 +60,127 @@
       "filetypes": ["c", "cpp", "objc", "objcpp"],
       "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
       "initializationOptions": {
-         "cache": {
-           "directory": "/tmp/ccls"
-         }
-       }
+        "cache": {
+          "directory": "/tmp/ccls"
+        }
+      }
     }
+  },
+  "coc.preferences.extensionUpdateCheck": "daily",
+  "explorer.sources": [
+    {
+      "name": "file",
+      "expand": true
+    },
+    {
+      "name": "buffer",
+      "expand": true
+    },
+    {
+      "name": "bookmark",
+      "expand": true
+    }
+  ],
+  "explorer.width": 30,
+  "explorer.previewAction.onHover": false,
+  "explorer.icon.expanded": "",
+  "explorer.icon.collapsed": "",
+  "explorer.icon.enableNerdfont": true,
+  "explorer.file.child.template": "[git | 2] [selection | clip | 1] [indent][icon | 1] [filename omitCenter 1][modified][readonly] [linkIcon & 1][link growRight 1 omitCenter 5]",
+  "explorer.file.root.template": "[icon & 1] [root]",
+  "explorer.buffer.root.template": "[icon & 1] [title]",
+  "explorer.bookmark.root.template": "[icon & 1] [title] [hidden & 1]",
+  "explorer.git.icon.status.modified": "»",
+  "explorer.file.column.indent.indentLine": false,
+  "explorer.icon.customIcons": {
+    "icons": {
+      "folderClosed": {
+        "code": "",
+        "color": "#00afaf"
+      },
+      "folderOpened": {
+        "code": "",
+        "color": "#e5c07b"
+      }
+    }
+  },
+  "explorer.keyMappings.global": {
+    "*": "toggleSelection",
+    "<tab>": false,
+    "<c-k>": "expandablePrev",
+    "<c-j>": "expandableNext",
+    "h": "collapse",
+    "l": "expand",
+    "<c-o>": false,
+    "o": ["expandable?", ["expanded?", "collapse", "expand"], "open"],
+    "J": ["toggleSelection", "normal:j"],
+    "K": ["toggleSelection", "normal:k"],
+    "gl": "expand:recursive",
+    "gh": "collapse:recursive",
+    "<cr>": ["expandable?", "cd", "open"],
+    "e": false,
+    "i": "open:split",
+    "E": false,
+    "s": "open:vsplit",
+    "t": "open:tab",
+    "<bs>": "gotoParent",
+    "gs": "reveal:select",
+    "gp": "preview:labeling",
+
+    "y": "copyFilepath",
+    "Y": "copyFilename",
+    "c": false,
+    "mc": "copyFile",
+    "x": false,
+    "mx": "cutFile",
+    "p": false,
+    "mp": "pasteFile",
+    "d": false,
+    "md": "delete",
+    "D": false,
+    "mD": "deleteForever",
+
+    "a": false,
+    "ma": "addFile",
+    "A": false,
+    "mA": "addDirectory",
+    "r": false,
+    "mr": "rename",
+
+    ".": false,
+    "I": "toggleHidden",
+    "R": "refresh",
+
+    "?": "help",
+    "q": false,
+    "mq": "quit",
+    "<esc>": "esc",
+    "mo": "systemExecute",
+    "gd": "listDrive",
+
+    "f": "search",
+    "F": "searchRecursive",
+
+    "gf": "gotoSource:file",
+    "gb": "gotoSource:buffer",
+
+    "[[": "sourcePrev",
+    "]]": "sourceNext",
+
+    "[i": "indentPrev",
+    "]i": "indentNext",
+
+    "[m": "indexPrev:modified",
+    "]m": "indexNext:modified",
+
+    "[d": "indexPrev:diagnosticError:diagnosticWarning",
+    "]d": "indexNext:diagnosticError:diagnosticWarning",
+    "[D": "indexPrev:diagnosticError",
+    "]D": "indexNext:diagnosticError",
+
+    "[c": "indexPrev:git",
+    "]c": "indexNext:git",
+    "<<": "gitStage",
+    ">>": "gitUnstage"
   }
 }

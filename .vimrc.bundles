@@ -8,22 +8,25 @@ Plug 'moll/vim-bbye'
 Plug 'wincent/scalpel'
 Plug 'mhinz/vim-startify'
 Plug 'wakatime/vim-wakatime'
+Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'OmniSharp/omnisharp-vim'
 
 Plug 'Yggdroot/indentLine'
+Plug 'norcalli/nvim-colorizer.lua'
 
-Plug 'Valloric/ListToggle'
+" Plug 'Valloric/ListToggle'
 
 Plug 'Valloric/MatchTagAlways'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'antoinemadec/coc-fzf'
 
 " Plug 'yssl/QFEnter'
-Plug 'vim-scripts/tComment'
+" Plug 'vim-scripts/tComment'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'kreskij/Repeatable.vim', { 'on': 'Repeatable' }
@@ -50,7 +53,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'kshenoy/vim-signature'
 
 " for javascript
-Plug 'sheerun/vim-polyglot'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'moll/vim-node'
 
@@ -66,6 +68,7 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'janko-m/vim-test'
 Plug 'keith/swift.vim'
 
-Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'kristijanhusak/defx-icons'
+" Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'kristijanhusak/defx-icons'
 Plug 'ryanoasis/vim-devicons'
+Plug 'sheerun/vim-polyglot'
