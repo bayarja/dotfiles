@@ -123,6 +123,7 @@ function! MyHighlights() abort
     highlight jsoncKeywordMatch guifg=#A6ACCD guibg=NONE
     highlight Search guifg=NONE guibg=#606480
     highlight shVariable guifg=#82B1FF guibg=NONE
+    highlight MatchTag guifg=#82B1FF guibg=NONE
     highlight typescriptVariable guifg=#C792EA guibg=NONE
     highlight typescriptBraces guifg=#82B1FF guibg=NONE
     highlight typescriptClassHeritage guifg=#82B1FF guibg=NONE
@@ -141,6 +142,7 @@ function! MyHighlights() abort
     highlight typescriptObjectLabel guifg=#A6ACCD guibg=NONE
     highlight typescriptObjectLiteral guifg=#82B1FF guibg=NONE
     highlight typescriptBoolean guifg=#FFAE57 guibg=NONE
+    highlight htmlTagName guifg=#FFAE57 guibg=NONE
     highlight jsoncBoolean guifg=#FFAE57 guibg=NONE
     highlight typescriptBinaryOp guifg=#FFAE57 guibg=NONE
     highlight typescriptAliasDeclaration guifg=#FFAE57 guibg=NONE
@@ -160,6 +162,8 @@ colorscheme palenight
 " ======================== Filetype & Autocmd ==============================
 augroup autocmds
   autocmd!
+  autocmd BufRead,BufNewFile *.jsx set filetype=javascriptreact
+  autocmd BufRead,BufNewFile *.tsx set filetype=typescriptreact
   autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
   " Instead of reverting the cursor to the last position in the buffer, we
   " set it to the first line when editing a git commit message
@@ -173,8 +177,6 @@ augroup autocmds
 	\ if line("'\"") > 0 && line("'\"") <= line("$") |
 	\   exe "normal! g`\"" |
 	\ endif
-
-  autocmd FileType html,css,javascript.jsx,typescript.tsx EmmetInstall
 
   if has('nvim') && !exists('g:fzf_layout')
     autocmd! FileType fzf
@@ -393,10 +395,6 @@ imap <F1> <Esc>
 " let g:UltiSnipsJumpForwardTrigger='<c-n>'
 " let g:UltiSnipsJumpBackwardTrigger='<c-p>'
 
-
-" emmet
-let g:user_emmet_install_global=0
-
 let g:windowswap_map_keys = 0 "prevent default bindings
 nnoremap <silent> <leader>y :call WindowSwap#EasyWindowSwap()<CR>
 
@@ -447,8 +445,6 @@ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-h
       \ --color "always" '.shellescape(<q-args>).' | tr -d "\017"', 1,
       \{ 'options': '--delimiter : --nth 4.. --color fg:#ABB2BF,hl:#61afef,fg+:#ffae57,bg+:-1,hl+:150 --color info:150,prompt:110,spinner:150,pointer:167,marker:174' }, <bang>0
       \)
-
-inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'window': { 'width': 0.2, 'height': 0.9, 'xoffset': 1 }})
 
 let g:fzf_buffers_jump = 1
 
