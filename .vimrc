@@ -446,6 +446,8 @@ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-h
       \{ 'options': '--delimiter : --nth 4.. --color fg:#ABB2BF,hl:#61afef,fg+:#ffae57,bg+:-1,hl+:150 --color info:150,prompt:110,spinner:150,pointer:167,marker:174' }, <bang>0
       \)
 
+let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.4, 'yoffset': 1 } }
+
 let g:fzf_buffers_jump = 1
 
 " startify
