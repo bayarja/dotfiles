@@ -696,5 +696,5 @@ nmap <C-p> :call FZFWithDevIcons()<CR>
 nmap <C-f> :Find<cr>
 nmap <C-b> :Buffers<CR>
 
-:nmap <silent><f4> :CocCommand explorer<CR>
-:nmap <silent><leader>nt :CocCommand explorer<CR>
+nmap <silent><f4> :CocCommand explorer<CR>
+nmap <Leader>nt :call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<CR>

@@ -92,6 +92,7 @@
   "explorer.bookmark.root.template": "[icon & 1] [title] [hidden & 1]",
   "explorer.git.icon.status.modified": "»",
   "explorer.file.column.indent.indentLine": false,
+  "explorer.file.autoReveal": false,
   "explorer.icon.customIcons": {
     "icons": {
       "folderClosed": {
