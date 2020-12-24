@@ -136,6 +136,7 @@ function! MyHighlights() abort
     highlight typescriptFuncCallArg guifg=#FFCB6B guibg=NONE
     highlight typescriptConditionalParen guifg=#D8DFEB guibg=NONE
     highlight typescriptInterfaceName guifg=#FFAE57 guibg=NONE
+    highlight typescriptAsyncFuncKeyword guifg=#FFAE57 guibg=NONE
     highlight typescriptInterfaceHeritage guifg=#FFCB6B guibg=NONE
     highlight typescriptExceptions guifg=#82B1FF guibg=NONE
     highlight typescriptDOMEventTargetMethod guifg=#89DDFF guibg=NONE
