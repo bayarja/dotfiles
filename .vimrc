@@ -223,7 +223,7 @@ let g:coc_global_extensions=[
 let mapleader = ','
 
 " r redo
-nmap r <c-r>
+noremap r <c-r>
 
 " Remap keys for gotos
 nmap <leader>d <Plug>(coc-definition)
@@ -554,7 +554,7 @@ let g:used_javascript_libs = 'jquery,chai,handlebars,underscore,react,react-dom'
 " Git Gutter
 let g:gitgutter_override_sign_column_highlight = 0
 " let g:gitgutter_sign_column_always = 1
-nmap <Leader>hk <Plug>GitGutterPreviewHunk
+noremap <leader>hk :SignifyHunkDiff<cr>
 
 " Easy Motion
 let g:EasyMotion_smartcase = 1 " Turn on case insensitive feature
