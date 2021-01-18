@@ -217,7 +217,7 @@ let g:move_key_modifier = 'S'
 
 let g:coc_global_extensions=[
       \ 'coc-explorer', 'coc-eslint', 'coc-tsserver', 'coc-json', 'coc-prettier', 'coc-pairs',
-      \ 'coc-bookmark', 'coc-snippets', 'coc-actions', 'coc-stylelint']
+      \ 'coc-snippets', 'coc-actions', 'coc-stylelint']
 
 " =========================== Custom Global Keybindings ===============================
 let mapleader = ','
