@@ -93,6 +93,7 @@
   "explorer.git.icon.status.modified": "»",
   "explorer.file.column.indent.indentLine": false,
   "explorer.file.autoReveal": false,
+  "explorer.file.revealWhenOpen": true,
   "explorer.icon.customIcons": {
     "icons": {
       "folderClosed": {

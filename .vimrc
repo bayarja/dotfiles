@@ -698,4 +698,20 @@ nmap <C-f> :Find<cr>
 nmap <C-b> :Buffers<CR>
 
 nmap <silent><f4> :CocCommand explorer<CR>
-nmap <Leader>nt :call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<CR>
+function! FocusInExplorer()
+  let l:a = 0
+  for window in getwininfo()
+    if getbufvar(window.bufnr, '&ft') == 'coc-explorer'
+      let l:a = 1
+      break
+    endif
+  endfor
+  if l:a == 1
+    call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])
+  else
+    execute 'CocCommand explorer --reveal '.expand('%:p')
+  endif
+endfunction
+
+" nmap <space>nf :call FocusInExplorer()<cr>
+nmap <Leader>nt :call FocusInExplorer()<CR>
