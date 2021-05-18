@@ -12,7 +12,7 @@ endpath="$HOME/.vim"
 
 if [ ! -e $endpath/.git ]; then
     echo "cloning vim config"
-    git clone --recursive -b master https://github.com/Orgil/dotfiles.git $endpath
+    git clone --recursive -b master https://github.com/bayarja/dotfiles.git $endpath
 else
     echo "updating vim config"
     cd $endpath && git pull origin master
@@ -20,10 +20,8 @@ fi
 
 echo "setting up symlinks"
 lnif $endpath/.vimrc $HOME/.vimrc
-lnif $endpath/.tmux.conf $HOME/.tmux.conf
 lnif $endpath/.vimrc.bundles $HOME/.vimrc.bundles
 lnif $endpath/.global_ignore $HOME/.global_ignore
-lnif $endpath/.ideavimrc $HOME/.ideavimrc
 # nvim link
 lnif $endpath $HOME/.config/nvim
 lnif $endpath/.vimrc $endpath/init.vim
